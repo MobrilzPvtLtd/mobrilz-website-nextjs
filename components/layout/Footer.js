@@ -1,5 +1,8 @@
 import { Box, Container, Stack, Text, SimpleGrid, Link, Icon, HStack, VStack, Image, Divider, useColorModeValue } from '@chakra-ui/react';
-import { FaTwitter, FaLinkedin, FaGithub, FaInstagram, FaDribbble, FaBehance, FaMedium } from 'react-icons/fa';
+import { 
+  FaTwitter, FaLinkedin, FaGithub, FaInstagram, 
+  FaPhone, FaEnvelope, FaClock, FaMapMarkerAlt 
+} from 'react-icons/fa';
 import NextLink from 'next/link';
 
 const SocialLink = ({ icon, label, href }) => (
@@ -50,14 +53,10 @@ const Footer = () => {
     >
       <Container maxW="container.xl">
         <Stack spacing={12}>
-          {/* Top Section */}
-          <Stack 
-            direction={{ base: 'column', md: 'row' }}
-            justify="space-between"
-            align={{ base: 'start', md: 'center' }}
-            spacing={8}
-          >
-            <VStack align="start" spacing={4} maxW="400px">
+          {/* Top Section - Redesigned */}
+          <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8} w="full">
+            {/* Company Info & Logo */}
+            <VStack align="start" spacing={4}>
               <Image 
                 src="/images/logo.png" 
                 alt="Mobrilz Logo" 
@@ -67,14 +66,71 @@ const Footer = () => {
               <Text color={textColor} fontSize="sm" lineHeight="tall">
                 We create digital experiences that matter.
               </Text>
-              <HStack spacing={6} wrap="wrap">
+              <HStack spacing={4} wrap="wrap">
                 <SocialLink icon={FaTwitter} label="Twitter" href="https://twitter.com/mobrilz" />
                 <SocialLink icon={FaLinkedin} label="LinkedIn" href="https://linkedin.com/company/mobrilz" />
                 <SocialLink icon={FaGithub} label="GitHub" href="https://github.com/mobrilz" />
                 <SocialLink icon={FaInstagram} label="Instagram" href="https://instagram.com/mobrilz" />
               </HStack>
             </VStack>
-          </Stack>
+
+            {/* Address */}
+            <VStack align="start" spacing={3}>
+              <Text fontWeight="bold" fontSize="md" mb={2}>
+                Visit Us
+              </Text>
+              <VStack align="start" spacing={2}>
+                <HStack align="start" spacing={2}>
+                  <Icon as={FaMapMarkerAlt} color={textColor} mt={1} />
+                  <Text color={textColor} fontSize="sm">
+                    E-160, 3rd Floor, Sector 63
+                    Noida, U.P. 201301, India
+                  </Text>
+                </HStack>
+                <HStack spacing={2}>
+                  <Icon as={FaClock} color={textColor} mt={1} />
+                  <Text color={textColor} fontSize="sm">
+                    Opening Hours: 
+                    <Text as="span" fontWeight="medium"> 10:00 - 18:00 IST</Text>
+                  </Text>
+                </HStack>
+                <Text color="brand.500" fontSize="sm" fontStyle="italic">
+                  Please schedule an appointment before visiting
+                </Text>
+              </VStack>
+            </VStack>
+
+            {/* Contact Info */}
+            <VStack align="start" spacing={3}>
+              <Text fontWeight="bold" fontSize="md" mb={2}>
+                Get in Touch
+              </Text>
+              <VStack align="start" spacing={2}>
+                <HStack spacing={2}>
+                  <Icon as={FaPhone} color={textColor} />
+                  <Link 
+                    href="tel:+918010355718" 
+                    color={textColor} 
+                    fontSize="sm"
+                    _hover={{ color: 'brand.500' }}
+                  >
+                    +91-8010355718
+                  </Link>
+                </HStack>
+                <HStack spacing={2}>
+                  <Icon as={FaEnvelope} color={textColor} />
+                  <Link 
+                    href="mailto:sales@mobrilz.com" 
+                    color={textColor} 
+                    fontSize="sm"
+                    _hover={{ color: 'brand.500' }}
+                  >
+                    sales@mobrilz.com
+                  </Link>
+                </HStack>
+              </VStack>
+            </VStack>
+          </SimpleGrid>
 
           <Divider borderColor={borderColor} />
 
