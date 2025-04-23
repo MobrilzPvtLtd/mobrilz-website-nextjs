@@ -3,8 +3,8 @@ import Link from 'next/link';
 
 const Logo = () => {
   return (
-    <Link href="/" passHref legacyBehavior>
-      <Box as="a" cursor="pointer">
+    <Link href="/">
+      <Box cursor="pointer">
         <Image 
           src="/images/logo.png" 
           alt="Mobrilz Logo" 

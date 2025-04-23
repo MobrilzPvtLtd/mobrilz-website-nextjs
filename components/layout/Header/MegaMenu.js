@@ -1,12 +1,15 @@
-import { Box, Button, Menu, MenuButton, MenuList, MenuItem, SimpleGrid, Flex, Text, Divider } from '@chakra-ui/react';
+import { Box, Button, Menu, MenuButton, MenuList, MenuItem, SimpleGrid, Flex, Text } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import Link from 'next/link';
 
 const MegaMenu = () => {
   return (
-    <Flex gap={1} justify="flex-end" flex={1} mx={4}>
-      <Link href="/" passHref legacyBehavior>
-        <Button as="a" variant="ghost" size="sm">Home</Button>
+    <Flex gap={0.5} justify="flex-end" flex={1} mx={4}>
+      {/* Home Link */}
+      <Link href="/">
+        <Button as="span" variant="ghost" size="sm">
+          Home
+        </Button>
       </Link>
 
       {/* Services Menu */}
@@ -14,12 +17,10 @@ const MegaMenu = () => {
         <MenuButton as={Button} variant="ghost" size="sm" rightIcon={<ChevronDownIcon />}>
           Services
         </MenuButton>
-        <MenuList p={6} minW="680px" borderRadius="xl" boxShadow="xl">
-          <SimpleGrid columns={3} spacing={8}>
+        <MenuList p={4} minW="680px" borderRadius="xl" boxShadow="xl">
+          <SimpleGrid columns={3} spacing={6}>
             <Box>
-              <Text fontSize="sm" fontWeight="bold" mb={3} color="brand.600" textTransform="uppercase">
-                Development
-              </Text>
+              <Text fontSize="sm" fontWeight="bold" mb={3} color="brand.600">Development</Text>
               <Flex direction="column" gap={2}>
                 <MenuItem>Web Development</MenuItem>
                 <MenuItem>Mobile Apps</MenuItem>
@@ -28,9 +29,7 @@ const MegaMenu = () => {
               </Flex>
             </Box>
             <Box>
-              <Text fontSize="sm" fontWeight="bold" mb={3} color="brand.600" textTransform="uppercase">
-                Design
-              </Text>
+              <Text fontSize="sm" fontWeight="bold" mb={3} color="brand.600">Design</Text>
               <Flex direction="column" gap={2}>
                 <MenuItem>UI/UX Design</MenuItem>
                 <MenuItem>Branding</MenuItem>
@@ -38,9 +37,7 @@ const MegaMenu = () => {
               </Flex>
             </Box>
             <Box>
-              <Text fontSize="sm" fontWeight="bold" mb={3} color="brand.600" textTransform="uppercase">
-                Solutions
-              </Text>
+              <Text fontSize="sm" fontWeight="bold" mb={3} color="brand.600">Solutions</Text>
               <Flex direction="column" gap={2}>
                 <MenuItem>DevOps</MenuItem>
                 <MenuItem>API Integration</MenuItem>
@@ -56,12 +53,10 @@ const MegaMenu = () => {
         <MenuButton as={Button} variant="ghost" size="sm" rightIcon={<ChevronDownIcon />}>
           Industry
         </MenuButton>
-        <MenuList p={6} minW="460px" borderRadius="xl" boxShadow="xl">
-          <SimpleGrid columns={2} spacing={8}>
+        <MenuList p={4} minW="460px" borderRadius="xl" boxShadow="xl">
+          <SimpleGrid columns={2} spacing={6}>
             <Box>
-              <Text fontSize="sm" fontWeight="bold" mb={3} color="brand.600" textTransform="uppercase">
-                Sectors
-              </Text>
+              <Text fontSize="sm" fontWeight="bold" mb={3} color="brand.600">Sectors</Text>
               <Flex direction="column" gap={2}>
                 <MenuItem>Manufacturing</MenuItem>
                 <MenuItem>Finance</MenuItem>
@@ -69,9 +64,7 @@ const MegaMenu = () => {
               </Flex>
             </Box>
             <Box>
-              <Text fontSize="sm" fontWeight="bold" mb={3} color="brand.600" textTransform="uppercase">
-                Solutions
-              </Text>
+              <Text fontSize="sm" fontWeight="bold" mb={3} color="brand.600">Solutions</Text>
               <Flex direction="column" gap={2}>
                 <MenuItem>E-Commerce</MenuItem>
                 <MenuItem>Consulting</MenuItem>
@@ -87,11 +80,9 @@ const MegaMenu = () => {
         <MenuButton as={Button} variant="ghost" size="sm" rightIcon={<ChevronDownIcon />}>
           Our Work
         </MenuButton>
-        <MenuList p={6} minW="240px" borderRadius="xl" boxShadow="xl">
+        <MenuList p={4} minW="240px" borderRadius="xl" boxShadow="xl">
           <Box>
-            <Text fontSize="sm" fontWeight="bold" mb={3} color="brand.600" textTransform="uppercase">
-              Portfolio
-            </Text>
+            <Text fontSize="sm" fontWeight="bold" mb={3} color="brand.600">Portfolio</Text>
             <Flex direction="column" gap={2}>
               <MenuItem>Case Studies</MenuItem>
               <MenuItem>Projects</MenuItem>
@@ -102,10 +93,22 @@ const MegaMenu = () => {
         </MenuList>
       </Menu>
 
-      {/* Other Menu Items */}
-      <Button as="a" variant="ghost" size="sm">Packages</Button>
-      <Button as="a" variant="ghost" size="sm">Support</Button>
-      <Button as="a" variant="ghost" size="sm">About</Button>
+      {/* Regular Menu Links */}
+      <Link href="/packages">
+        <Button as="span" variant="ghost" size="sm">
+          Packages
+        </Button>
+      </Link>
+      <Link href="/support">
+        <Button as="span" variant="ghost" size="sm">
+          Support
+        </Button>
+      </Link>
+      <Link href="/about">
+        <Button as="span" variant="ghost" size="sm">
+          About
+        </Button>
+      </Link>
     </Flex>
   );
 };

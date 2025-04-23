@@ -29,16 +29,18 @@ const HeaderTop = () => {
             </HStack>
           </HStack>
           <HStack spacing={6}>
-            <Link href="/careers" passHref legacyBehavior>
+            <Link href="/careers">
               <ChakraLink 
+                as="span"
                 _hover={{ color: linkHoverColor }}
                 transition="all 0.2s"
               >
                 Careers
               </ChakraLink>
             </Link>
-            <Link href="/support" passHref legacyBehavior>
+            <Link href="/support">
               <ChakraLink 
+                as="span"
                 _hover={{ color: linkHoverColor }}
                 transition="all 0.2s"
               >
