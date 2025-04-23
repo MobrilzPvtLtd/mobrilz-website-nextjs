@@ -45,6 +45,13 @@ export const theme = extendTheme({
         fontWeight: "500",
         borderRadius: "lg",
       },
+      sizes: {
+        sm: {
+          fontSize: "sm",
+          px: 3, // reduced horizontal padding
+          py: 2,  // reduced vertical padding
+        }
+      },
       variants: {
         solid: (props) => ({
           bg: props.colorMode === "dark" ? "brand.500" : "brand.500",
@@ -53,6 +60,16 @@ export const theme = extendTheme({
             bg: props.colorMode === "dark" ? "brand.400" : "brand.600",
           }
         }),
+        ghost: {
+          _hover: {
+            bg: 'gray.50',
+          },
+          _dark: {
+            _hover: {
+              bg: 'gray.700',
+            }
+          }
+        }
       }
     },
     Link: {
@@ -60,6 +77,41 @@ export const theme = extendTheme({
         textDecoration: "none",
         _hover: {
           textDecoration: "none",
+        }
+      }
+    },
+    Menu: {
+      baseStyle: {
+        list: {
+          bg: 'white',
+          _dark: {
+            bg: 'gray.800'
+          },
+          border: 'none',
+          padding: '0.75rem',
+          boxShadow: 'lg',
+          borderRadius: 'xl'
+        },
+        item: {
+          fontSize: 'sm',
+          py: 1.5,
+          px: 3
+        }
+      }
+    },
+    MenuItem: {
+      baseStyle: {
+        _hover: {
+          bg: 'gray.50',
+          _dark: {
+            bg: 'gray.700'
+          }
+        },
+        _focus: {
+          bg: 'gray.50',
+          _dark: {
+            bg: 'gray.700'
+          }
         }
       }
     }

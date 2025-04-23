@@ -39,17 +39,17 @@ const HeaderBottom = () => {
                 <Flex
                     justify="space-between"
                     align="center"
-                    height="70px"
+                    height="64px"
                 >
                     <Logo />
                     <MegaMenu />
-                    <Flex align="center" gap={4}>
+                    <Flex align="center" gap={2}>
                         <ThemeSwitcher />
                         <Button 
                             colorScheme="brand"
                             size="md"
                         >
-                            Contact Us
+                            Get A Quote
                         </Button>
                     </Flex>
                 </Flex>
