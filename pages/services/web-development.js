@@ -34,6 +34,7 @@ import {
   FaCogs,
   FaTools,
   FaChartLine,
+  FaUser,
 } from 'react-icons/fa';
 import SEO from '../../components/SEO';
 import Breadcrumb from '../../components/common/Breadcrumb';
@@ -117,7 +118,7 @@ const WebDevelopment = () => {
             </Stack>
             <Box position="relative" width="100%" height="400px" overflow="hidden" borderRadius="xl">
               <Image
-                src="https://picsum.photos/seed/webdev-hero/1200/800"
+                src="https://picsum.photos/seed/web-dev-hero/1200/800"
                 alt="Web Development Services"
                 style={{
                   objectFit: 'cover',
@@ -314,6 +315,7 @@ const WebDevelopment = () => {
                       name={testimonial.name} 
                       size="xl"
                       loading="lazy"
+                      fallback={<Icon as={FaUser} boxSize={16} color={accentColor} />}
                     />
                   </Box>
                   <Stack spacing={2} textAlign="center">
@@ -451,21 +453,21 @@ const testimonials = [
     position: 'CEO, TechCorp',
     quote: 'Exceptional web development service. Delivered beyond expectations.',
     rating: 5,
-    image: 'https://picsum.photos/seed/john/200'
+    image: 'https://picsum.photos/seed/john-doe/200/200'
   },
   {
     name: 'Sarah Smith',
     position: 'CTO, InnovateX',
     quote: 'Their expertise in web development helped us transform our digital presence.',
     rating: 5,
-    image: 'https://picsum.photos/seed/sarah/200'
+    image: 'https://picsum.photos/seed/sarah-smith/200/200'
   },
   {
     name: 'Mike Johnson',
     position: 'Founder, StartupHub',
     quote: 'Professional team that delivers quality web solutions on time.',
     rating: 5,
-    image: 'https://picsum.photos/seed/mike/200'
+    image: 'https://picsum.photos/seed/mike-johnson/200/200'
   }
 ];
 

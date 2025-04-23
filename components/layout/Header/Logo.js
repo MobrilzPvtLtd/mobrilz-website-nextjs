@@ -1,4 +1,4 @@
-import { Box, Image } from '@chakra-ui/react';
+import { Box, Image, useColorModeValue } from '@chakra-ui/react';
 import Link from 'next/link';
 
 const Logo = () => {
@@ -10,6 +10,8 @@ const Logo = () => {
           alt="Mobrilz Logo" 
           h="40px"
           objectFit="contain"
+          filter={useColorModeValue("none", "brightness(0) invert(1)")}
+          transition="all 0.2s"
         />
       </Box>
     </Link>
