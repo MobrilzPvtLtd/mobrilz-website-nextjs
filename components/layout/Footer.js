@@ -1,5 +1,6 @@
 import { Box, Container, Stack, Text, SimpleGrid, Link, Icon, HStack, VStack, Image, Divider, useColorModeValue } from '@chakra-ui/react';
 import { FaTwitter, FaLinkedin, FaGithub, FaInstagram, FaDribbble, FaBehance, FaMedium } from 'react-icons/fa';
+import NextLink from 'next/link';
 
 const SocialLink = ({ icon, label, href }) => (
   <Link 
@@ -21,6 +22,18 @@ const SocialLink = ({ icon, label, href }) => (
       transition="all 0.2s ease"
     />
   </Link>
+);
+
+const FooterLink = ({ href, children }) => (
+  <NextLink href={href} passHref>
+    <Link 
+      color="gray.600" 
+      _dark={{ color: 'gray.400' }}
+      _hover={{ color: 'brand.500' }}
+    >
+      {children}
+    </Link>
+  </NextLink>
 );
 
 const Footer = () => {
@@ -54,65 +67,83 @@ const Footer = () => {
               <Text color={textColor} fontSize="sm" lineHeight="tall">
                 We create digital experiences that matter.
               </Text>
+              <HStack spacing={6} wrap="wrap">
+                <SocialLink icon={FaTwitter} label="Twitter" href="https://twitter.com/mobrilz" />
+                <SocialLink icon={FaLinkedin} label="LinkedIn" href="https://linkedin.com/company/mobrilz" />
+                <SocialLink icon={FaGithub} label="GitHub" href="https://github.com/mobrilz" />
+                <SocialLink icon={FaInstagram} label="Instagram" href="https://instagram.com/mobrilz" />
+              </HStack>
             </VStack>
-            
-            {/* Social Links */}
-            <HStack spacing={6} wrap="wrap">
-              <SocialLink icon={FaTwitter} label="Twitter" href="https://twitter.com/mobrilz" />
-              <SocialLink icon={FaLinkedin} label="LinkedIn" href="https://linkedin.com/company/mobrilz" />
-              <SocialLink icon={FaGithub} label="GitHub" href="https://github.com/mobrilz" />
-              <SocialLink icon={FaInstagram} label="Instagram" href="https://instagram.com/mobrilz" />
-              <SocialLink icon={FaDribbble} label="Dribbble" href="https://dribbble.com/mobrilz" />
-              <SocialLink icon={FaBehance} label="Behance" href="https://behance.net/mobrilz" />
-              <SocialLink icon={FaMedium} label="Medium" href="https://medium.com/@mobrilz" />
-            </HStack>
           </Stack>
 
           <Divider borderColor={borderColor} />
 
-          {/* Footer Links */}
+          {/* Footer Links - 4 Columns */}
           <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8}>
+            {/* Company & Legal */}
             <Stack spacing={4}>
               <Text fontWeight="bold" fontSize="md" textTransform="uppercase" letterSpacing="wide">
                 Company
               </Text>
               <Stack spacing={2}>
-                <Link _hover={{ color: 'brand.500' }}>About Us</Link>
-                <Link _hover={{ color: 'brand.500' }}>Careers</Link>
-                <Link _hover={{ color: 'brand.500' }}>Contact</Link>
+                <FooterLink href="/about">About Us</FooterLink>
+                <FooterLink href="/careers">Careers</FooterLink>
+                <FooterLink href="/contact">Contact</FooterLink>
+                <FooterLink href="/privacy-policy">Privacy Policy</FooterLink>
+                <FooterLink href="/terms-of-service">Terms of Service</FooterLink>
               </Stack>
             </Stack>
             
+            {/* Services */}
             <Stack spacing={4}>
               <Text fontWeight="bold" fontSize="md" textTransform="uppercase" letterSpacing="wide">
                 Services
               </Text>
               <Stack spacing={2}>
-                <Link _hover={{ color: 'brand.500' }}>Web Development</Link>
-                <Link _hover={{ color: 'brand.500' }}>Mobile Apps</Link>
-                <Link _hover={{ color: 'brand.500' }}>Cloud Solutions</Link>
+                {/* Development Services */}
+                <FooterLink href="/services/web-development">Web Development</FooterLink>
+                <FooterLink href="/services/mobile-apps">Mobile Apps</FooterLink>
+                <FooterLink href="/services/cloud-solutions">Cloud Solutions</FooterLink>
+                <FooterLink href="/services/custom-software">Custom Software</FooterLink>
+                
+                {/* Design Services */}
+                <FooterLink href="/services/ui-ux-design">UI/UX Design</FooterLink>
+                <FooterLink href="/services/branding">Branding</FooterLink>
+                <FooterLink href="/services/graphics-design">Graphics Design</FooterLink>
+                
+                {/* Solutions */}
+                <FooterLink href="/services/devops">DevOps</FooterLink>
+                <FooterLink href="/services/api-integration">API Integration</FooterLink>
+                <FooterLink href="/services/maintenance">Maintenance</FooterLink>
               </Stack>
             </Stack>
             
+            {/* Solutions */}
             <Stack spacing={4}>
               <Text fontWeight="bold" fontSize="md" textTransform="uppercase" letterSpacing="wide">
-                Resources
+                Solutions
               </Text>
               <Stack spacing={2}>
-                <Link _hover={{ color: 'brand.500' }}>Blog</Link>
-                <Link _hover={{ color: 'brand.500' }}>Documentation</Link>
-                <Link _hover={{ color: 'brand.500' }}>Support</Link>
+                <FooterLink href="/services/api-integration">API Integration</FooterLink>
+                <FooterLink href="/services/maintenance">Maintenance</FooterLink>
+                <FooterLink href="/services/branding">Branding</FooterLink>
+                <FooterLink href="/services/graphics-design">Graphics Design</FooterLink>
               </Stack>
             </Stack>
             
+            {/* Industries */}
             <Stack spacing={4}>
               <Text fontWeight="bold" fontSize="md" textTransform="uppercase" letterSpacing="wide">
-                Legal
+                Industries
               </Text>
               <Stack spacing={2}>
-                <Link _hover={{ color: 'brand.500' }}>Privacy Policy</Link>
-                <Link _hover={{ color: 'brand.500' }}>Terms of Service</Link>
-                <Link _hover={{ color: 'brand.500' }}>Cookie Policy</Link>
+                {/* Sectors */}
+                <FooterLink href="/industries/manufacturing">Manufacturing</FooterLink>
+                <FooterLink href="/industries/finance">Finance</FooterLink>
+                <FooterLink href="/industries/healthcare">Healthcare</FooterLink>
+                <FooterLink href="/industries/e-commerce">E-Commerce</FooterLink>
+                <FooterLink href="/industries/consulting">Consulting</FooterLink>
+                <FooterLink href="/industries/retail">Retail</FooterLink>
               </Stack>
             </Stack>
           </SimpleGrid>
