@@ -3,9 +3,9 @@ import { PhoneIcon, EmailIcon } from '@chakra-ui/icons';
 import Link from 'next/link';
 
 const HeaderTop = () => {
-  const bgColor = useColorModeValue('header.light.top', 'header.dark.top');
+  const bgColor = useColorModeValue('brand.600', 'gray.800');
   const textColor = useColorModeValue('white', 'gray.100');
-  const linkHoverColor = useColorModeValue('gray.200', 'gray.300');
+  const linkHoverColor = useColorModeValue('brand.100', 'gray.300');
 
   return (
     <Box 
@@ -14,32 +14,33 @@ const HeaderTop = () => {
       py={2}
       transition="all 0.3s ease"
       className="header-top"
+      fontSize="sm"
     >
       <Container maxW="container.xl">
         <Flex justify="space-between" align="center">
-          <HStack spacing={4}>
-            <HStack>
-              <Icon as={PhoneIcon} />
-              <Text fontSize="sm">+1 234 567 890</Text>
+          <HStack spacing={6}>
+            <HStack spacing={2}>
+              <Icon as={PhoneIcon} w={3} h={3} />
+              <Text>+1 234 567 890</Text>
             </HStack>
-            <HStack>
-              <Icon as={EmailIcon} />
-              <Text fontSize="sm">contact@mobrilz.com</Text>
+            <HStack spacing={2}>
+              <Icon as={EmailIcon} w={3} h={3} />
+              <Text>contact@mobrilz.com</Text>
             </HStack>
           </HStack>
-          <HStack spacing={4}>
+          <HStack spacing={6}>
             <Link href="/careers" passHref legacyBehavior>
               <ChakraLink 
-                fontSize="sm"
                 _hover={{ color: linkHoverColor }}
+                transition="all 0.2s"
               >
-                Career
+                Careers
               </ChakraLink>
             </Link>
             <Link href="/support" passHref legacyBehavior>
               <ChakraLink 
-                fontSize="sm"
                 _hover={{ color: linkHoverColor }}
+                transition="all 0.2s"
               >
                 Support
               </ChakraLink>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Box, Flex, Container, Button, useDisclosure, useColorModeValue } from '@chakra-ui/react';
+import { Box, Flex, Container, Button, useColorModeValue } from '@chakra-ui/react';
 import Logo from './Logo';
 import MegaMenu from './MegaMenu';
 import ThemeSwitcher from './ThemeSwitcher';
@@ -7,8 +7,9 @@ import ThemeSwitcher from './ThemeSwitcher';
 const HeaderBottom = () => {
     const [scrollPosition, setScrollPosition] = useState(0);
     const [isVisible, setIsVisible] = useState(true);
-    const bgColor = useColorModeValue('header.light.bottom', 'header.dark.bottom');
-    const borderColor = useColorModeValue('gray.200', 'gray.700');
+    const bgColor = useColorModeValue('white', 'gray.900');
+    const borderColor = useColorModeValue('gray.100', 'gray.700');
+    const shadowColor = useColorModeValue('rgba(0, 0, 0, 0.1)', 'rgba(0, 0, 0, 0.4)');
 
     useEffect(() => {
         const handleScroll = () => {
@@ -27,9 +28,9 @@ const HeaderBottom = () => {
             position="sticky"
             top={0}
             bg={bgColor}
-            boxShadow="sm"
             borderBottom="1px"
             borderColor={borderColor}
+            boxShadow={`0 4px 6px -1px ${shadowColor}`}
             zIndex="sticky"
             transform={`translateY(${isVisible ? '0' : '-100%'})`}
             transition="all 0.3s ease"
@@ -38,18 +39,15 @@ const HeaderBottom = () => {
                 <Flex
                     justify="space-between"
                     align="center"
-                    py={4}
+                    height="70px"
                 >
                     <Logo />
                     <MegaMenu />
                     <Flex align="center" gap={4}>
                         <ThemeSwitcher />
                         <Button 
-                            colorScheme="blue"
-                            _dark={{
-                                bg: 'blue.600',
-                                _hover: { bg: 'blue.500' }
-                            }}
+                            colorScheme="brand"
+                            size="md"
                         >
                             Contact Us
                         </Button>
