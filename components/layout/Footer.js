@@ -1,4 +1,4 @@
-import { Box, Container, Stack, Text, SimpleGrid, Link, Icon, HStack, VStack, Image, Divider } from '@chakra-ui/react';
+import { Box, Container, Stack, Text, SimpleGrid, Link, Icon, HStack, VStack, Image, Divider, useColorModeValue } from '@chakra-ui/react';
 import { FaTwitter, FaLinkedin, FaGithub, FaInstagram, FaDribbble, FaBehance, FaMedium } from 'react-icons/fa';
 
 const SocialLink = ({ icon, label, href }) => (
@@ -24,18 +24,20 @@ const SocialLink = ({ icon, label, href }) => (
 );
 
 const Footer = () => {
+  const bgColor = useColorModeValue("white", "gray.900");
+  const borderColor = useColorModeValue("gray.100", "gray.700");
+  const textColor = useColorModeValue("gray.600", "gray.400");
+
   return (
     <Box 
-      bg="white" 
-      _dark={{ bg: 'gray.900' }}
+      bg={bgColor}
       borderTop="1px"
-      borderColor="gray.100"
-      _dark={{ borderColor: 'gray.700' }}
+      borderColor={borderColor}
       py={12}
     >
       <Container maxW="container.xl">
         <Stack spacing={12}>
-          {/* Top Section with Logo and Description */}
+          {/* Top Section */}
           <Stack 
             direction={{ base: 'column', md: 'row' }}
             justify="space-between"
@@ -47,10 +49,10 @@ const Footer = () => {
                 src="/images/logo.png" 
                 alt="Mobrilz Logo" 
                 height="40px"
-                _dark={{ filter: 'brightness(0) invert(1)' }}
+                filter={useColorModeValue("none", "brightness(0) invert(1)")}
               />
-              <Text color="gray.600" _dark={{ color: 'gray.400' }} fontSize="sm" lineHeight="tall">
-                We create digital experiences that matter. Transform your business with our innovative solutions in web, mobile, and cloud development.
+              <Text color={textColor} fontSize="sm" lineHeight="tall">
+                We create digital experiences that matter.
               </Text>
             </VStack>
             
@@ -66,13 +68,10 @@ const Footer = () => {
             </HStack>
           </Stack>
 
-          <Divider borderColor="gray.200" _dark={{ borderColor: 'gray.700' }} />
+          <Divider borderColor={borderColor} />
 
-          {/* Main Links Section */}
-          <SimpleGrid 
-            columns={{ base: 1, sm: 2, md: 4 }} 
-            spacing={{ base: 8, md: 12 }}
-          >
+          {/* Footer Links */}
+          <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8}>
             <Stack spacing={4}>
               <Text fontWeight="bold" fontSize="md" textTransform="uppercase" letterSpacing="wide">
                 Company
@@ -119,7 +118,7 @@ const Footer = () => {
           </SimpleGrid>
 
           {/* Bottom Section */}
-          <Box pt={8} borderTopWidth={1} borderColor="gray.200" _dark={{ borderColor: 'gray.700' }}>
+          <Box pt={8} borderTopWidth={1} borderColor={borderColor}>
             <Stack 
               direction={{ base: 'column', md: 'row' }}
               justify="space-between"

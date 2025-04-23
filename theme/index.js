@@ -31,6 +31,10 @@ export const theme = extendTheme({
       }
     }
   },
+  config: {
+    initialColorMode: 'light',
+    useSystemColorMode: true,
+  },
   styles: {
     global: (props) => ({
       body: {
@@ -65,8 +69,25 @@ export const theme = extendTheme({
           _hover: {
             bg: props.colorMode === "dark" ? "whiteAlpha.200" : "blackAlpha.50"
           }
+        }),
+        outline: (props) => ({
+          borderColor: props.colorMode === "dark" ? "white" : "brand.500",
+          color: props.colorMode === "dark" ? "white" : "brand.500",
+          _hover: {
+            bg: props.colorMode === "dark" ? "whiteAlpha.200" : "brand.50"
+          }
         })
       }
+    },
+    Heading: {
+      baseStyle: (props) => ({
+        color: props.colorMode === "dark" ? "white" : "gray.800",
+      })
+    },
+    Text: {
+      baseStyle: (props) => ({
+        color: props.colorMode === "dark" ? "gray.100" : "gray.800",
+      })
     },
     Link: {
       baseStyle: (props) => ({

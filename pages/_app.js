@@ -1,34 +1,39 @@
 import '/styles/globals.css';
-import { ChakraProvider } from '@chakra-ui/react';
+import { useState, useEffect } from 'react';
+import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 import { theme } from '../theme';
 import Layout from '../components/layout/Layout';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
-  // Analytics and performance monitoring
   useEffect(() => {
-    const handleRouteChange = (url) => {
-      // Log page views here if needed
+    const handleStart = () => setIsLoading(true);
+    const handleComplete = () => setIsLoading(false);
+
+    router.events.on('routeChangeStart', handleStart);
+    router.events.on('routeChangeComplete', handleComplete);
+    router.events.on('routeChangeError', handleComplete);
+
+    return () => {
+      router.events.off('routeChangeStart', handleStart);
+      router.events.off('routeChangeComplete', handleComplete);
+      router.events.off('routeChangeError', handleComplete);
     };
-    router.events.on('routeChangeComplete', handleRouteChange);
-    return () => router.events.off('routeChangeComplete', handleRouteChange);
-  }, [router.events]);
+  }, [router]);
 
   return (
-    <ChakraProvider theme={theme}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </ChakraProvider>
+    <>
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+      <ChakraProvider theme={theme}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ChakraProvider>
+    </>
   );
-}
-
-export function reportWebVitals(metric) {
-  // Analytics implementation
-  console.log(metric);
 }
 
 export default MyApp;

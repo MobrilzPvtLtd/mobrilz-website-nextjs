@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Box, Flex, Container, Button, useColorModeValue } from '@chakra-ui/react';
 import Logo from './Logo';
 import MegaMenu from './MegaMenu';
@@ -7,20 +7,21 @@ import ThemeSwitcher from './ThemeSwitcher';
 const HeaderBottom = () => {
     const [scrollPosition, setScrollPosition] = useState(0);
     const [isVisible, setIsVisible] = useState(true);
+    
     const bgColor = useColorModeValue('white', 'gray.900');
     const borderColor = useColorModeValue('gray.100', 'gray.700');
     const shadowColor = useColorModeValue('rgba(0, 0, 0, 0.1)', 'rgba(0, 0, 0, 0.4)');
 
-    useEffect(() => {
-        const handleScroll = () => {
-            const currentPosition = window.pageYOffset;
-            setIsVisible(scrollPosition > currentPosition || currentPosition < 10);
-            setScrollPosition(currentPosition);
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+    const handleScroll = useCallback(() => {
+        const currentPosition = window.pageYOffset;
+        setIsVisible(scrollPosition > currentPosition || currentPosition < 10);
+        setScrollPosition(currentPosition);
     }, [scrollPosition]);
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [handleScroll]);
 
     return (
         <Box
@@ -31,7 +32,7 @@ const HeaderBottom = () => {
             borderBottom="1px"
             borderColor={borderColor}
             boxShadow={`0 4px 6px -1px ${shadowColor}`}
-            zIndex="sticky"
+            zIndex={1000}
             transform={`translateY(${isVisible ? '0' : '-100%'})`}
             transition="all 0.3s ease"
         >
