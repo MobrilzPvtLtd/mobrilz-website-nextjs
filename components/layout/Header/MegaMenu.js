@@ -7,62 +7,66 @@ import {
   FaUsers, FaStar, FaHeadset
 } from 'react-icons/fa';
 import Link from 'next/link';
+import NextLink from 'next/link';
 
-const MenuItem = ({ icon, title, description, ...props }) => {
+const MenuItem = ({ icon, title, description, href = '#', ...props }) => {
   const hoverBg = useColorModeValue('gray.50', 'gray.700');
   
   return (
-    <HStack 
-      p={3} 
-      spacing={4} 
-      role="menuitem"
-      tabIndex={0}
-      aria-label={title}
-      borderRadius="md"
-      transition="all 0.2s"
-      cursor="pointer"
-      _hover={{
-        bg: hoverBg,
-        transform: 'translateX(4px)'
-      }}
-      role="group"
-      {...props}
-    >
-      <Icon 
-        as={icon} 
-        boxSize={5} 
-        color="brand.500" 
-        _dark={{ color: 'brand.200' }} 
-        _groupHover={{
-          color: 'brand.400',
-          _dark: { color: 'brand.300' }
+    <NextLink href={href} passHref legacyBehavior>
+      <HStack 
+        as="a"
+        p={3} 
+        spacing={4} 
+        role="menuitem"
+        tabIndex={0}
+        aria-label={title}
+        borderRadius="md"
+        transition="all 0.2s"
+        cursor="pointer"
+        _hover={{
+          bg: hoverBg,
+          transform: 'translateX(4px)'
         }}
-      />
-      <VStack align="start" spacing={0}>
-        <Text 
-          fontWeight="500"
-          color="gray.800"
-          _dark={{ color: 'white' }}
+        role="group"
+        {...props}
+      >
+        <Icon 
+          as={icon} 
+          boxSize={5} 
+          color="brand.500" 
+          _dark={{ color: 'brand.200' }} 
           _groupHover={{
-            color: useColorModeValue('brand.600', 'brand.200')
+            color: 'brand.400',
+            _dark: { color: 'brand.300' }
           }}
-        >
-          {title}
-        </Text>
-        {description && (
+        />
+        <VStack align="start" spacing={0}>
           <Text 
-            fontSize="sm" 
-            color="gray.600" 
-            _dark={{ color: 'gray.400' }}
+            fontWeight="500"
+            color="gray.800"
+            _dark={{ color: 'white' }}
             _groupHover={{
-              color: useColorModeValue('gray.700', 'gray.300')
+              color: useColorModeValue('brand.600', 'brand.200')
             }}
           >
-            {description}
+            {title}
           </Text>
-        )}
-      </VStack>
-    </HStack>
+          {description && (
+            <Text 
+              fontSize="sm" 
+              color="gray.600" 
+              _dark={{ color: 'gray.400' }}
+              _groupHover={{
+                color: useColorModeValue('gray.700', 'gray.300')
+              }}
+            >
+              {description}
+            </Text>
+          )}
+        </VStack>
+      </HStack>
+    </NextLink>
   );
 };
 
@@ -145,6 +149,7 @@ const MegaMenu = () => {
                   icon={FaCode}
                   title="Web Development"
                   description="Custom websites & web applications"
+                  href="/services/web-development"
                 />
                 <MenuItem 
                   icon={FaMobile}

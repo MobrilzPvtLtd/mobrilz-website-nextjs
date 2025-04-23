@@ -6,7 +6,7 @@ import {
   useColorModeValue 
 } from '@chakra-ui/react';
 import { ChevronRightIcon } from '@chakra-ui/icons';
-import Link from 'next/link';
+import NextLink from 'next/link';
 
 const Breadcrumb = ({ items, 'aria-label': ariaLabel }) => {
   const [mounted, setMounted] = useState(false);
@@ -18,11 +18,8 @@ const Breadcrumb = ({ items, 'aria-label': ariaLabel }) => {
   const color = useColorModeValue("gray.600", "gray.400");
   const activeColor = useColorModeValue("blue.600", "blue.200");
   const separatorColor = useColorModeValue("gray.400", "gray.600");
-  const hoverColor = useColorModeValue("blue.700", "blue.300");
 
-  if (!mounted) {
-    return null;
-  }
+  if (!mounted) return null;
 
   return (
     <ChakraBreadcrumb
@@ -47,16 +44,16 @@ const Breadcrumb = ({ items, 'aria-label': ariaLabel }) => {
               {item.name}
             </BreadcrumbLink>
           ) : (
-            <Link href={item.path} passHref>
+            <NextLink href={item.path} passHref legacyBehavior>
               <BreadcrumbLink 
                 color={color}
-                _hover={{ color: hoverColor }}
+                _hover={{ color: activeColor }}
                 title={item.title}
                 aria-label={item.description}
               >
                 {item.name}
               </BreadcrumbLink>
-            </Link>
+            </NextLink>
           )}
         </BreadcrumbItem>
       ))}
