@@ -1,14 +1,18 @@
-import { Box, Container, Flex, Text, HStack, Link as ChakraLink, Icon } from '@chakra-ui/react';
+import { Box, Container, Flex, Text, HStack, Link as ChakraLink, Icon, useColorModeValue } from '@chakra-ui/react';
 import { PhoneIcon, EmailIcon } from '@chakra-ui/icons';
 import Link from 'next/link';
 
 const HeaderTop = () => {
+  const bgColor = useColorModeValue('header.light.top', 'header.dark.top');
+  const textColor = useColorModeValue('white', 'gray.100');
+  const linkHoverColor = useColorModeValue('gray.200', 'gray.300');
+
   return (
     <Box 
-      bg="blue.600" 
-      color="white" 
+      bg={bgColor}
+      color={textColor}
       py={2}
-      transition="transform 0.3s ease"
+      transition="all 0.3s ease"
       className="header-top"
     >
       <Container maxW="container.xl">
@@ -25,10 +29,20 @@ const HeaderTop = () => {
           </HStack>
           <HStack spacing={4}>
             <Link href="/careers" passHref legacyBehavior>
-              <ChakraLink fontSize="sm">Career</ChakraLink>
+              <ChakraLink 
+                fontSize="sm"
+                _hover={{ color: linkHoverColor }}
+              >
+                Career
+              </ChakraLink>
             </Link>
             <Link href="/support" passHref legacyBehavior>
-              <ChakraLink fontSize="sm">Support</ChakraLink>
+              <ChakraLink 
+                fontSize="sm"
+                _hover={{ color: linkHoverColor }}
+              >
+                Support
+              </ChakraLink>
             </Link>
           </HStack>
         </Flex>

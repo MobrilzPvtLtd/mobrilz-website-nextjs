@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Box, Flex, Container, Button, useDisclosure } from '@chakra-ui/react';
+import { Box, Flex, Container, Button, useDisclosure, useColorModeValue } from '@chakra-ui/react';
 import Logo from './Logo';
 import MegaMenu from './MegaMenu';
 import ThemeSwitcher from './ThemeSwitcher';
@@ -7,6 +7,8 @@ import ThemeSwitcher from './ThemeSwitcher';
 const HeaderBottom = () => {
     const [scrollPosition, setScrollPosition] = useState(0);
     const [isVisible, setIsVisible] = useState(true);
+    const bgColor = useColorModeValue('header.light.bottom', 'header.dark.bottom');
+    const borderColor = useColorModeValue('gray.200', 'gray.700');
 
     useEffect(() => {
         const handleScroll = () => {
@@ -24,11 +26,13 @@ const HeaderBottom = () => {
             as="header"
             position="sticky"
             top={0}
-            bg="white"
+            bg={bgColor}
             boxShadow="sm"
+            borderBottom="1px"
+            borderColor={borderColor}
             zIndex="sticky"
             transform={`translateY(${isVisible ? '0' : '-100%'})`}
-            transition="transform 0.3s ease"
+            transition="all 0.3s ease"
         >
             <Container maxW="container.xl">
                 <Flex
@@ -40,7 +44,15 @@ const HeaderBottom = () => {
                     <MegaMenu />
                     <Flex align="center" gap={4}>
                         <ThemeSwitcher />
-                        <Button colorScheme="blue">Contact Us</Button>
+                        <Button 
+                            colorScheme="blue"
+                            _dark={{
+                                bg: 'blue.600',
+                                _hover: { bg: 'blue.500' }
+                            }}
+                        >
+                            Contact Us
+                        </Button>
                     </Flex>
                 </Flex>
             </Container>
