@@ -155,16 +155,19 @@ const MegaMenu = () => {
                   icon={FaMobile}
                   title="Mobile Apps"
                   description="iOS & Android development"
+                  href="/services/mobile-apps"
                 />
                 <MenuItem 
                   icon={FaCloud}
                   title="Cloud Solutions"
                   description="Scalable cloud infrastructure"
+                  href="/services/cloud-solutions"
                 />
                 <MenuItem 
                   icon={FaCogs}
                   title="Custom Software"
                   description="Tailored business solutions"
+                  href="/services/custom-software"
                 />
               </VStack>
             </Box>
@@ -175,16 +178,19 @@ const MegaMenu = () => {
                   icon={FaPalette}
                   title="UI/UX Design"
                   description="User-centered interfaces"
+                  href="/services/ui-ux-design"
                 />
                 <MenuItem 
                   icon={FaChartLine}
                   title="Branding"
                   description="Brand identity & strategy"
+                  href="/services/branding"
                 />
                 <MenuItem 
                   icon={FaPalette}
                   title="Graphics Design"
                   description="Visual content creation"
+                  href="/services/graphics-design"
                 />
               </VStack>
             </Box>
@@ -195,16 +201,19 @@ const MegaMenu = () => {
                   icon={FaCogs}
                   title="DevOps"
                   description="Automated development ops"
+                  href="/services/devops"
                 />
                 <MenuItem 
                   icon={FaCloud}
                   title="API Integration"
                   description="Seamless system connections"
+                  href="/services/api-integration"
                 />
                 <MenuItem 
                   icon={FaHandshake}
                   title="Maintenance"
                   description="Ongoing system support"
+                  href="/services/maintenance"
                 />
               </VStack>
             </Box>
@@ -230,16 +239,19 @@ const MegaMenu = () => {
                   icon={FaIndustry}
                   title="Manufacturing"
                   description="Smart factory solutions"
+                  href="/industries/manufacturing"
                 />
                 <MenuItem 
                   icon={FaBuilding}
                   title="Finance"
                   description="Fintech innovations"
+                  href="/industries/finance"
                 />
                 <MenuItem 
                   icon={FaHeadset}
                   title="Healthcare"
                   description="Digital health systems"
+                  href="/industries/healthcare"
                 />
               </VStack>
             </Box>
@@ -250,16 +262,19 @@ const MegaMenu = () => {
                   icon={FaChartLine}
                   title="E-Commerce"
                   description="Online retail platforms"
+                  href="/industries/e-commerce"
                 />
                 <MenuItem 
                   icon={FaHandshake}
                   title="Consulting"
                   description="Business technology advice"
+                  href="/industries/consulting"
                 />
                 <MenuItem 
                   icon={FaBuilding}
                   title="Retail"
                   description="Point of sale systems"
+                  href="/industries/retail"
                 />
               </VStack>
             </Box>
@@ -284,21 +299,25 @@ const MegaMenu = () => {
                 icon={FaProjectDiagram}
                 title="Case Studies"
                 description="Success stories"
+                href="/work/case-studies"
               />
               <MenuItem 
                 icon={FaCogs}
                 title="Projects"
                 description="Recent work"
+                href="/work/projects"
               />
               <MenuItem 
                 icon={FaUsers}
                 title="Clients"
                 description="Who we work with"
+                href="/work/clients"
               />
               <MenuItem 
                 icon={FaStar}
                 title="Testimonials"
                 description="Client feedback"
+                href="/work/testimonials"
               />
             </VStack>
           </Box>
