@@ -60,18 +60,12 @@ export const theme = extendTheme({
             bg: props.colorMode === "dark" ? "brand.400" : "brand.600",
           }
         }),
-        ghost: {
-          color: 'gray.700',
-          _dark: {
-            color: 'white'
-          },
+        ghost: (props) => ({
+          color: props.colorMode === 'dark' ? 'white' : 'gray.700',
           _hover: {
-            bg: 'gray.50',
-            _dark: {
-              bg: 'gray.700',
-            }
+            bg: props.colorMode === 'dark' ? 'gray.700' : 'gray.50'
           }
-        }
+        })
       }
     },
     Link: {
@@ -94,8 +88,7 @@ export const theme = extendTheme({
           _dark: {
             borderColor: 'gray.700'
           },
-          boxShadow: 'lg',
-          padding: '0.75rem'
+          boxShadow: 'lg'
         },
         item: {
           fontSize: 'sm',
@@ -110,25 +103,26 @@ export const theme = extendTheme({
             _dark: {
               bg: 'gray.700'
             }
+          },
+          _focus: {
+            bg: 'gray.50',
+            _dark: {
+              bg: 'gray.700'
+            }
           }
         }
       }
     },
     MenuItem: {
-      baseStyle: {
+      baseStyle: (props) => ({
+        color: props.colorMode === 'dark' ? 'white' : 'gray.800',
         _hover: {
-          bg: 'gray.50',
-          _dark: {
-            bg: 'gray.700'
-          }
+          bg: props.colorMode === 'dark' ? 'gray.700' : 'gray.50'
         },
         _focus: {
-          bg: 'gray.50',
-          _dark: {
-            bg: 'gray.700'
-          }
+          bg: props.colorMode === 'dark' ? 'gray.700' : 'gray.50'
         }
-      }
+      })
     }
   }
 });
