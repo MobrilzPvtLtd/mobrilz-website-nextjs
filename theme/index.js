@@ -61,11 +61,13 @@ export const theme = extendTheme({
           }
         }),
         ghost: {
+          color: 'gray.700',
+          _dark: {
+            color: 'white'
+          },
           _hover: {
             bg: 'gray.50',
-          },
-          _dark: {
-            _hover: {
+            _dark: {
               bg: 'gray.700',
             }
           }
@@ -87,15 +89,28 @@ export const theme = extendTheme({
           _dark: {
             bg: 'gray.800'
           },
-          border: 'none',
-          padding: '0.75rem',
+          border: '1px solid',
+          borderColor: 'gray.100',
+          _dark: {
+            borderColor: 'gray.700'
+          },
           boxShadow: 'lg',
-          borderRadius: 'xl'
+          padding: '0.75rem'
         },
         item: {
           fontSize: 'sm',
           py: 1.5,
-          px: 3
+          px: 3,
+          color: 'gray.800',
+          _dark: {
+            color: 'white'
+          },
+          _hover: {
+            bg: 'gray.50',
+            _dark: {
+              bg: 'gray.700'
+            }
+          }
         }
       }
     },
