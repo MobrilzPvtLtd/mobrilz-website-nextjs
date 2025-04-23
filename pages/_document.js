@@ -5,7 +5,6 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <link rel="stylesheet" href="/path/to/your/styles.css" />
           {/* Add any additional head elements here */}
         </Head>
         <body>
