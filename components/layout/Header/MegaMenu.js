@@ -12,16 +12,24 @@ const MenuItem = ({ icon, title, description }) => (
   <HStack 
     p={3} 
     spacing={4} 
-    _hover={{ bg: 'gray.50', _dark: { bg: 'gray.700' } }}
+    _hover={{ 
+      bg: 'whiteAlpha.100', 
+      _dark: { bg: 'whiteAlpha.100' } 
+    }}
     borderRadius="md"
     transition="all 0.2s"
     cursor="pointer"
+    role="group"
   >
     <Icon 
       as={icon} 
       boxSize={5} 
       color="brand.500" 
       _dark={{ color: 'brand.200' }} 
+      _groupHover={{
+        color: 'brand.400',
+        _dark: { color: 'brand.300' }
+      }}
     />
     <VStack align="start" spacing={0}>
       <Text 
@@ -35,7 +43,7 @@ const MenuItem = ({ icon, title, description }) => (
         <Text 
           fontSize="sm" 
           color="gray.600" 
-          _dark={{ color: 'gray.300' }}
+          _dark={{ color: 'gray.400' }}
         >
           {description}
         </Text>

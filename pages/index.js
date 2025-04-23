@@ -18,7 +18,12 @@ import Layout from '../components/layout/Layout';
 
 const Home = () => {
   return (
-    <>
+    <Box 
+      bg="white" 
+      _dark={{
+        bg: 'gray.900'
+      }}
+    >
       {/* Hero Section */}
       <Box bg="blue.50" py={20}>
         <Container maxW="container.xl">
@@ -231,7 +236,7 @@ const Home = () => {
           </Stack>
         </Container>
       </Box>
-    </>
+    </Box>
   );
 };
 

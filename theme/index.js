@@ -54,64 +54,46 @@ export const theme = extendTheme({
       },
       variants: {
         solid: (props) => ({
-          bg: props.colorMode === "dark" ? "brand.500" : "brand.500",
+          bg: "brand.500",
           color: "white",
           _hover: {
             bg: props.colorMode === "dark" ? "brand.400" : "brand.600",
           }
         }),
         ghost: (props) => ({
-          color: props.colorMode === 'dark' ? 'white' : 'gray.700',
+          color: props.colorMode === "dark" ? "white" : "gray.700",
           _hover: {
-            bg: props.colorMode === 'dark' ? 'gray.700' : 'gray.50'
+            bg: props.colorMode === "dark" ? "whiteAlpha.200" : "blackAlpha.50"
           }
         })
       }
     },
     Link: {
-      baseStyle: {
-        textDecoration: "none",
+      baseStyle: (props) => ({
+        color: props.colorMode === "dark" ? "white" : "gray.700",
         _hover: {
-          textDecoration: "none",
+          color: props.colorMode === "dark" ? "brand.200" : "brand.600",
         }
-      }
+      })
     },
     Menu: {
-      baseStyle: {
+      baseStyle: (props) => ({
         list: {
-          bg: 'white',
-          _dark: {
-            bg: 'gray.800'
-          },
-          border: '1px solid',
-          borderColor: 'gray.100',
-          _dark: {
-            borderColor: 'gray.700'
-          },
-          boxShadow: 'lg'
+          bg: props.colorMode === "dark" ? "gray.800" : "white",
+          borderColor: props.colorMode === "dark" ? "gray.700" : "gray.100",
+          boxShadow: props.colorMode === "dark" ? "dark-lg" : "lg",
         },
         item: {
-          fontSize: 'sm',
-          py: 1.5,
-          px: 3,
-          color: 'gray.800',
-          _dark: {
-            color: 'white'
-          },
+          bg: props.colorMode === "dark" ? "gray.800" : "white",
+          color: props.colorMode === "dark" ? "white" : "gray.800",
           _hover: {
-            bg: 'gray.50',
-            _dark: {
-              bg: 'gray.700'
-            }
+            bg: props.colorMode === "dark" ? "gray.700" : "gray.50",
           },
           _focus: {
-            bg: 'gray.50',
-            _dark: {
-              bg: 'gray.700'
-            }
+            bg: props.colorMode === "dark" ? "gray.700" : "gray.50",
           }
         }
-      }
+      })
     },
     MenuItem: {
       baseStyle: (props) => ({
