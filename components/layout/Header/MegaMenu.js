@@ -1,4 +1,4 @@
-import { Box, Button, Menu, MenuButton, MenuList, SimpleGrid, Flex, Text, Icon, HStack, VStack } from '@chakra-ui/react';
+import { Box, Button, Menu, MenuButton, MenuList, SimpleGrid, Flex, Text, Icon, HStack, VStack, useColorModeValue } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import { 
   FaCode, FaMobile, FaCloud, FaCogs, 
@@ -8,53 +8,70 @@ import {
 } from 'react-icons/fa';
 import Link from 'next/link';
 
-const MenuItem = ({ icon, title, description, ...props }) => (
-  <HStack 
-    p={3} 
-    spacing={4} 
-    role="menuitem"
-    tabIndex={0}
-    aria-label={title}
-    {...props}
-  >
-    <Icon 
-      as={icon} 
-      boxSize={5} 
-      color="brand.500" 
-      _dark={{ color: 'brand.200' }} 
-      _groupHover={{
-        color: 'brand.400',
-        _dark: { color: 'brand.300' }
+const MenuItem = ({ icon, title, description, ...props }) => {
+  const hoverBg = useColorModeValue('gray.50', 'gray.700');
+  
+  return (
+    <HStack 
+      p={3} 
+      spacing={4} 
+      role="menuitem"
+      tabIndex={0}
+      aria-label={title}
+      borderRadius="md"
+      transition="all 0.2s"
+      cursor="pointer"
+      _hover={{
+        bg: hoverBg,
+        transform: 'translateX(4px)'
       }}
-    />
-    <VStack align="start" spacing={0}>
-      <Text 
-        fontWeight="500"
-        color="gray.800"
-        _dark={{ color: 'white' }}
-      >
-        {title}
-      </Text>
-      {description && (
+      role="group"
+      {...props}
+    >
+      <Icon 
+        as={icon} 
+        boxSize={5} 
+        color="brand.500" 
+        _dark={{ color: 'brand.200' }} 
+        _groupHover={{
+          color: 'brand.400',
+          _dark: { color: 'brand.300' }
+        }}
+      />
+      <VStack align="start" spacing={0}>
         <Text 
-          fontSize="sm" 
-          color="gray.600" 
-          _dark={{ color: 'gray.400' }}
+          fontWeight="500"
+          color="gray.800"
+          _dark={{ color: 'white' }}
+          _groupHover={{
+            color: useColorModeValue('brand.600', 'brand.200')
+          }}
         >
-          {description}
+          {title}
         </Text>
-      )}
-    </VStack>
-  </HStack>
-);
+        {description && (
+          <Text 
+            fontSize="sm" 
+            color="gray.600" 
+            _dark={{ color: 'gray.400' }}
+            _groupHover={{
+              color: useColorModeValue('gray.700', 'gray.300')
+            }}
+          >
+            {description}
+          </Text>
+        )}
+      </VStack>
+    </HStack>
+  );
+};
 
 const CategoryTitle = ({ children }) => (
   <Text 
     fontSize="sm" 
     fontWeight="bold" 
     mb={4} 
-    color="gray.700"
-    _dark={{ color: 'gray.100' }}
+    color={useColorModeValue('gray.700', 'gray.100')}
     textTransform="uppercase"
   >
     {children}
@@ -62,11 +79,50 @@ const CategoryTitle = ({ children }) => (
 );
 
 const MegaMenu = () => {
+  // Move styles inside the component
+  const menuListStyles = {
+    p: 6,
+    borderRadius: 'xl',
+    boxShadow: useColorModeValue(
+      '0 4px 6px rgba(0,0,0,0.1)',
+      '0 4px 6px rgba(0,0,0,0.4)'
+    ),
+    bg: useColorModeValue('white', 'gray.800'),
+    border: '1px solid',
+    borderColor: useColorModeValue('gray.100', 'gray.700'),
+    _hover: {
+      borderColor: useColorModeValue('gray.200', 'gray.600')
+    }
+  };
+
+  const menuButtonStyles = {
+    variant: 'ghost',
+    size: 'sm',
+    color: useColorModeValue('gray.700', 'white'),
+    _hover: {
+      bg: useColorModeValue('gray.100', 'whiteAlpha.200')
+    },
+    _active: {
+      bg: useColorModeValue('gray.200', 'whiteAlpha.300')
+    }
+  };
+
   return (
     <Flex gap={0.5} justify="flex-end" flex={1} mx={4}>
       {/* Home Link */}
       <Link href="/">
-        <Button as="span" variant="ghost" size="sm">
+        <Button 
+          as="span" 
+          variant="ghost" 
+          size="sm"
+          color={useColorModeValue('gray.700', 'white')}
+          _hover={{
+            bg: useColorModeValue('gray.100', 'whiteAlpha.200')
+          }}
+          _active={{
+            bg: useColorModeValue('gray.200', 'whiteAlpha.300')
+          }}
+        >
           Home
         </Button>
       </Link>
@@ -75,25 +131,12 @@ const MegaMenu = () => {
       <Menu>
         <MenuButton 
           as={Button} 
-          variant="ghost" 
-          size="sm"
-          color="gray.700"
-          _dark={{ color: 'white' }}
+          {...menuButtonStyles}
           rightIcon={<ChevronDownIcon />}
         >
           Services
         </MenuButton>
-        <MenuList 
-          p={6} 
-          minW="780px" 
-          borderRadius="xl" 
-          boxShadow="2xl"
-          bg="white"
-          _dark={{ bg: 'gray.800' }}
-          border="1px solid"
-          borderColor="gray.100"
-          _dark={{ borderColor: 'gray.700' }}
-        >
+        <MenuList {...menuListStyles} minW="780px">
           <SimpleGrid columns={3} spacing={8}>
             <Box>
               <CategoryTitle>Development</CategoryTitle>
@@ -168,25 +211,12 @@ const MegaMenu = () => {
       <Menu>
         <MenuButton 
           as={Button} 
-          variant="ghost" 
-          size="sm"
-          color="gray.700"
-          _dark={{ color: 'white' }}
+          {...menuButtonStyles}
           rightIcon={<ChevronDownIcon />}
         >
           Industry
         </MenuButton>
-        <MenuList 
-          p={6} 
-          minW="520px" 
-          borderRadius="xl" 
-          boxShadow="2xl"
-          bg="white"
-          _dark={{ bg: 'gray.800' }}
-          border="1px solid"
-          borderColor="gray.100"
-          _dark={{ borderColor: 'gray.700' }}
-        >
+        <MenuList {...menuListStyles} minW="520px">
           <SimpleGrid columns={2} spacing={8}>
             <Box>
               <CategoryTitle>Sectors</CategoryTitle>
@@ -236,25 +266,12 @@ const MegaMenu = () => {
       <Menu>
         <MenuButton 
           as={Button} 
-          variant="ghost" 
-          size="sm"
-          color="gray.700"
-          _dark={{ color: 'white' }}
+          {...menuButtonStyles}
           rightIcon={<ChevronDownIcon />}
         >
           Our Work
         </MenuButton>
-        <MenuList 
-          p={6} 
-          minW="300px" 
-          borderRadius="xl" 
-          boxShadow="2xl"
-          bg="white"
-          _dark={{ bg: 'gray.800' }}
-          border="1px solid"
-          borderColor="gray.100"
-          _dark={{ borderColor: 'gray.700' }}
-        >
+        <MenuList {...menuListStyles} minW="300px">
           <Box>
             <CategoryTitle>Portfolio</CategoryTitle>
             <VStack align="stretch" spacing={2}>
@@ -289,8 +306,13 @@ const MegaMenu = () => {
           as="span" 
           variant="ghost" 
           size="sm"
-          color="gray.700"
-          _dark={{ color: 'white' }}
+          color={useColorModeValue('gray.700', 'white')}
+          _hover={{
+            bg: useColorModeValue('gray.100', 'whiteAlpha.200')
+          }}
+          _active={{
+            bg: useColorModeValue('gray.200', 'whiteAlpha.300')
+          }}
         >
           Packages
         </Button>
@@ -300,8 +322,13 @@ const MegaMenu = () => {
           as="span" 
           variant="ghost" 
           size="sm"
-          color="gray.700"
-          _dark={{ color: 'white' }}
+          color={useColorModeValue('gray.700', 'white')}
+          _hover={{
+            bg: useColorModeValue('gray.100', 'whiteAlpha.200')
+          }}
+          _active={{
+            bg: useColorModeValue('gray.200', 'whiteAlpha.300')
+          }}
         >
           Support
         </Button>
@@ -311,8 +338,13 @@ const MegaMenu = () => {
           as="span" 
           variant="ghost" 
           size="sm"
-          color="gray.700"
-          _dark={{ color: 'white' }}
+          color={useColorModeValue('gray.700', 'white')}
+          _hover={{
+            bg: useColorModeValue('gray.100', 'whiteAlpha.200')
+          }}
+          _active={{
+            bg: useColorModeValue('gray.200', 'whiteAlpha.300')
+          }}
         >
           About
         </Button>
