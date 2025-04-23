@@ -81,6 +81,6 @@ Private - All rights reserved by Mobrilz Private Limited
 
 ## 👥 Contact
 
-Mobrilz Private Limited - [contact@mobrilz.com](mailto:contact@mobrilz.com)
+Mobrilz Private Limited - [contact@mobrilz.com](mailto:contact@mobrilz.com) 
 
 Project Link: [https://github.com/MobrilzPvtLtd/mobrilz-website-nextjs](https://github.com/MobrilzPvtLtd/mobrilz-website-nextjs)
