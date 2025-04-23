@@ -8,18 +8,14 @@ import {
 } from 'react-icons/fa';
 import Link from 'next/link';
 
-const MenuItem = ({ icon, title, description }) => (
+const MenuItem = ({ icon, title, description, ...props }) => (
   <HStack 
     p={3} 
     spacing={4} 
-    _hover={{ 
-      bg: 'whiteAlpha.100', 
-      _dark: { bg: 'whiteAlpha.100' } 
-    }}
-    borderRadius="md"
-    transition="all 0.2s"
-    cursor="pointer"
-    role="group"
+    role="menuitem"
+    tabIndex={0}
+    aria-label={title}
+    {...props}
   >
     <Icon 
       as={icon} 

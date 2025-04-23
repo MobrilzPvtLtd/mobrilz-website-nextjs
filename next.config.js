@@ -1,19 +1,25 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    reactStrictMode: true,
-    images: {
-      remotePatterns: [
-        {
-          protocol: 'https',
-          hostname: 'picsum.photos',
-        },
-        {
-          protocol: 'https',
-          hostname: 'res.cloudinary.com',
-          pathname: '/**',
-        },
-      ],
-    },
-  };
-  
-  module.exports = nextConfig;
+  reactStrictMode: true,
+  images: {
+    domains: ['picsum.photos', 'res.cloudinary.com'],
+  },
+  compress: true,
+  poweredByHeader: false,
+  generateEtags: true,
+  headers: async () => {
+    return [
+      {
+        source: '/_next/static/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+    ];
+  },
+};
+
+module.exports = nextConfig;
