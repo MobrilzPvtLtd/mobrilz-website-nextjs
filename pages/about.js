@@ -21,6 +21,22 @@ import { FaLightbulb, FaHandshake, FaRocket, FaUsers } from 'react-icons/fa';
 import SEO from '../components/SEO';
 import Breadcrumb from '../components/common/Breadcrumb';
 
+// Add breadcrumb schema configuration
+const breadcrumbSchema = {
+  home: {
+    '@type': 'ListItem',
+    position: 1,
+    name: 'Home',
+    item: 'https://mobrilz.com'
+  },
+  about: {
+    '@type': 'ListItem',
+    position: 2,
+    name: 'About Us',
+    item: 'https://mobrilz.com/about'
+  }
+};
+
 const AboutPage = () => {
   // Color mode values
   const bgColor = useColorModeValue("white", "gray.900");
@@ -32,9 +48,18 @@ const AboutPage = () => {
 
   const breadcrumbItems = [
     {
+      name: 'Home',
+      path: '/',
+      title: 'Mobrilz Software Solutions Homepage',
+      description: 'Leading software development company',
+      isCurrentPage: false
+    },
+    {
       name: 'About Us',
       path: '/about',
-      title: 'Learn about Mobrilz Software Solutions'
+      title: 'Learn About Mobrilz Software Solutions',
+      description: 'Our story, mission, and team',
+      isCurrentPage: true
     }
   ];
 
@@ -43,13 +68,30 @@ const AboutPage = () => {
       <SEO 
         title="About Us - Mobrilz Software Solutions" 
         description="Learn about our journey, mission, and the team behind Mobrilz's innovative software solutions."
-      />
+      >
+        {/* Add Schema.org BreadcrumbList */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                breadcrumbSchema.home,
+                breadcrumbSchema.about
+              ]
+            })
+          }}
+        />
+      </SEO>
 
       {/* Hero Section */}
       <Box bg={heroBgColor} py={20}>
         <Container maxW="container.xl">
-          {/* Add Breadcrumb here */}
-          <Breadcrumb items={breadcrumbItems} />
+          <Breadcrumb 
+            items={breadcrumbItems}
+            aria-label="About page navigation"
+          />
           
           <Grid templateColumns={{ base: '1fr', md: '1fr 1fr' }} gap={8} alignItems="center">
             <Stack spacing={6}>

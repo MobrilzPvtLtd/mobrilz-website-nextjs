@@ -6,8 +6,14 @@ import Layout from '../components/layout/Layout';
 import { useRouter } from 'next/router';
 
 function MyApp({ Component, pageProps }) {
+  // Add client-side only rendering state
+  const [isClient, setIsClient] = useState(false);
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     const handleStart = () => setIsLoading(true);
@@ -29,7 +35,7 @@ function MyApp({ Component, pageProps }) {
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
       <ChakraProvider theme={theme}>
         <Layout>
-          <Component {...pageProps} />
+          {isClient && <Component {...pageProps} />}
         </Layout>
       </ChakraProvider>
     </>

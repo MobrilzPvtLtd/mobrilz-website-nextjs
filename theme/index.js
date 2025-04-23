@@ -33,7 +33,7 @@ export const theme = extendTheme({
   },
   config: {
     initialColorMode: 'light',
-    useSystemColorMode: true,
+    useSystemColorMode: false, // Change this to false
   },
   styles: {
     global: (props) => ({

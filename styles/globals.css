@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
+/* Add this at the top of the file */
+html {
+  visibility: visible;
+  opacity: 1;
+}
+
 /* Reset and base styles */
 html,
 body {
