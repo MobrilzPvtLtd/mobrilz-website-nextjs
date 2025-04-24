@@ -32,8 +32,8 @@ export const theme = extendTheme({
     }
   },
   config: {
-    initialColorMode: 'light',
-    useSystemColorMode: false, // Change this to false
+    initialColorMode: 'light', // Ensure this matches the server-rendered color mode
+    useSystemColorMode: false, // Disable system color mode to avoid mismatches
   },
   styles: {
     global: (props) => ({
