@@ -19,6 +19,7 @@ import SEO from '../components/SEO';
 import { benefitsData, servicesData, projectsData, testimonials, trustSignals } from '../data/content'; // Add this import
 import * as Icons from 'react-icons/fa';
 import { useMemo } from 'react';
+import NextLink from 'next/link';
 
 // Static Generation
 export async function getStaticProps() {
@@ -71,9 +72,11 @@ const Home = ({ services, projects, benefits, testimonials, trustSignals }) => {
                   and digital transformation solutions.
                 </Text>
                 <Stack direction={{ base: 'column', sm: 'row' }} spacing={4}>
-                  <Button size="lg" colorScheme="blue" rightIcon={<ArrowForwardIcon />}>
-                    Get Free Consultation
-                  </Button>
+                  <NextLink href="/contact" passHref legacyBehavior>
+                    <Button as="a" size="lg" colorScheme="blue" rightIcon={<ArrowForwardIcon />}>
+                      Get Free Consultation
+                    </Button>
+                  </NextLink>
                   <Button size="lg" variant="outline" colorScheme="blue">
                     View Our Work
                   </Button>
