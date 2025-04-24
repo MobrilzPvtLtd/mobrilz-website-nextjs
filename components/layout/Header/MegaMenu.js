@@ -95,8 +95,7 @@ const MegaMenu = () => {
     _hover: {
       borderColor: useColorModeValue('gray.200', 'gray.600')
     },
-    minW: { base: "90vw", md: "520px", lg: "780px" },
-    maxW: { base: "95vw", md: "none" },
+
   };
 
   const menuButtonStyles = {
