@@ -27,15 +27,18 @@ const SocialLink = ({ icon, label, href }) => (
   </Link>
 );
 
+// Update the FooterLink component
 const FooterLink = ({ href, children }) => (
-  <NextLink href={href} passHref>
-    <Link 
-      color="gray.600" 
+  <NextLink href={href}>
+    <Box
+      as="span"
+      color="gray.600"
       _dark={{ color: 'gray.400' }}
       _hover={{ color: 'brand.500' }}
+      cursor="pointer"
     >
       {children}
-    </Link>
+    </Box>
   </NextLink>
 );
 
