@@ -17,8 +17,10 @@ import { ChevronRightIcon, ArrowForwardIcon } from '@chakra-ui/icons';
 import Layout from '../components/layout/Layout';
 import SEO from '../components/SEO';
 import { benefitsData, servicesData, projectsData, testimonials, trustSignals } from '../data/content'; // Add this import
+import { technologiesData } from '../data/content';
 import * as Icons from 'react-icons/fa';
 import { useMemo } from 'react';
+import NextLink from 'next/link';
 
 // Static Generation
 export async function getStaticProps() {
@@ -28,13 +30,14 @@ export async function getStaticProps() {
       projects: projectsData,
       benefits: benefitsData,
       testimonials,
-      trustSignals
+      trustSignals,
+      technologies: technologiesData // Add this line
     },
     revalidate: false // Disable ISR for now
   };
 }
 
-const Home = ({ services, projects, benefits, testimonials, trustSignals }) => { // Updated to include trustSignals
+const Home = ({ services, projects, benefits, testimonials, trustSignals, technologies }) => { // Updated to include technologies
   const getIcon = useMemo(() => (iconName) => {
     return Icons[iconName];
   }, []);
@@ -71,9 +74,11 @@ const Home = ({ services, projects, benefits, testimonials, trustSignals }) => {
                   and digital transformation solutions.
                 </Text>
                 <Stack direction={{ base: 'column', sm: 'row' }} spacing={4}>
-                  <Button size="lg" colorScheme="blue" rightIcon={<ArrowForwardIcon />}>
-                    Get Free Consultation
-                  </Button>
+                  <NextLink href="/contact" passHref legacyBehavior>
+                    <Button as="a" size="lg" colorScheme="blue" rightIcon={<ArrowForwardIcon />}>
+                      Get Free Consultation
+                    </Button>
+                  </NextLink>
                   <Button size="lg" variant="outline" colorScheme="blue">
                     View Our Work
                   </Button>
@@ -391,6 +396,163 @@ const Home = ({ services, projects, benefits, testimonials, trustSignals }) => {
                         </Text>
                       </Box>
                     </Flex>
+                  </Box>
+                ))}
+              </SimpleGrid>
+            </Stack>
+          </Container>
+        </Box>
+
+        {/* Technologies Section */}
+        <Box 
+          py={20} 
+          position="relative"
+          overflow="hidden"
+        >
+          {/* Background Design Elements */}
+          <Box
+            position="absolute"
+            top={0}
+            left={0}
+            right={0}
+            bottom={0}
+            bg={useColorModeValue("gray.50", "gray.800")}
+            bgGradient={useColorModeValue(
+              "linear(to-br, blue.50, gray.50, purple.50)",
+              "linear(to-br, blue.900, gray.800, purple.900)"
+            )}
+            opacity={0.97}
+            zIndex={0}
+          />
+          <Box
+            position="absolute"
+            top="-10%"
+            right="-10%"
+            width="400px"
+            height="400px"
+            borderRadius="full"
+            bg={useColorModeValue("blue.50", "blue.900")}
+            filter="blur(70px)"
+            opacity={0.4}
+            zIndex={0}
+          />
+          <Box
+            position="absolute"
+            bottom="-5%"
+            left="-5%"
+            width="300px"
+            height="300px"
+            borderRadius="full"
+            bg={useColorModeValue("purple.50", "purple.900")}
+            filter="blur(70px)"
+            opacity={0.4}
+            zIndex={0}
+          />
+
+          <Container maxW="container.xl" position="relative" zIndex={1}>
+            <Stack spacing={12}>
+              <Stack textAlign="center" spacing={3}>
+                <Heading 
+                  size="xl" 
+                  color={useColorModeValue("gray.800", "white")}
+                  bgGradient={useColorModeValue(
+                    "linear(to-r, blue.600, purple.600)",
+                    "linear(to-r, blue.200, purple.200)"
+                  )}
+                  bgClip="text"
+                >
+                  Technologies We Master
+                </Heading>
+                <Text 
+                  fontSize="lg"
+                  color={useColorModeValue("gray.600", "gray.300")} 
+                  maxW="2xl" 
+                  mx="auto"
+                >
+                  We use cutting-edge technologies to build robust and scalable solutions
+                </Text>
+              </Stack>
+
+              <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={8}>
+                {Object.values(technologies).map((category, index) => (
+                  <Box 
+                    key={index}
+                    p={6}
+                    bg={useColorModeValue("white", "gray.700")}
+                    borderRadius="xl"
+                    boxShadow="xl"
+                    borderWidth="1px"
+                    borderColor={useColorModeValue("gray.100", "gray.600")}
+                    position="relative"
+                    overflow="hidden"
+                    _before={{
+                      content: '""',
+                      position: "absolute",
+                      top: "-50%",
+                      left: "-50%",
+                      width: "200%",
+                      height: "200%",
+                      background: useColorModeValue(
+                        "radial-gradient(circle, rgba(237,242,247,0.8) 0%, rgba(255,255,255,0) 60%)",
+                        "radial-gradient(circle, rgba(45,55,72,0.8) 0%, rgba(26,32,44,0) 60%)"
+                      ),
+                      transform: "rotate(-45deg)",
+                      zIndex: 0,
+                    }}
+                  >
+                    <Box position="relative" zIndex={1}>
+                      <Text
+                        fontWeight="bold"
+                        fontSize="lg"
+                        mb={4}
+                        color={useColorModeValue("gray.800", "white")}
+                        bgGradient={useColorModeValue(
+                          "linear(to-r, blue.600, purple.600)",
+                          "linear(to-r, blue.200, purple.200)"
+                        )}
+                        bgClip="text"
+                      >
+                        {category.title}
+                      </Text>
+                      <SimpleGrid columns={2} spacing={4}>
+                        {category.tools.map((tool, idx) => (
+                          <Box 
+                            key={idx}
+                            p={3}
+                            borderRadius="lg"
+                            borderWidth="1px"
+                            borderColor={useColorModeValue("gray.200", "gray.600")}
+                            bg={useColorModeValue("white", "gray.800")}
+                            transition="all 0.3s"
+                            _hover={{
+                              transform: 'translateY(-2px)',
+                              shadow: 'lg',
+                              borderColor: 'blue.400',
+                              bg: useColorModeValue("blue.50", "blue.900"),
+                            }}
+                          >
+                            <Image
+                              src={tool.icon}
+                              alt={tool.name}
+                              h="40px"
+                              w="40px"
+                              mx="auto"
+                              mb={2}
+                              borderRadius="full"
+                              p={1}
+                            />
+                            <Text
+                              fontSize="sm"
+                              fontWeight="medium"
+                              textAlign="center"
+                              color={useColorModeValue("gray.700", "gray.300")}
+                            >
+                              {tool.name}
+                            </Text>
+                          </Box>
+                        ))}
+                      </SimpleGrid>
+                    </Box>
                   </Box>
                 ))}
               </SimpleGrid>

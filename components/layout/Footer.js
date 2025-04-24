@@ -14,26 +14,21 @@ const heartbeat = keyframes`
   75% { transform: scale(1.2); }
 `;
 
+// Update the SocialLink component
 const SocialLink = ({ icon, label, href }) => (
-  <Link 
-    href={href} 
-    isExternal 
-    role="group" 
-    display="flex" 
-    alignItems="center"
-  >
+  <NextLink href={href} target="_blank" rel="noopener noreferrer">
     <Icon 
       as={icon} 
       w={5} 
       h={5} 
       color="gray.400"
-      _groupHover={{ 
+      _hover={{ 
         color: 'brand.500',
         transform: 'translateY(-2px)' 
       }}
       transition="all 0.2s ease"
     />
-  </Link>
+  </NextLink>
 );
 
 // Update the FooterLink component

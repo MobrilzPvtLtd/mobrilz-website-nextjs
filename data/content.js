@@ -104,3 +104,42 @@ export const testimonials = [
     image: "https://picsum.photos/seed/mike/200/200"
   }
 ];
+
+export const technologiesData = {
+  frontend: {
+    title: 'Frontend',
+    tools: [
+      { name: 'React', icon: 'https://picsum.photos/seed/react/100/100' },
+      { name: 'Next.js', icon: 'https://picsum.photos/seed/nextjs/100/100' },
+      { name: 'Vue.js', icon: 'https://picsum.photos/seed/vuejs/100/100' },
+      { name: 'Angular', icon: 'https://picsum.photos/seed/angular/100/100' }
+    ]
+  },
+  backend: {
+    title: 'Backend',
+    tools: [
+      { name: 'Node.js', icon: 'https://picsum.photos/seed/nodejs/100/100' },
+      { name: 'Python', icon: 'https://picsum.photos/seed/python/100/100' },
+      { name: 'Java', icon: 'https://picsum.photos/seed/java/100/100' },
+      { name: 'PHP', icon: 'https://picsum.photos/seed/php/100/100' }
+    ]
+  },
+  database: {
+    title: 'Database',
+    tools: [
+      { name: 'MongoDB', icon: 'https://picsum.photos/seed/mongodb/100/100' },
+      { name: 'MySQL', icon: 'https://picsum.photos/seed/mysql/100/100' },
+      { name: 'PostgreSQL', icon: 'https://picsum.photos/seed/postgresql/100/100' },
+      { name: 'Redis', icon: 'https://picsum.photos/seed/redis/100/100' }
+    ]
+  },
+  cloud: {
+    title: 'Cloud & DevOps',
+    tools: [
+      { name: 'AWS', icon: 'https://picsum.photos/seed/aws/100/100' },
+      { name: 'Docker', icon: 'https://picsum.photos/seed/docker/100/100' },
+      { name: 'Kubernetes', icon: 'https://picsum.photos/seed/kubernetes/100/100' },
+      { name: 'Azure', icon: 'https://picsum.photos/seed/azure/100/100' }
+    ]
+  }
+};

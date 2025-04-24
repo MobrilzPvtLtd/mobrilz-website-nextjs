@@ -7,19 +7,22 @@ const nextConfig = {
   compress: true,
   poweredByHeader: false,
   generateEtags: true,
-  headers: async () => {
-    return [
-      {
-        source: '/_next/static/:path*',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-    ];
+  // Improve HMR stability
+  webpack: (config, { dev, isServer }) => {
+    if (dev && !isServer) {
+      config.watchOptions = {
+        ignored: ['**/.git/**', '**/node_modules/**'],
+        aggregateTimeout: 300,
+        poll: false, // Use native file system events instead of polling
+      };
+    }
+    return config;
   },
-};
+  // Optimize development experience
+  onDemandEntries: {
+    maxInactiveAge: 25 * 1000,
+    pagesBufferLength: 2,
+  },
+}
 
 module.exports = nextConfig;
