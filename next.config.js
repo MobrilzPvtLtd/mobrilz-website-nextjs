@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['picsum.photos', 'res.cloudinary.com'],
+    domains: ['picsum.photos', 'res.cloudinary.com', 'admin.mobrilz.com'],
   },
   compress: true,
   poweredByHeader: false,
