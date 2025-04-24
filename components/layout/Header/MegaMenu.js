@@ -28,7 +28,7 @@ const MenuItem = ({ icon, title, description, href = '#', ...props }) => {
           bg: hoverBg,
           transform: 'translateX(4px)'
         }}
-        role="group"
+        // role="group"
         {...props}
       >
         <Icon 
