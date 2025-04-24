@@ -44,7 +44,11 @@ const HeaderBottom = () => {
                 >
                     <Logo />
                     <MegaMenu />
-                    <Flex align="center" gap={2}>
+                    <Flex 
+                        align="center" 
+                        gap={2} 
+                        display={{ base: 'none', lg: 'flex' }} // Hide on mobile/tablet
+                    >
                         <ThemeSwitcher />
                         <Button 
                             colorScheme="brand"

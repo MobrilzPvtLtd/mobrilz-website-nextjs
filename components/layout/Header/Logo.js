@@ -8,7 +8,7 @@ const Logo = () => {
         <Image 
           src="/images/logo.png" 
           alt="Mobrilz Logo" 
-          h="40px"
+          h={{ base: "32px", md: "36px", lg: "40px" }}
           objectFit="contain"
           filter={useColorModeValue("none", "brightness(0) invert(1)")}
           transition="all 0.2s"

@@ -1,5 +1,12 @@
-import { Box, Button, Menu, MenuButton, MenuList, SimpleGrid, Flex, Text, Icon, HStack, VStack, useColorModeValue } from '@chakra-ui/react';
-import { ChevronDownIcon } from '@chakra-ui/icons';
+import { 
+  Box, Button, Menu, MenuButton, MenuList, SimpleGrid, 
+  Flex, Text, Icon, HStack, VStack, useColorModeValue,
+  Drawer, DrawerBody, DrawerHeader, DrawerOverlay,
+  DrawerContent, DrawerCloseButton, useDisclosure,
+  IconButton, Accordion, AccordionItem,
+  AccordionButton, AccordionPanel, AccordionIcon
+} from '@chakra-ui/react';
+import { ChevronDownIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { 
   FaCode, FaMobile, FaCloud, FaCogs, 
   FaPalette, FaChartLine, FaIndustry,
@@ -8,6 +15,7 @@ import {
 } from 'react-icons/fa';
 import Link from 'next/link';
 import NextLink from 'next/link';
+import ThemeSwitcher from './ThemeSwitcher';
 
 const MenuItem = ({ icon, title, description, href = '#', ...props }) => {
   const hoverBg = useColorModeValue('gray.50', 'gray.700');
@@ -28,7 +36,6 @@ const MenuItem = ({ icon, title, description, href = '#', ...props }) => {
           bg: hoverBg,
           transform: 'translateX(4px)'
         }}
-        // role="group"
         {...props}
       >
         <Icon 
@@ -36,19 +43,12 @@ const MenuItem = ({ icon, title, description, href = '#', ...props }) => {
           boxSize={5} 
           color="brand.500" 
           _dark={{ color: 'brand.200' }} 
-          _groupHover={{
-            color: 'brand.400',
-            _dark: { color: 'brand.300' }
-          }}
         />
         <VStack align="start" spacing={0}>
           <Text 
             fontWeight="500"
             color="gray.800"
             _dark={{ color: 'white' }}
-            _groupHover={{
-              color: useColorModeValue('brand.600', 'brand.200')
-            }}
           >
             {title}
           </Text>
@@ -57,9 +57,6 @@ const MenuItem = ({ icon, title, description, href = '#', ...props }) => {
               fontSize="sm" 
               color="gray.600" 
               _dark={{ color: 'gray.400' }}
-              _groupHover={{
-                color: useColorModeValue('gray.700', 'gray.300')
-              }}
             >
               {description}
             </Text>
@@ -83,7 +80,8 @@ const CategoryTitle = ({ children }) => (
 );
 
 const MegaMenu = () => {
-  // Move styles inside the component
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const menuListStyles = {
     p: 6,
     borderRadius: 'xl',
@@ -96,7 +94,9 @@ const MegaMenu = () => {
     borderColor: useColorModeValue('gray.100', 'gray.700'),
     _hover: {
       borderColor: useColorModeValue('gray.200', 'gray.600')
-    }
+    },
+    minW: { base: "90vw", md: "520px", lg: "780px" },
+    maxW: { base: "95vw", md: "none" },
   };
 
   const menuButtonStyles = {
@@ -111,9 +111,60 @@ const MegaMenu = () => {
     }
   };
 
-  return (
-    <Flex gap={0.5} justify="flex-end" flex={1} mx={4}>
-      {/* Home Link */}
+  const MobileNavItem = ({ href, children, items }) => {
+    if (items) {
+      return (
+        <AccordionItem border="none">
+          <AccordionButton py={4}>
+            <Box flex="1" textAlign="left" fontWeight="500">
+              {children}
+            </Box>
+            <AccordionIcon />
+          </AccordionButton>
+          <AccordionPanel pb={4}>
+            <VStack align="stretch" spacing={3}>
+              {items.map((item, index) => (
+                <Link key={index} href={item.href}>
+                  <Text 
+                    py={2}
+                    px={4}
+                    borderRadius="md"
+                    _hover={{ bg: useColorModeValue('gray.100', 'whiteAlpha.100') }}
+                  >
+                    {item.title}
+                  </Text>
+                </Link>
+              ))}
+            </VStack>
+          </AccordionPanel>
+        </AccordionItem>
+      );
+    }
+
+    return (
+      <Link href={href}>
+        <Box
+          py={4}
+          px={4}
+          fontWeight="500"
+          borderBottom="1px"
+          borderColor={useColorModeValue('gray.100', 'whiteAlpha.100')}
+          _hover={{ bg: useColorModeValue('gray.50', 'whiteAlpha.100') }}
+        >
+          {children}
+        </Box>
+      </Link>
+    );
+  };
+
+  const DesktopMenu = () => (
+    <Flex 
+      gap={0.5} 
+      justify="flex-end" 
+      flex={1} 
+      mx={4}
+      display={{ base: 'none', lg: 'flex' }}
+    >
       <Link href="/">
         <Button 
           as="span" 
@@ -131,7 +182,6 @@ const MegaMenu = () => {
         </Button>
       </Link>
 
-      {/* Services Menu */}
       <Menu>
         <MenuButton 
           as={Button} 
@@ -140,8 +190,8 @@ const MegaMenu = () => {
         >
           Services
         </MenuButton>
-        <MenuList {...menuListStyles} minW="780px">
-          <SimpleGrid columns={3} spacing={8}>
+        <MenuList {...menuListStyles}>
+          <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={{ base: 4, md: 8 }}>
             <Box>
               <CategoryTitle>Development</CategoryTitle>
               <VStack align="stretch" spacing={2}>
@@ -221,7 +271,6 @@ const MegaMenu = () => {
         </MenuList>
       </Menu>
 
-      {/* Industry Menu */}
       <Menu>
         <MenuButton 
           as={Button} 
@@ -230,8 +279,8 @@ const MegaMenu = () => {
         >
           Industry
         </MenuButton>
-        <MenuList {...menuListStyles} minW="520px">
-          <SimpleGrid columns={2} spacing={8}>
+        <MenuList {...menuListStyles}>
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 4, md: 8 }}>
             <Box>
               <CategoryTitle>Sectors</CategoryTitle>
               <VStack align="stretch" spacing={2}>
@@ -282,7 +331,6 @@ const MegaMenu = () => {
         </MenuList>
       </Menu>
 
-      {/* Our Work Menu */}
       <Menu>
         <MenuButton 
           as={Button} 
@@ -291,7 +339,7 @@ const MegaMenu = () => {
         >
           Our Work
         </MenuButton>
-        <MenuList {...menuListStyles} minW="300px">
+        <MenuList {...menuListStyles}>
           <Box>
             <CategoryTitle>Portfolio</CategoryTitle>
             <VStack align="stretch" spacing={2}>
@@ -324,7 +372,6 @@ const MegaMenu = () => {
         </MenuList>
       </Menu>
 
-      {/* Regular Menu Links */}
       <Link href="/packages">
         <Button 
           as="span" 
@@ -373,6 +420,89 @@ const MegaMenu = () => {
           About
         </Button>
       </Link>
+    </Flex>
+  );
+
+  const MobileMenu = () => (
+    <Box display={{ base: 'block', lg: 'none' }}>
+      <ThemeSwitcher />
+      <IconButton
+        aria-label="Open menu"
+        icon={<HamburgerIcon boxSize={6} />}
+        variant="ghost"
+        onClick={onOpen}
+      />
+      
+      <Drawer isOpen={isOpen} placement="right" onClose={onClose} size="full">
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader borderBottomWidth="1px">Menu</DrawerHeader>
+          <DrawerBody p={0}>
+            <Accordion allowToggle>
+              <MobileNavItem href="/">Home</MobileNavItem>
+              
+              <MobileNavItem items={[
+                { href: '/services/web-development', title: 'Web Development' },
+                { href: '/services/mobile-apps', title: 'Mobile Apps' },
+                { href: '/services/cloud-solutions', title: 'Cloud Solutions' },
+                { href: '/services/custom-software', title: 'Custom Software' },
+              ]}>
+                Services
+              </MobileNavItem>
+
+              <MobileNavItem items={[
+                { href: '/industries/manufacturing', title: 'Manufacturing' },
+                { href: '/industries/finance', title: 'Finance' },
+                { href: '/industries/healthcare', title: 'Healthcare' },
+              ]}>
+                Industry
+              </MobileNavItem>
+
+              <MobileNavItem items={[
+                { href: '/work/case-studies', title: 'Case Studies' },
+                { href: '/work/projects', title: 'Projects' },
+                { href: '/work/clients', title: 'Clients' },
+                { href: '/work/testimonials', title: 'Testimonials' },
+              ]}>
+                Our Work
+              </MobileNavItem>
+
+              <MobileNavItem href="/packages">Packages</MobileNavItem>
+              <MobileNavItem href="/support">Support</MobileNavItem>
+              <MobileNavItem href="/about">About</MobileNavItem>
+            </Accordion>
+
+            {/* Add Theme Switcher and Get A Quote button at the bottom */}
+            <Box 
+              p={10}  
+              borderColor={useColorModeValue('gray.100', 'gray.700')}
+              mt={4}
+            >
+              <Flex 
+                direction="column" 
+                gap={4} 
+                align="center"
+              > 
+                <Button 
+                  colorScheme="brand"
+                  size="md"
+                  w="60"
+                >
+                  Get A Quote
+                </Button>
+              </Flex>
+            </Box>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+    </Box>
+  );
+
+  return (
+    <Flex justify="flex-end" align="center" flex={1}>
+      <DesktopMenu />
+      <MobileMenu />
     </Flex>
   );
 };
