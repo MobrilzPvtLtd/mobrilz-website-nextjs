@@ -350,9 +350,9 @@ const MegaMenu = () => {
               />
               <MenuItem 
                 icon={FaCogs}
-                title="Projects"
+                title="Portfolios"
                 description="Recent work"
-                href="/work/projects"
+                href="/portfolios"
               />
               <MenuItem 
                 icon={FaUsers}

@@ -8,6 +8,7 @@ import {
     Stack,
     useColorModeValue,
 } from '@chakra-ui/react';
+import NextLink from 'next/link';
 
 const TechnologiesSection = ({ technologies = [], isError = false }) => {
     if (isError) {
@@ -80,35 +81,45 @@ const TechnologiesSection = ({ technologies = [], isError = false }) => {
                             </Heading>
                             <SimpleGrid columns={{ base: 2, sm: 3, md: 4, lg: 6 }} spacing={6}>
                                 {techs.map((tech) => (
-                                    <Box
+                                    <NextLink 
+                                        href={`/technology/${tech.slug}`} 
+                                        passHref 
                                         key={tech.id}
-                                        p={4}
-                                        bg={useColorModeValue("white", "gray.700")}
-                                        borderRadius="xl"
-                                        boxShadow="lg"
-                                        transition="all 0.3s"
-                                        _hover={{
-                                            transform: 'translateY(-5px)',
-                                            shadow: '2xl'
-                                        }}
                                     >
-                                        <Image
-                                            src={tech.icon?.formats?.thumbnail?.url || tech.icon?.url}
-                                            alt={tech.name}
-                                            h="60px"
-                                            w="60px"
-                                            mx="auto"
-                                            mb={3}
-                                            objectFit="contain"
-                                        />
-                                        <Text
-                                            textAlign="center"
-                                            fontWeight="medium"
-                                            color={useColorModeValue("gray.700", "gray.200")}
+                                        <Box
+                                            as="a"
+                                            cursor="pointer"
+                                            p={4}
+                                            bg={useColorModeValue("white", "gray.700")}
+                                            borderRadius="xl"
+                                            boxShadow="lg"
+                                            transition="all 0.3s"
+                                            _hover={{
+                                                transform: 'translateY(-5px)',
+                                                shadow: '2xl',
+                                                borderColor: 'blue.400'
+                                            }}
+                                            borderWidth="1px"
+                                            borderColor={useColorModeValue("gray.200", "gray.700")}
                                         >
-                                            {tech.name}
-                                        </Text>
-                                    </Box>
+                                            <Stack align="center" spacing={3}>
+                                                <Image
+                                                    src={tech.icon?.formats?.thumbnail?.url || tech.icon?.url}
+                                                    alt={tech.name}
+                                                    h="60px"
+                                                    w="60px"
+                                                    objectFit="contain"
+                                                />
+                                                <Text
+                                                    textAlign="center"
+                                                    fontWeight="medium"
+                                                    color={useColorModeValue("gray.700", "gray.200")}
+                                                >
+                                                    {tech.name}
+                                                </Text>
+                                            </Stack>
+                                        </Box>
+                                    </NextLink>
                                 ))}
                             </SimpleGrid>
                         </Box>

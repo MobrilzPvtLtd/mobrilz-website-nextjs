@@ -179,6 +179,8 @@ const Footer = () => {
                 <FooterLink href="/careers">Careers</FooterLink>
                 <FooterLink href="/privacy-policy">Privacy Policy</FooterLink>
                 <FooterLink href="/terms-of-service">Terms of Service</FooterLink>
+                <FooterLink href="/technologies">Technologies</FooterLink>
+                <FooterLink href="/portfolios">Portfolios</FooterLink>
               </Stack>
             </Stack>
             
