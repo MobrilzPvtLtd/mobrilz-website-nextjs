@@ -1,9 +1,18 @@
 import { Box, Container, Stack, Text, SimpleGrid, Link, Icon, HStack, VStack, Image, Divider, useColorModeValue } from '@chakra-ui/react';
+import { keyframes } from '@emotion/react'; // Import keyframes from @emotion/react
 import { 
   FaTwitter, FaLinkedin, FaGithub, FaInstagram, 
   FaPhone, FaEnvelope, FaClock, FaMapMarkerAlt 
 } from 'react-icons/fa';
 import NextLink from 'next/link';
+
+// Define the heartbeat animation using @emotion/react
+const heartbeat = keyframes`
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.2); }
+  50% { transform: scale(1.4); }
+  75% { transform: scale(1.2); }
+`;
 
 const SocialLink = ({ icon, label, href }) => (
   <Link 
@@ -43,8 +52,8 @@ const FooterLink = ({ href, children }) => (
 );
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear(); // Move this outside the JSX
-  const bgColor = useColorModeValue("white", "gray.900");
+  const currentYear = typeof window === 'undefined' ? 2025 : new Date().getFullYear(); // Static year for SSR
+  const bgColor = useColorModeValue("linear-gradient(135deg, #f5f7fa, #c3cfe2)", "linear-gradient(135deg, #1a202c, #2d3748)");
   const borderColor = useColorModeValue("gray.100", "gray.700");
   const textColor = useColorModeValue("gray.600", "gray.400");
 
@@ -54,8 +63,33 @@ const Footer = () => {
       borderTop="1px"
       borderColor={borderColor}
       py={12}
+      position="relative"
+      overflow="hidden"
     >
-      <Container maxW="container.xl">
+      {/* Decorative Background Elements */}
+      <Box
+        position="absolute"
+        top={0}
+        left={0}
+        right={0}
+        bottom={0}
+        bgGradient="radial(whiteAlpha.500, transparent)"
+        opacity={0.3}
+        zIndex={0}
+      />
+      <Box
+        position="absolute"
+        top="50%"
+        left="50%"
+        transform="translate(-50%, -50%)"
+        w="200%"
+        h="200%"
+        bgGradient="radial(transparent, rgba(0, 0, 0, 0.1))"
+        opacity={0.2}
+        zIndex={0}
+      />
+
+      <Container maxW="container.xl" position="relative" zIndex={1}>
         <Stack spacing={12}>
           {/* Top Section - Redesigned */}
           <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8} w="full">
@@ -159,18 +193,13 @@ const Footer = () => {
                 Services
               </Text>
               <Stack spacing={2}>
-                {/* Development Services */}
                 <FooterLink href="/services/web-development">Web Development</FooterLink>
                 <FooterLink href="/services/mobile-apps">Mobile Apps</FooterLink>
                 <FooterLink href="/services/cloud-solutions">Cloud Solutions</FooterLink>
                 <FooterLink href="/services/custom-software">Custom Software</FooterLink>
-                
-                {/* Design Services */}
                 <FooterLink href="/services/ui-ux-design">UI/UX Design</FooterLink>
                 <FooterLink href="/services/branding">Branding</FooterLink>
                 <FooterLink href="/services/graphics-design">Graphics Design</FooterLink>
-                
-                {/* Solutions */}
                 <FooterLink href="/services/devops">DevOps</FooterLink>
                 <FooterLink href="/services/api-integration">API Integration</FooterLink>
                 <FooterLink href="/services/maintenance">Maintenance</FooterLink>
@@ -183,7 +212,6 @@ const Footer = () => {
                 Industries
               </Text>
               <Stack spacing={2}>
-                {/* Sectors */}
                 <FooterLink href="/industries/manufacturing">Manufacturing</FooterLink>
                 <FooterLink href="/industries/finance">Finance</FooterLink>
                 <FooterLink href="/industries/healthcare">Healthcare</FooterLink>
@@ -216,8 +244,31 @@ const Footer = () => {
               <Text color="gray.500" fontSize="sm">
                 © {currentYear} Mobrilz. All rights reserved.
               </Text>
-              <Text color="gray.400" fontSize="sm">
-                Made with ❤️ in Digital World
+              <Text color="gray.400" fontSize="sm" display="flex" alignItems="center">
+                Made with 
+                <Box 
+                  as="span" 
+                  mx={1} 
+                  color="red.500" 
+                  animation={`${heartbeat} 1.5s infinite`} // Heartbeat animation
+                >
+                  ❤️
+                </Box> 
+                in India 
+                <Box as="span" ml={2} display="inline-block">
+                  {/* India Flag SVG */}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="15"
+                    viewBox="0 0 20 15"
+                  >
+                    <rect width="20" height="5" fill="#FF9933" />
+                    <rect y="5" width="20" height="5" fill="#FFFFFF" />
+                    <rect y="10" width="20" height="5" fill="#138808" />
+                    <circle cx="10" cy="7.5" r="1.5" fill="#000080" />
+                  </svg>
+                </Box>
               </Text>
             </Stack>
           </Box>
