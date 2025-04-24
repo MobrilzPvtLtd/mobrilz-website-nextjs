@@ -40,6 +40,7 @@ const FooterLink = ({ href, children }) => (
 );
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear(); // Move this outside the JSX
   const bgColor = useColorModeValue("white", "gray.900");
   const borderColor = useColorModeValue("gray.100", "gray.700");
   const textColor = useColorModeValue("gray.600", "gray.400");
@@ -144,7 +145,6 @@ const Footer = () => {
               <Stack spacing={2}>
                 <FooterLink href="/about">About Us</FooterLink>
                 <FooterLink href="/careers">Careers</FooterLink>
-                <FooterLink href="/contact">Contact</FooterLink>
                 <FooterLink href="/privacy-policy">Privacy Policy</FooterLink>
                 <FooterLink href="/terms-of-service">Terms of Service</FooterLink>
               </Stack>
@@ -174,19 +174,6 @@ const Footer = () => {
               </Stack>
             </Stack>
             
-            {/* Solutions */}
-            <Stack spacing={4}>
-              <Text fontWeight="bold" fontSize="md" textTransform="uppercase" letterSpacing="wide">
-                Solutions
-              </Text>
-              <Stack spacing={2}>
-                <FooterLink href="/services/api-integration">API Integration</FooterLink>
-                <FooterLink href="/services/maintenance">Maintenance</FooterLink>
-                <FooterLink href="/services/branding">Branding</FooterLink>
-                <FooterLink href="/services/graphics-design">Graphics Design</FooterLink>
-              </Stack>
-            </Stack>
-            
             {/* Industries */}
             <Stack spacing={4}>
               <Text fontWeight="bold" fontSize="md" textTransform="uppercase" letterSpacing="wide">
@@ -202,6 +189,17 @@ const Footer = () => {
                 <FooterLink href="/industries/retail">Retail</FooterLink>
               </Stack>
             </Stack>
+
+            {/* Support */}
+            <Stack spacing={4}>
+              <Text fontWeight="bold" fontSize="md" textTransform="uppercase" letterSpacing="wide">
+                Support
+              </Text>
+              <Stack spacing={2}>
+                <FooterLink href="/contact">Contact</FooterLink>
+                <FooterLink href="/services/make-payment">Make Payment</FooterLink>
+              </Stack>
+            </Stack>
           </SimpleGrid>
 
           {/* Bottom Section */}
@@ -213,7 +211,7 @@ const Footer = () => {
               spacing={4}
             >
               <Text color="gray.500" fontSize="sm">
-                © {new Date().getFullYear()} Mobrilz. All rights reserved.
+                © {currentYear} Mobrilz. All rights reserved.
               </Text>
               <Text color="gray.400" fontSize="sm">
                 Made with ❤️ in Digital World
