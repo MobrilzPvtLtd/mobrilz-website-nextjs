@@ -3,6 +3,7 @@ import { Box, Flex, Container, Button, useColorModeValue } from '@chakra-ui/reac
 import Logo from './Logo';
 import MegaMenu from './MegaMenu';
 import ThemeSwitcher from './ThemeSwitcher';
+import NextLink from 'next/link'; // Add this import
 
 const HeaderBottom = () => {
     const [scrollPosition, setScrollPosition] = useState(0);
@@ -50,12 +51,15 @@ const HeaderBottom = () => {
                         display={{ base: 'none', lg: 'flex' }} // Hide on mobile/tablet
                     >
                         <ThemeSwitcher />
-                        <Button 
-                            colorScheme="brand"
-                            size="md"
-                        >
-                            Get A Quote
-                        </Button>
+                        <NextLink href="/get-quote" passHref>
+                            <Button 
+                                as="a"
+                                colorScheme="brand"
+                                size="md"
+                            >
+                                Get A Quote
+                            </Button>
+                        </NextLink>
                     </Flex>
                 </Flex>
             </Container>
