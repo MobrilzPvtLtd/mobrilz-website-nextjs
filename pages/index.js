@@ -17,24 +17,131 @@ import {
 import { ChevronRightIcon, ArrowForwardIcon } from '@chakra-ui/icons';
 import Layout from '../components/layout/Layout';
 import SEO from '../components/SEO';
-import { 
-  benefitsData, 
-  servicesData, 
-  testimonials, 
-  trustSignals,
-  technologiesData 
-} from '../data/content';
 import * as Icons from 'react-icons/fa';
 import { useMemo } from 'react';
 import NextLink from 'next/link';
 import { getStrapiAPI } from '../utils/api';
 import PortfolioSection from '../components/PortfolioSection';
 import TechnologiesSection from '../components/TechnologiesSection';
+import TestimonialsSection from '../components/TestimonialsSection';
 
-// Static Generation
+// Update the static data to match Strapi API response format
+const staticServices = {
+  data: [
+    {
+      id: 1,
+      attributes: {
+        title: 'Web Development',
+        description: 'Custom web applications and responsive websites built with modern technologies.',
+        image: {
+          data: {
+            attributes: {
+              url: 'https://picsum.photos/seed/web/800/600'
+            }
+          }
+        },
+        slug: 'web-development'
+      }
+    },
+    {
+      id: 2,
+      attributes: {
+        title: 'Mobile Development',
+        description: 'Native and cross-platform mobile apps for iOS and Android devices.',
+        image: {
+          data: {
+            attributes: {
+              url: 'https://picsum.photos/seed/mobile/800/600'
+            }
+          }
+        },
+        slug: 'mobile-development'
+      }
+    },
+    {
+      id: 3,
+      attributes: {
+        title: 'Cloud Solutions',
+        description: 'Scalable cloud infrastructure and deployment solutions.',
+        image: {
+          data: {
+            attributes: {
+              url: 'https://picsum.photos/seed/cloud/800/600'
+            }
+          }
+        },
+        slug: 'cloud-solutions'
+      }
+    }
+  ]
+};
+
+const staticTrustSignals = {
+  data: [
+    {
+      id: 1,
+      attributes: {
+        name: 'Google Partner',
+        logo: {
+          data: {
+            attributes: {
+              url: 'https://picsum.photos/seed/google/200/80'
+            }
+          }
+        }
+      }
+    },
+    {
+      id: 2,
+      attributes: {
+        name: 'Microsoft Certified',
+        logo: {
+          data: {
+            attributes: {
+              url: 'https://picsum.photos/seed/microsoft/200/80'
+            }
+          }
+        }
+      }
+    },
+    {
+      id: 3,
+      attributes: {
+        name: 'AWS Partner',
+        logo: {
+          data: {
+            attributes: {
+              url: 'https://picsum.photos/seed/aws/200/80'
+            }
+          }
+        }
+      }
+    }
+  ]
+};
+
+const staticBenefits = [
+  {
+    icon: 'FaRocket',
+    title: 'Fast Development',
+    description: 'Quick turnaround with high-quality deliverables using modern development practices.'
+  },
+  {
+    icon: 'FaShieldAlt',
+    title: 'Secure Solutions',
+    description: 'Built-in security measures to protect your business and customer data.'
+  },
+  {
+    icon: 'FaTools',
+    title: 'Scalable Architecture',
+    description: 'Future-proof solutions that grow with your business needs.'
+  }
+];
+
+// Update the getStaticProps function
 export async function getStaticProps() {
   try {
-    const [portfoliosRes, technologiesRes] = await Promise.all([
+    const [portfoliosRes, technologiesRes, testimonialsRes] = await Promise.all([
       getStrapiAPI("/portfolios", {
         sort: ['id:desc'],
         populate: {
@@ -49,45 +156,34 @@ export async function getStaticProps() {
           Featured: true
         },
         sort: ['type:asc', 'name:asc']
+      }),
+      getStrapiAPI("/testimonials", {
+        populate: '*'
       })
     ]);
 
     return {
       props: {
-        services: servicesData,
-        benefits: benefitsData,
-        testimonials: testimonials,
-        trustSignals: trustSignals,
+        services: staticServices,
+        testimonials: testimonialsRes?.data || [],
+        trustSignals: staticTrustSignals,
         portfolios: portfoliosRes?.data ? portfoliosRes : { data: [] },
         technologies: technologiesRes?.data || [],
+        benefits: staticBenefits,
         isError: false
       },
       revalidate: false
     };
   } catch (error) {
     console.error('Error in getStaticProps:', error);
-    // Fallback to mock data on error
-    const mockTechnologies = Object.entries(technologiesData).reduce((acc, [type, data]) => {
-      const tools = data.tools.map(tool => ({
-        id: tool.name.toLowerCase().replace(/\s+/g, '-'),
-        name: tool.name,
-        type: data.title,
-        icon: { url: tool.icon },
-        slug: tool.name.toLowerCase().replace(/\s+/g, '-')
-      }));
-      return [...acc, ...tools];
-    }, []);
-
     return {
       props: {
-        services: servicesData,
-        benefits: benefitsData,
-        testimonials: testimonials,
-        trustSignals: trustSignals,
-        portfolios: { 
-          data: [] 
-        },
-        technologies: mockTechnologies,
+        services: staticServices,
+        testimonials: [],
+        trustSignals: staticTrustSignals,
+        portfolios: { data: [] },
+        technologies: [],
+        benefits: staticBenefits,
         isError: true
       }
     };
@@ -96,11 +192,11 @@ export async function getStaticProps() {
 
 const Home = ({ 
   services, 
-  benefits, 
   testimonials, 
   trustSignals, 
   technologies, 
   portfolios,
+  benefits,
   isError = false 
 }) => {
   const getIcon = useMemo(() => (iconName) => {
@@ -149,11 +245,11 @@ const Home = ({
                   </Button>
                 </Stack>
                 <Flex wrap="wrap" gap={4} mt={4}>
-                  {trustSignals.map((signal, index) => (
+                  {trustSignals.data.map((signal) => (
                     <Image
-                      key={index}
-                      src={signal.image}
-                      alt={signal.name}
+                      key={signal.id}
+                      src={signal.attributes.logo.data.attributes.url}
+                      alt={signal.attributes.name}
                       h="40px"
                       filter="grayscale(100%)"
                       opacity={0.7}
@@ -193,9 +289,9 @@ const Home = ({
               </Stack>
 
               <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
-                {services.map((service, index) => (
+                {services.data.map((service, index) => (
                   <Box
-                    key={index}
+                    key={service.id || index}
                     p={6}
                     boxShadow="lg"
                     borderRadius="lg"
@@ -210,8 +306,8 @@ const Home = ({
                     }}
                   >
                     <Image
-                      src={service.image}
-                      alt={service.title}
+                      src={service.attributes.image.data.attributes.url}
+                      alt={service.attributes.title}
                       borderRadius="md"
                       mb={4}
                       h="200px"
@@ -223,25 +319,32 @@ const Home = ({
                       mb={3}
                       color={useColorModeValue("gray.800", "white")}
                     >
-                      {service.title}
+                      {service.attributes.title}
                     </Heading>
                     <Text
                       color={useColorModeValue("gray.600", "gray.300")}
                       mb={4}
                     >
-                      {service.description}
+                      {service.attributes.description}
                     </Text>
-                    <Button
-                      variant="link"
-                      colorScheme="blue"
-                      color={useColorModeValue("blue.600", "blue.200")}
-                      rightIcon={<ChevronRightIcon />}
-                      _hover={{
-                        color: useColorModeValue("blue.700", "blue.100")
-                      }}
+                    <NextLink 
+                      href={`/services/${service.attributes.slug}`} 
+                      passHref 
+                      legacyBehavior
                     >
-                      Learn More
-                    </Button>
+                      <Button
+                        as="a"
+                        variant="link"
+                        colorScheme="blue"
+                        color={useColorModeValue("blue.600", "blue.200")}
+                        rightIcon={<ChevronRightIcon />}
+                        _hover={{
+                          color: useColorModeValue("blue.700", "blue.100")
+                        }}
+                      >
+                        Learn More
+                      </Button>
+                    </NextLink>
                   </Box>
                 ))}
               </SimpleGrid>
@@ -317,69 +420,7 @@ const Home = ({
         </Box>
 
         {/* Testimonials */}
-        <Box
-          bg={useColorModeValue("gray.50", "gray.800")}
-          py={20}
-        >
-          <Container maxW="container.xl">
-            <Stack spacing={12}>
-              <Stack textAlign="center" spacing={3}>
-                <Heading size="xl">What Our Clients Say</Heading>
-                <Text
-                  color={useColorModeValue("gray.600", "gray.300")}
-                  maxW="2xl"
-                  mx="auto"
-                >
-                  Don't just take our word for it - hear what our clients have to say
-                </Text>
-              </Stack>
-
-              <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
-                {testimonials.map((testimonial, index) => (
-                  <Box
-                    key={index}
-                    p={6}
-                    boxShadow="lg"
-                    borderRadius="lg"
-                    bg={useColorModeValue("white", "gray.700")}
-                    borderWidth="1px"
-                    borderColor={useColorModeValue("gray.100", "gray.600")}
-                  >
-                    <Text
-                      fontSize="lg"
-                      fontStyle="italic"
-                      mb={4}
-                      color={useColorModeValue("gray.800", "white")}
-                    >
-                      "{testimonial.quote}"
-                    </Text>
-                    <Flex align="center">
-                      <Avatar
-                        src={testimonial.image}
-                        mr={4}
-                        border="2px solid"
-                        borderColor={useColorModeValue("gray.200", "gray.600")}
-                      />
-                      <Box>
-                        <Text
-                          fontWeight="bold"
-                          color={useColorModeValue("gray.800", "white")}
-                        >
-                          {testimonial.name}
-                        </Text>
-                        <Text
-                          color={useColorModeValue("gray.600", "gray.300")}
-                        >
-                          {testimonial.position}
-                        </Text>
-                      </Box>
-                    </Flex>
-                  </Box>
-                ))}
-              </SimpleGrid>
-            </Stack>
-          </Container>
-        </Box>
+        <TestimonialsSection testimonials={testimonials} />
 
         {/* Technologies Section */}
         <TechnologiesSection 
