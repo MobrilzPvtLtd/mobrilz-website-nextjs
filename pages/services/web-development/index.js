@@ -13,10 +13,25 @@ import {
     List,
     ListItem,
     ListIcon,
-    Avatar
+    Avatar,
+    Flex // Add Flex component
 } from '@chakra-ui/react';
 import { CheckIcon, ArrowForwardIcon, StarIcon } from '@chakra-ui/icons';
-import { FaCode, FaShoppingCart, FaLaptopCode, FaUser } from 'react-icons/fa';
+import { 
+    FaCode, 
+    FaServer, 
+    FaLayerGroup, 
+    FaPencilRuler, 
+    FaDatabase, 
+    FaShoppingCart, 
+    FaWordpress, 
+    FaMobile, 
+    FaTools, 
+    FaSearch, 
+    FaShieldAlt, 
+    FaChartLine,
+    FaUser // Add FaUser icon
+} from 'react-icons/fa';
 import NextLink from 'next/link';
 import SEO from '../../../components/SEO'; // Fixed path
 import Breadcrumb from '../../../components/common/Breadcrumb'; // Fixed path
@@ -185,43 +200,51 @@ export default function WebDevelopment({ technologies: apiTechnologies = [], por
 
             <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10}>
               {services.map((service, index) => (
-                <Stack
-                  key={index}
-                  p={6}
-                  bg={cardBgColor}
-                  borderRadius="lg"
-                  borderWidth="1px"
-                  borderColor={borderColor}
-                  spacing={4}
-                  _hover={{
-                    transform: 'translateY(-5px)',
-                    boxShadow: 'xl',
-                  }}
-                  transition="all 0.3s"
+                <NextLink 
+                  key={index} 
+                  href={service.url}
+                  passHref
                 >
-                  <Icon as={service.icon} boxSize={10} color={accentColor} />
-                  <Stack spacing={2}>
-                    <Heading size="md" color={headingColor}>
-                      {service.title}
-                    </Heading>
-                    <Text color={textColor}>
-                      {service.description}
-                    </Text>
+                  <Stack
+                    as="a"
+                    p={6}
+                    bg={cardBgColor}
+                    borderRadius="lg"
+                    borderWidth="1px"
+                    borderColor={borderColor}
+                    spacing={4}
+                    cursor="pointer"
+                    _hover={{
+                      transform: 'translateY(-5px)',
+                      boxShadow: 'xl',
+                      borderColor: 'brand.500'
+                    }}
+                    transition="all 0.3s"
+                  >
+                    <Icon as={service.icon} boxSize={10} color={accentColor} />
+                    <Stack spacing={2}>
+                      <Heading size="md" color={headingColor}>
+                        {service.title}
+                      </Heading>
+                      <Text color={textColor}>
+                        {service.description}
+                      </Text>
+                    </Stack>
+                    <List spacing={3}>
+                      {service.features.map((feature, idx) => (
+                        <ListItem 
+                          key={idx}
+                          display="flex"
+                          alignItems="center"
+                          color={textColor}
+                        >
+                          <ListIcon as={CheckIcon} color="green.500" />
+                          {feature}
+                        </ListItem>
+                      ))}
+                    </List>
                   </Stack>
-                  <List spacing={3}>
-                    {service.features.map((feature, idx) => (
-                      <ListItem 
-                        key={idx}
-                        display="flex"
-                        alignItems="center"
-                        color={textColor}
-                      >
-                        <ListIcon as={CheckIcon} color="green.500" />
-                        {feature}
-                      </ListItem>
-                    ))}
-                  </List>
-                </Stack>
+                </NextLink>
               ))}
             </SimpleGrid>
           </Stack>
@@ -390,38 +413,116 @@ export default function WebDevelopment({ technologies: apiTechnologies = [], por
 }
 
 const services = [
+  // Core Web Development Services
   {
-    title: 'Custom Web Development',
+    title: 'Front-End Development',
     icon: FaCode,
-    description: 'Tailored web solutions built from the ground up.',
+    description: 'Creating engaging user interfaces and experiences.',
     features: [
-      'Custom Frontend & Backend',
-      'Responsive Design',
-      'Performance Optimization',
+      'HTML5 & CSS3 Development',
+      'JavaScript Programming',
+      'React/Next.js Development',
+      'Responsive Design Implementation'
+    ],
+    url: '/services/web-development/frontend-development'
+  },
+  {
+    title: 'Back-End Development',
+    icon: FaServer,
+    description: 'Building robust server-side applications.',
+    features: [
+      'Server-Side Programming',
+      'Database Management',
+      'API Development',
       'Security Implementation'
-    ]
+    ],
+    url: '/services/web-development/backend-development'
+  },
+  {
+    title: 'Full-Stack Development',
+    icon: FaLayerGroup,
+    description: 'End-to-end web application development.',
+    features: [
+      'Full Application Architecture',
+      'Frontend & Backend Integration',
+      'Database Design',
+      'API Development'
+    ],
+    url: '/services/web-development/full-stack-development'
+  },
+  // Specific Website & Application Development
+  {
+    title: 'Custom Web Applications',
+    icon: FaPencilRuler,
+    description: 'Tailored web solutions for your business needs.',
+    features: [
+      'Bespoke Web Applications',
+      'Enterprise Solutions',
+      'Cloud Integration',
+      'Scalable Architecture'
+    ],
+    url: '/services/web-development/custom-applications'
+  },
+  {
+    title: 'CMS Development',
+    icon: FaWordpress,
+    description: 'Content management system development.',
+    features: [
+      'WordPress Development',
+      'Custom CMS Solutions',
+      'Content Migration',
+      'Plugin Development'
+    ],
+    url: '/services/web-development/cms-development'
   },
   {
     title: 'E-Commerce Solutions',
     icon: FaShoppingCart,
-    description: 'Build and scale your online store.',
+    description: 'Building powerful online stores.',
     features: [
-      'Custom Shopping Cart',
+      'Custom Shopping Platforms',
       'Payment Integration',
       'Inventory Management',
       'Mobile Commerce'
-    ]
+    ],
+    url: '/services/web-development/ecommerce'
+  },
+  // Related & Supplementary Services
+  {
+    title: 'Web Maintenance',
+    icon: FaTools,
+    description: 'Keeping your web applications up-to-date.',
+    features: [
+      'Regular Updates',
+      'Performance Monitoring',
+      'Security Patches',
+      'Content Updates'
+    ],
+    url: '/services/web-development/maintenance'
   },
   {
-    title: 'Web Applications',
-    icon: FaLaptopCode,
-    description: 'Powerful web apps for your business needs.',
+    title: 'SEO Implementation',
+    icon: FaSearch,
+    description: 'Optimize your website for search engines.',
     features: [
-      'SPA Development',
-      'Progressive Web Apps',
-      'Real-time Features',
-      'Cloud Integration'
-    ]
+      'Technical SEO',
+      'On-Page Optimization',
+      'Performance Tuning',
+      'Analytics Integration'
+    ],
+    url: '/services/web-development/seo'
+  },
+  {
+    title: 'Web Security',
+    icon: FaShieldAlt,
+    description: 'Protect your web applications.',
+    features: [
+      'Security Audits',
+      'SSL Implementation',
+      'Data Protection',
+      'Access Control'
+    ],
+    url: '/services/web-development/security'
   }
 ];
 
