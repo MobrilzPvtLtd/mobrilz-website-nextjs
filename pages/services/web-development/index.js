@@ -37,6 +37,7 @@ import SEO from '../../../components/SEO'; // Fixed path
 import Breadcrumb from '../../../components/common/Breadcrumb'; // Fixed path
 import TechnologiesSection from '../../../components/TechnologiesSection'; // Fixed path
 import PortfolioSection from '../../../components/PortfolioSection'; // Fixed path
+import TestimonialsSection from '../../../components/TestimonialsSection';
 import { getStrapiAPI } from '../../../utils/api'; // Fixed path
 import { 
     webDevelopmentServices as services,
@@ -46,7 +47,7 @@ import {
 
 export async function getStaticProps() {
     try {
-        const [technologiesRes, portfoliosRes] = await Promise.all([
+        const [technologiesRes, portfoliosRes, testimonialsRes] = await Promise.all([
             getStrapiAPI("/technologies", {
                 populate: '*',
                 filters: {
@@ -59,11 +60,10 @@ export async function getStaticProps() {
                     ThumbnailImage: { populate: '*' },
                     technologies: { populate: '*' },
                     portfolio_categories: { populate: '*' }
-                },
-                filters: {
-                    Featured: true
-                },
-                sort: ['id:desc']
+                }
+            }),
+            getStrapiAPI("/testimonials", {
+                populate: '*'
             })
         ]);
 
@@ -71,6 +71,7 @@ export async function getStaticProps() {
             props: {
                 technologies: technologiesRes?.data || [],
                 portfolios: portfoliosRes?.data || [],
+                testimonials: testimonialsRes?.data || [],
                 isError: false
             },
             revalidate: false
@@ -81,14 +82,19 @@ export async function getStaticProps() {
             props: {
                 technologies: [],
                 portfolios: [],
+                testimonials: [],
                 isError: true
-            },
-            revalidate: false
+            }
         };
     }
 }
 
-export default function WebDevelopment({ technologies: apiTechnologies = [], portfolios = [], isError = false }) {
+export default function WebDevelopment({ 
+    technologies: apiTechnologies = [], 
+    portfolios = [], 
+    testimonials = [],
+    isError = false 
+}) {
   const bgColor = useColorModeValue('white', 'gray.900');
   const heroBgColor = useColorModeValue('blue.50', 'gray.800');
   const cardBgColor = useColorModeValue('white', 'gray.800');
@@ -321,60 +327,10 @@ export default function WebDevelopment({ technologies: apiTechnologies = [], por
       />
 
       {/* Testimonials Section */}
-      <Box py={20} bg={heroBgColor}>
-        <Container maxW="container.xl">
-          <Stack spacing={12}>
-            <Stack spacing={3} textAlign="center">
-              <Heading size="xl" color={headingColor}>
-                Client Success Stories
-              </Heading>
-              <Text color={textColor} maxW="3xl" mx="auto">
-                See what our clients say about our web development services
-              </Text>
-            </Stack>
-
-            <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10}>
-              {testimonials.map((testimonial, index) => (
-                <Stack
-                  key={index}
-                  p={6}
-                  bg={cardBgColor}
-                  borderRadius="lg"
-                  borderWidth="1px"
-                  borderColor={borderColor}
-                  spacing={4}
-                >
-                  <Box position="relative" width="80px" height="80px" mx="auto">
-                    <Avatar 
-                      src={testimonial.image} 
-                      name={testimonial.name} 
-                      size="xl"
-                      loading="lazy"
-                      fallback={<Icon as={FaUser} boxSize={16} color={accentColor} />}
-                    />
-                  </Box>
-                  <Stack spacing={2} textAlign="center">
-                    <Text fontWeight="bold" color={headingColor}>
-                      {testimonial.name}
-                    </Text>
-                    <Text fontSize="sm" color={textColor}>
-                      {testimonial.position}
-                    </Text>
-                    <Text color={textColor}>
-                      "{testimonial.quote}"
-                    </Text>
-                    <Stack direction="row" justify="center">
-                      {Array.from({ length: testimonial.rating }).map((_, i) => (
-                        <Icon key={i} as={StarIcon} color="yellow.400" />
-                      ))}
-                    </Stack>
-                  </Stack>
-                </Stack>
-              ))}
-            </SimpleGrid>
-          </Stack>
-        </Container>
-      </Box>
+      <TestimonialsSection 
+        testimonials={testimonials} 
+        isError={isError}
+      />
 
       {/* CTA Section */}
       <Box py={20} bg={useColorModeValue("brand.600", "brand.900")}>
