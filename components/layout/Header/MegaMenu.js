@@ -16,6 +16,7 @@ import {
 import Link from 'next/link';
 import NextLink from 'next/link';
 import ThemeSwitcher from './ThemeSwitcher';
+import { useServices } from '../../../hooks/useServices';
 
 const MenuItem = ({ icon, title, description, href = '#', ...props }) => {
   const hoverBg = useColorModeValue('gray.50', 'gray.700');
@@ -81,6 +82,7 @@ const CategoryTitle = ({ children }) => (
 
 const MegaMenu = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { services, industries, work } = useServices();
 
   const menuListStyles = {
     p: 6,
@@ -181,6 +183,7 @@ const MegaMenu = () => {
         </Button>
       </Link>
 
+      {/* Services Menu */}
       <Menu>
         <MenuButton 
           as={Button} 
@@ -191,145 +194,58 @@ const MegaMenu = () => {
         </MenuButton>
         <MenuList {...menuListStyles}>
           <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={{ base: 4, md: 8 }}>
-            <Box>
-              <CategoryTitle>Development</CategoryTitle>
-              <VStack align="stretch" spacing={2}>
-                <MenuItem 
-                  icon={FaCode}
-                  title="Web Development"
-                  description="Custom websites & web applications"
-                  href="/services/web-development"
-                />
-                <MenuItem 
-                  icon={FaMobile}
-                  title="Mobile Apps"
-                  description="iOS & Android development"
-                  href="/services/mobile-apps"
-                />
-                <MenuItem 
-                  icon={FaCloud}
-                  title="Cloud Solutions"
-                  description="Scalable cloud infrastructure"
-                  href="/services/cloud-solutions"
-                />
-                <MenuItem 
-                  icon={FaCogs}
-                  title="Custom Software"
-                  description="Tailored business solutions"
-                  href="/services/custom-software"
-                />
-              </VStack>
-            </Box>
-            <Box>
-              <CategoryTitle>Design</CategoryTitle>
-              <VStack align="stretch" spacing={2}>
-                <MenuItem 
-                  icon={FaPalette}
-                  title="UI/UX Design"
-                  description="User-centered interfaces"
-                  href="/services/ui-ux-design"
-                />
-                <MenuItem 
-                  icon={FaChartLine}
-                  title="Branding"
-                  description="Brand identity & strategy"
-                  href="/services/branding"
-                />
-                <MenuItem 
-                  icon={FaPalette}
-                  title="Graphics Design"
-                  description="Visual content creation"
-                  href="/services/graphics-design"
-                />
-              </VStack>
-            </Box>
-            <Box>
-              <CategoryTitle>Solutions</CategoryTitle>
-              <VStack align="stretch" spacing={2}>
-                <MenuItem 
-                  icon={FaCogs}
-                  title="DevOps"
-                  description="Automated development ops"
-                  href="/services/devops"
-                />
-                <MenuItem 
-                  icon={FaCloud}
-                  title="API Integration"
-                  description="Seamless system connections"
-                  href="/services/api-integration"
-                />
-                <MenuItem 
-                  icon={FaHandshake}
-                  title="Maintenance"
-                  description="Ongoing system support"
-                  href="/services/maintenance"
-                />
-              </VStack>
-            </Box>
+            {Object.entries(services).map(([key, category]) => (
+              <Box key={key}>
+                <CategoryTitle>{category.title}</CategoryTitle>
+                <VStack align="stretch" spacing={2}>
+                  {category.items.map((item, index) => (
+                    <MenuItem 
+                      key={index}
+                      icon={item.icon}
+                      title={item.title}
+                      description={item.description}
+                      href={item.href}
+                    />
+                  ))}
+                </VStack>
+              </Box>
+            ))}
           </SimpleGrid>
         </MenuList>
       </Menu>
 
+      {/* Industries Menu */}
       <Menu>
         <MenuButton 
           as={Button} 
           {...menuButtonStyles}
           rightIcon={<ChevronDownIcon />}
         >
-          Industry
+          Industries
         </MenuButton>
         <MenuList {...menuListStyles}>
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 4, md: 8 }}>
-            <Box>
-              <CategoryTitle>Sectors</CategoryTitle>
-              <VStack align="stretch" spacing={2}>
-                <MenuItem 
-                  icon={FaIndustry}
-                  title="Manufacturing"
-                  description="Smart factory solutions"
-                  href="/industries/manufacturing"
-                />
-                <MenuItem 
-                  icon={FaBuilding}
-                  title="Finance"
-                  description="Fintech innovations"
-                  href="/industries/finance"
-                />
-                <MenuItem 
-                  icon={FaHeadset}
-                  title="Healthcare"
-                  description="Digital health systems"
-                  href="/industries/healthcare"
-                />
-              </VStack>
-            </Box>
-            <Box>
-              <CategoryTitle>Solutions</CategoryTitle>
-              <VStack align="stretch" spacing={2}>
-                <MenuItem 
-                  icon={FaChartLine}
-                  title="E-Commerce"
-                  description="Online retail platforms"
-                  href="/industries/e-commerce"
-                />
-                <MenuItem 
-                  icon={FaHandshake}
-                  title="Consulting"
-                  description="Business technology advice"
-                  href="/industries/consulting"
-                />
-                <MenuItem 
-                  icon={FaBuilding}
-                  title="Retail"
-                  description="Point of sale systems"
-                  href="/industries/retail"
-                />
-              </VStack>
-            </Box>
+            {Object.entries(industries).map(([key, category]) => (
+              <Box key={key}>
+                <CategoryTitle>{category.title}</CategoryTitle>
+                <VStack align="stretch" spacing={2}>
+                  {category.items.map((item, index) => (
+                    <MenuItem 
+                      key={index}
+                      icon={item.icon}
+                      title={item.title}
+                      description={item.description}
+                      href={item.href}
+                    />
+                  ))}
+                </VStack>
+              </Box>
+            ))}
           </SimpleGrid>
         </MenuList>
       </Menu>
 
+      {/* Our Work Menu */}
       <Menu>
         <MenuButton 
           as={Button} 
@@ -339,35 +255,22 @@ const MegaMenu = () => {
           Our Work
         </MenuButton>
         <MenuList {...menuListStyles}>
-          <Box>
-            <CategoryTitle>Portfolio</CategoryTitle>
-            <VStack align="stretch" spacing={2}>
-              <MenuItem 
-                icon={FaProjectDiagram}
-                title="Case Studies"
-                description="Success stories"
-                href="/work/case-studies"
-              />
-              <MenuItem 
-                icon={FaCogs}
-                title="Portfolios"
-                description="Recent work"
-                href="/portfolios"
-              />
-              <MenuItem 
-                icon={FaUsers}
-                title="Clients"
-                description="Who we work with"
-                href="/work/clients"
-              />
-              <MenuItem 
-                icon={FaStar}
-                title="Testimonials"
-                description="Client feedback"
-                href="/work/testimonials"
-              />
-            </VStack>
-          </Box>
+          {Object.entries(work).map(([key, category]) => (
+            <Box key={key}>
+              <CategoryTitle>{category.title}</CategoryTitle>
+              <VStack align="stretch" spacing={2}>
+                {category.items.map((item, index) => (
+                  <MenuItem 
+                    key={index}
+                    icon={item.icon}
+                    title={item.title}
+                    description={item.description}
+                    href={item.href}
+                  />
+                ))}
+              </VStack>
+            </Box>
+          ))}
         </MenuList>
       </Menu>
 
@@ -441,38 +344,41 @@ const MegaMenu = () => {
             <Accordion allowToggle>
               <MobileNavItem href="/">Home</MobileNavItem>
               
-              <MobileNavItem items={[
-                { href: '/services/web-development', title: 'Web Development' },
-                { href: '/services/mobile-apps', title: 'Mobile Apps' },
-                { href: '/services/cloud-solutions', title: 'Cloud Solutions' },
-                { href: '/services/custom-software', title: 'Custom Software' },
-              ]}>
-                Services
-              </MobileNavItem>
+              <MobileNavItem 
+                items={Object.values(services)
+                  .flatMap(category => category.items)
+                  .map(item => ({
+                    href: item.href,
+                    title: item.title
+                  }))}
+                title="Services"
+              />
 
-              <MobileNavItem items={[
-                { href: '/industries/manufacturing', title: 'Manufacturing' },
-                { href: '/industries/finance', title: 'Finance' },
-                { href: '/industries/healthcare', title: 'Healthcare' },
-              ]}>
-                Industry
-              </MobileNavItem>
+              <MobileNavItem 
+                items={Object.values(industries)
+                  .flatMap(category => category.items)
+                  .map(item => ({
+                    href: item.href,
+                    title: item.title
+                  }))}
+                title="Industries"
+              />
 
-              <MobileNavItem items={[
-                { href: '/work/case-studies', title: 'Case Studies' },
-                { href: '/work/projects', title: 'Projects' },
-                { href: '/work/clients', title: 'Clients' },
-                { href: '/work/testimonials', title: 'Testimonials' },
-              ]}>
-                Our Work
-              </MobileNavItem>
+              <MobileNavItem 
+                items={Object.values(work)
+                  .flatMap(category => category.items)
+                  .map(item => ({
+                    href: item.href,
+                    title: item.title
+                  }))}
+                title="Our Work"
+              />
 
               <MobileNavItem href="/packages">Packages</MobileNavItem>
               <MobileNavItem href="/support">Support</MobileNavItem>
               <MobileNavItem href="/about">About</MobileNavItem>
             </Accordion>
 
-            {/* Add Theme Switcher and Get A Quote button at the bottom */}
             <Box 
               p={10}  
               borderColor={useColorModeValue('gray.100', 'gray.700')}
