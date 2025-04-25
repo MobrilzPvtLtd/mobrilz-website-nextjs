@@ -123,8 +123,7 @@ const Footer = () => {
                 <HStack spacing={2}>
                   <Icon as={FaClock} color={textColor} mt={1} />
                   <Text color={textColor} fontSize="sm">
-                    Opening Hours: 
-                    <Text as="span" fontWeight="medium"> 10:00 - 18:00 IST</Text>
+                    Monday - Friday: 9:00 AM - 6:00 PM (IST)
                   </Text>
                 </HStack>
                 <Text color="brand.500" fontSize="sm" fontStyle="italic">
