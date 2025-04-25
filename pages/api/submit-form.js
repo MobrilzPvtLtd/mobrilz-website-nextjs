@@ -6,8 +6,6 @@ export default async function handler(req, res) {
   }
 
   try {
-    console.log('Request body:', req.body);
-
     const formData = {
       data: {
         Inquirytype:'Contact Us Page',
@@ -23,8 +21,6 @@ export default async function handler(req, res) {
       }
     };
 
-    console.log('Sending to Strapi:', formData);
-
     const response = await fetch(`${getStrapiURL('/api/form-messages')}`, {
       method: 'POST',
       headers: {
@@ -34,28 +30,16 @@ export default async function handler(req, res) {
     });
 
     if (!response.ok) {
-      const errorData = await response.text();
-      console.error('Strapi Error Response:', {
-        status: response.status,
-        statusText: response.statusText,
-        body: errorData
-      });
-      throw new Error(`HTTP error! status: ${response.status}, body: ${errorData}`);
+      throw new Error('Form submission failed');
     }
 
     const data = await response.json();
-    console.log('Strapi Success Response:', data);
     return res.status(200).json(data);
 
   } catch (error) {
-    console.error('Form submission error:', {
-      message: error.message,
-      stack: error.stack
-    });
     return res.status(500).json({ 
       message: 'Error submitting form',
-      error: error.message,
-      details: error.stack
+      error: error.message
     });
   }
 }
