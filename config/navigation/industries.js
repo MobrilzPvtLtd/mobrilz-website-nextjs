@@ -1,56 +1,68 @@
 import { 
-  FaIndustry,
-  FaBuilding,
-  FaHeadset,
-  FaChartLine,
-  FaHandshake 
+    FaIndustry,
+    FaBuilding,
+    FaHeadset,
+    FaChartLine,
+    FaHandshake,
+    FaShoppingCart,
+    FaGraduationCap,
+    FaTruck,
+    FaHospital
 } from 'react-icons/fa';
 
 export const industries = {
-  sectors: {
-    title: "Sectors",
-    items: [
-      {
-        icon: FaIndustry,
-        title: "Manufacturing",
-        description: "Smart factory solutions",
-        href: "/industries/manufacturing"
-      },
-      {
-        icon: FaBuilding,
-        title: "Finance",
-        description: "Fintech innovations",
-        href: "/industries/finance"
-      },
-      {
-        icon: FaHeadset,
-        title: "Healthcare",
-        description: "Digital health systems",
-        href: "/industries/healthcare"
-      }
-    ]
-  },
-  solutions: {
-    title: "Solutions",
-    items: [
-      {
-        icon: FaChartLine,
-        title: "E-Commerce",
-        description: "Online retail platforms",
-        href: "/industries/e-commerce"
-      },
-      {
-        icon: FaHandshake,
-        title: "Consulting",
-        description: "Business technology advice",
-        href: "/industries/consulting"
-      },
-      {
-        icon: FaBuilding,
-        title: "Retail",
-        description: "Point of sale systems",
-        href: "/industries/retail"
-      }
-    ]
-  }
+    sectors: {
+        title: "Core Industries",
+        description: "Delivering specialized solutions across key business sectors with deep domain expertise",
+        items: [
+            {
+                icon: FaIndustry,
+                title: "Manufacturing",
+                description: "Smart factory solutions and industrial automation",
+                href: "/industries/manufacturing"
+            },
+            {
+                icon: FaBuilding,
+                title: "Finance",
+                description: "Fintech innovations and banking solutions",
+                href: "/industries/finance"
+            },
+            {
+                icon: FaHospital,
+                title: "Healthcare",
+                description: "Digital health systems and medical solutions",
+                href: "/industries/healthcare"
+            },
+            {
+                icon: FaGraduationCap,
+                title: "Education",
+                description: "E-learning and educational platforms",
+                href: "/industries/education"
+            }
+        ]
+    },
+    solutions: {
+        title: "Business Solutions",
+        description: "Comprehensive digital solutions tailored for modern business challenges",
+        items: [
+            {
+                icon: FaShoppingCart,
+                title: "E-Commerce",
+                description: "Online retail and marketplace solutions",
+                href: "/industries/e-commerce"
+            },
+            {
+                icon: FaHandshake,
+                title: "Consulting",
+                description: "Technology advisory and implementation",
+                href: "/industries/consulting"
+            },
+            {
+                icon: FaTruck,
+                title: "Logistics",
+                description: "Supply chain and delivery solutions",
+                href: "/industries/logistics"
+            }
+        ]
+    }
 };

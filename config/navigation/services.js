@@ -16,6 +16,7 @@ import {
 export const services = {
     development: {
         title: "Development",
+        description: "Build powerful web and mobile applications with cutting-edge technologies that scale with your business needs",
         items: [
             {
                 icon: FaCode,
@@ -45,6 +46,7 @@ export const services = {
     },
     design: {
         title: "Design",
+        description: "Create engaging user experiences and memorable brand identities that resonate with your target audience",
         items: [
             {
                 icon: FaPalette,
@@ -68,6 +70,7 @@ export const services = {
     },
     solutions: {
         title: "Solutions",
+        description: "Optimize your business operations with integrated solutions that enhance efficiency and drive growth",
         items: [
             {
                 icon: FaShieldAlt,

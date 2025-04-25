@@ -11,16 +11,32 @@ import {
 import { useServices } from '../../hooks/useServices';
 import SEO from '../../components/SEO';
 import NextLink from 'next/link';
+import Breadcrumb from '../../components/common/Breadcrumb';
 
 export default function ServicesPage() {
-  const { getAllServices } = useServices();
-  const services = getAllServices();
+  const { services } = useServices();
   
   const bgColor = useColorModeValue("gray.50", "gray.900");
   const cardBgColor = useColorModeValue("white", "gray.800");
   const borderColor = useColorModeValue("gray.100", "gray.700");
   const textColor = useColorModeValue("gray.600", "gray.300");
   const headingColor = useColorModeValue("gray.800", "white");
+
+  const breadcrumbItems = [
+    {
+      name: 'Home',
+      path: '/',
+      title: 'Go to Home page',
+      description: 'Navigate to home page'
+    },
+    {
+      name: 'Services',
+      path: '/services',
+      title: 'Our Services',
+      description: 'View all our services',
+      isCurrentPage: true
+    }
+  ];
   
   return (
     <>
@@ -29,64 +45,104 @@ export default function ServicesPage() {
         description="Explore our comprehensive range of software development and digital services."
       />
       
-      <Box bg={bgColor} py={20}>
+      {/* Breadcrumb Section */}
+      <Box bg={bgColor} pt={4} pb={0}>
         <Container maxW="container.xl">
-          <Stack spacing={12}>
-            <Stack textAlign="center" spacing={3}>
-              <Heading size="xl" color={headingColor}>
-                Our Services
-              </Heading>
-              <Text color={textColor} maxW="2xl" mx="auto">
-                Comprehensive software solutions to help your business grow in the digital age
-              </Text>
-            </Stack>
+          <Breadcrumb items={breadcrumbItems} aria-label="Services navigation" />
+        </Container>
+      </Box>
 
-            <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10}>
-              {services.map((service, index) => (
-                <NextLink 
-                  key={index} 
-                  href={service.href}
-                  passHref
-                >
-                  <Stack
-                    as="a"
-                    p={6}
-                    bg={cardBgColor}
-                    borderRadius="lg"
-                    borderWidth="1px"
-                    borderColor={borderColor}
-                    spacing={4}
-                    cursor="pointer"
-                    _hover={{
-                      transform: 'translateY(-5px)',
-                      boxShadow: 'xl',
-                      borderColor: 'blue.400'
-                    }}
-                    transition="all 0.3s"
-                  >
-                    <Icon 
-                      as={service.icon} 
-                      boxSize={10} 
-                      color="blue.500" 
-                    />
-                    <Stack spacing={2}>
-                      <Heading 
-                        size="md" 
-                        color={headingColor}
-                      >
-                        {service.title}
-                      </Heading>
-                      <Text color={textColor}>
-                        {service.description}
-                      </Text>
-                    </Stack>
-                  </Stack>
-                </NextLink>
-              ))}
-            </SimpleGrid>
+      {/* Hero Section */}
+      <Box bg={useColorModeValue('blue.50', 'blue.900')} py={20}>
+        <Container maxW="container.xl">
+          <Stack spacing={6} textAlign="center">
+            <Heading
+              size="2xl"
+              bgGradient={useColorModeValue(
+                "linear(to-r, blue.600, purple.600)",
+                "linear(to-r, blue.200, purple.200)"
+              )}
+              bgClip="text"
+            >
+              Our Services
+            </Heading>
+            <Text
+              fontSize="xl"
+              color={textColor}
+              maxW="3xl"
+              mx="auto"
+            >
+              Transform your business with our comprehensive range of digital solutions
+            </Text>
           </Stack>
         </Container>
       </Box>
+
+      {/* Services Sections */}
+      {Object.entries(services).map(([key, category]) => (
+        <Box 
+          key={key}
+          py={20}
+          bg={key === 'design' ? cardBgColor : bgColor}
+        >
+          <Container maxW="container.xl">
+            <Stack spacing={12}>
+              <Stack textAlign="center" spacing={3}>
+                <Heading size="xl" color={headingColor}>
+                  {category.title}
+                </Heading>
+                <Text color={textColor} maxW="2xl" mx="auto">
+                  {category.description}
+                </Text>
+              </Stack>
+
+              <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10}>
+                {category.items.map((service, index) => (
+                  <NextLink 
+                    key={index} 
+                    href={service.href}
+                    passHref
+                  >
+                    <Stack
+                      as="a"
+                      p={6}
+                      bg={cardBgColor}
+                      borderRadius="lg"
+                      borderWidth="1px"
+                      borderColor={borderColor}
+                      spacing={4}
+                      cursor="pointer"
+                      _hover={{
+                        transform: 'translateY(-5px)',
+                        boxShadow: 'xl',
+                        borderColor: 'blue.400'
+                      }}
+                      transition="all 0.3s"
+                    >
+                      <Icon 
+                        as={service.icon} 
+                        boxSize={10} 
+                        color="blue.500" 
+                      />
+                      <Stack spacing={2}>
+                        <Heading 
+                          size="md" 
+                          color={headingColor}
+                        >
+                          {service.title}
+                        </Heading>
+                        <Text color={textColor}>
+                          {service.description}
+                        </Text>
+                      </Stack>
+                    </Stack>
+                  </NextLink>
+                ))}
+              </SimpleGrid>
+            </Stack>
+          </Container>
+        </Box>
+      ))}
     </>
   );
 }
