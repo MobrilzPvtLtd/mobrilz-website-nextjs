@@ -6,7 +6,7 @@ import {
   IconButton, Accordion, AccordionItem,
   AccordionButton, AccordionPanel, AccordionIcon
 } from '@chakra-ui/react';
-import { ChevronDownIcon, HamburgerIcon } from '@chakra-ui/icons';
+import { ChevronDownIcon, HamburgerIcon, ArrowForwardIcon } from '@chakra-ui/icons';
 import { 
   FaCode, FaMobile, FaCloud, FaCogs, 
   FaPalette, FaChartLine, FaIndustry,
@@ -322,6 +322,7 @@ const MegaMenu = () => {
           About
         </Button>
       </Link>
+     
     </Flex>
   );
 
@@ -389,13 +390,17 @@ const MegaMenu = () => {
                 gap={4} 
                 align="center"
               > 
-                <Button 
-                  colorScheme="brand"
-                  size="md"
-                  w="60"
-                >
-                  Get A Quote
-                </Button>
+                <NextLink href="/get-quote" passHref>
+                  <Button
+                    as="a"
+                    colorScheme="blue"
+                    size="md"
+                    w="60"
+                    rightIcon={<ArrowForwardIcon />}
+                  >
+                    Get a Quote
+                  </Button>
+                </NextLink>
               </Flex>
             </Box>
           </DrawerBody>

@@ -235,7 +235,7 @@ const Home = ({
                   and digital transformation solutions.
                 </Text>
                 <Stack direction={{ base: 'column', sm: 'row' }} spacing={4}>
-                  <NextLink href="/contact" passHref legacyBehavior>
+                  <NextLink href="/get-quote" passHref legacyBehavior>
                     <Button as="a" size="lg" colorScheme="blue" rightIcon={<ArrowForwardIcon />}>
                       Get Free Consultation
                     </Button>
@@ -444,17 +444,19 @@ const Home = ({
               >
                 Let's discuss how we can help transform your business through innovative software solutions
               </Text>
-              <Button
-                size="lg"
-                bg={useColorModeValue("white", "whiteAlpha.200")}
-                color={useColorModeValue("blue.600", "white")}
-                _hover={{
-                  bg: useColorModeValue("gray.100", "whiteAlpha.300")
-                }}
-                rightIcon={<ArrowForwardIcon />}
-              >
-                Schedule a Free Consultation
-              </Button>
+              <NextLink href="/get-quote" passHref>
+                <Button
+                  size="lg"
+                  bg={useColorModeValue("white", "whiteAlpha.200")}
+                  color={useColorModeValue("blue.600", "white")}
+                  _hover={{
+                    bg: useColorModeValue("gray.100", "whiteAlpha.300")
+                  }}
+                  rightIcon={<ArrowForwardIcon />}
+                >
+                  Get Free Quote
+                </Button>
+              </NextLink>
             </Stack>
           </Container>
         </Box>

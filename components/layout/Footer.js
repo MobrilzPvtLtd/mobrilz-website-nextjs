@@ -1,4 +1,4 @@
-import { Box, Container, Stack, Text, SimpleGrid, Link, Icon, HStack, VStack, Image, Divider, useColorModeValue } from '@chakra-ui/react';
+import { Box, Container, Stack, Text, SimpleGrid, Link, Icon, HStack, VStack, Image, Divider, useColorModeValue, Button } from '@chakra-ui/react';
 import { keyframes } from '@emotion/react'; // Import keyframes from @emotion/react
 import { 
   FaTwitter, FaLinkedin, FaGithub, FaInstagram, 
@@ -226,6 +226,15 @@ const Footer = () => {
               <Stack spacing={2}>
                 <FooterLink href="/contact">Contact</FooterLink>
                 <FooterLink href="/services/make-payment">Make Payment</FooterLink>
+                <NextLink href="/get-quote" passHref>
+                  <Button
+                    variant="link"
+                    color={useColorModeValue("gray.600", "gray.400")}
+                    _hover={{ color: "blue.500" }}
+                  >
+                    Get a Quote
+                  </Button>
+                </NextLink>
               </Stack>
             </Stack>
           </SimpleGrid>
