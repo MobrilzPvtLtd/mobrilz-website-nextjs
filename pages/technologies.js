@@ -24,7 +24,7 @@ export async function getStaticProps() {
                 technologies: technologiesRes?.data || [],
                 isError: false
             },
-            revalidate: 60
+            revalidate: false // Remove revalidation to make it fully static
         };
     } catch (error) {
         console.error('Error fetching technologies:', error);
@@ -33,7 +33,7 @@ export async function getStaticProps() {
                 technologies: [],
                 isError: true
             },
-            revalidate: 60
+            revalidate: false // Remove revalidation to make it fully static
         };
     }
 }

@@ -1,47 +1,70 @@
 import {
-  Box,
-  Container,
-  Heading,
-  Text,
-  SimpleGrid,
-  Icon,
-  Stack,
-  List,
-  ListItem,
-  ListIcon,
-  Button,
-  useColorModeValue,
-  Flex,
-  Image,
-  Grid,
-  Avatar,
-  Divider,
-  Badge,
+    Box,
+    Container,
+    Heading,
+    Text,
+    Image,
+    Stack,
+    Button,
+    SimpleGrid,
+    Grid,
+    Icon,
+    useColorModeValue,
 } from '@chakra-ui/react';
 import { CheckIcon, ArrowForwardIcon, StarIcon } from '@chakra-ui/icons';
-import {
-  FaCode,
-  FaReact,
-  FaNodeJs,
-  FaDatabase,
-  FaWordpress,
-  FaShoppingCart,
-  FaSearch,
-  FaRocket,
-  FaMobile,
-  FaLaptopCode,
-  FaShieldAlt,
-  FaCogs,
-  FaTools,
-  FaChartLine,
-  FaUser,
-} from 'react-icons/fa';
-import SEO from '../../components/SEO';
-import Breadcrumb from '../../components/common/Breadcrumb';
-import Link from 'next/link';
+import { FaCode, FaShoppingCart, FaLaptopCode, FaUser } from 'react-icons/fa';
+import SEO from '../../../components/SEO'; // Fixed path
+import Breadcrumb from '../../../components/common/Breadcrumb'; // Fixed path
+import TechnologiesSection from '../../../components/TechnologiesSection'; // Fixed path
+import PortfolioSection from '../../../components/PortfolioSection'; // Fixed path
+import NextLink from 'next/link';
+import { getStrapiAPI } from '../../../utils/api'; // Fixed path
 
-const WebDevelopment = () => {
-  // Color mode values
+export async function getStaticProps() {
+    try {
+        const [technologiesRes, portfoliosRes] = await Promise.all([
+            getStrapiAPI("/technologies", {
+                populate: '*',
+                filters: {
+                    Featured: true
+                },
+                sort: ['type:asc', 'name:asc']
+            }),
+            getStrapiAPI("/portfolios", {
+                populate: {
+                    ThumbnailImage: { populate: '*' },
+                    technologies: { populate: '*' },
+                    portfolio_categories: { populate: '*' }
+                },
+                filters: {
+                    Featured: true
+                },
+                sort: ['id:desc']
+            })
+        ]);
+
+        return {
+            props: {
+                technologies: technologiesRes?.data || [],
+                portfolios: portfoliosRes?.data || [],
+                isError: false
+            },
+            revalidate: false
+        };
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        return {
+            props: {
+                technologies: [],
+                portfolios: [],
+                isError: true
+            },
+            revalidate: false
+        };
+    }
+}
+
+export default function WebDevelopment({ technologies: apiTechnologies = [], portfolios = [], isError = false }) {
   const bgColor = useColorModeValue('white', 'gray.900');
   const heroBgColor = useColorModeValue('blue.50', 'gray.800');
   const cardBgColor = useColorModeValue('white', 'gray.800');
@@ -68,6 +91,15 @@ const WebDevelopment = () => {
       isCurrentPage: true,
     }
   ];
+
+  const getDescription = (description) => {
+    if (!description) return '';
+    if (typeof description === 'string') return description;
+    if (Array.isArray(description) && description[0]?.children?.[0]?.text) {
+      return description[0].children[0].text;
+    }
+    return '';
+  };
 
   return (
     <>
@@ -98,7 +130,7 @@ const WebDevelopment = () => {
                 </Text>
               </Stack>
               <Stack direction={{ base: 'column', sm: 'row' }} spacing={4}>
-                <Link href="/contact">
+                <NextLink href="/contact" passHref>
                   <Button
                     size="lg"
                     colorScheme="brand"
@@ -106,7 +138,7 @@ const WebDevelopment = () => {
                   >
                     Start Your Project
                   </Button>
-                </Link>
+                </NextLink>
                 <Button
                   size="lg"
                   variant="outline"
@@ -133,7 +165,7 @@ const WebDevelopment = () => {
         </Container>
       </Box>
 
-      {/* Services Grid */}
+      {/* Services Section */}
       <Box py={20} bg={bgColor}>
         <Container maxW="container.xl">
           <Stack spacing={12}>
@@ -245,45 +277,16 @@ const WebDevelopment = () => {
       </Box>
 
       {/* Technologies Section */}
-      <Box py={20} bg={bgColor}>
-        <Container maxW="container.xl">
-          <Stack spacing={12}>
-            <Stack spacing={3} textAlign="center">
-              <Heading size="xl" color={headingColor}>
-                Technologies We Use
-              </Heading>
-              <Text color={textColor} maxW="3xl" mx="auto">
-                We leverage the latest technologies to build modern web solutions
-              </Text>
-            </Stack>
+      <TechnologiesSection 
+        technologies={apiTechnologies} 
+        isError={isError}
+      />
 
-            <SimpleGrid columns={{ base: 2, md: 3, lg: 6 }} spacing={8}>
-              {technologies.map((tech, index) => (
-                <Stack
-                  key={index}
-                  p={6}
-                  bg={cardBgColor}
-                  borderRadius="lg"
-                  borderWidth="1px"
-                  borderColor={borderColor}
-                  align="center"
-                  spacing={4}
-                  _hover={{
-                    transform: 'translateY(-5px)',
-                    shadow: 'lg',
-                  }}
-                  transition="all 0.3s"
-                >
-                  <Icon as={tech.icon} boxSize={10} color={accentColor} />
-                  <Text fontWeight="bold" color={headingColor}>
-                    {tech.name}
-                  </Text>
-                </Stack>
-              ))}
-            </SimpleGrid>
-          </Stack>
-        </Container>
-      </Box>
+      {/* Portfolio Section */}
+      <PortfolioSection 
+        portfolios={portfolios} 
+        isError={isError}
+      />
 
       {/* Testimonials Section */}
       <Box py={20} bg={heroBgColor}>
@@ -380,9 +383,8 @@ const WebDevelopment = () => {
       </Box>
     </>
   );
-};
+}
 
-// Data objects for the page components
 const services = [
   {
     title: 'Custom Web Development',
@@ -438,15 +440,6 @@ const process = [
   }
 ];
 
-const technologies = [
-  { name: 'React', icon: FaReact },
-  { name: 'Node.js', icon: FaNodeJs },
-  { name: 'Next.js', icon: FaRocket },
-  { name: 'MongoDB', icon: FaDatabase },
-  { name: 'WordPress', icon: FaWordpress },
-  { name: 'DevOps', icon: FaCogs }
-];
-
 const testimonials = [
   {
     name: 'John Doe',
@@ -470,5 +463,3 @@ const testimonials = [
     image: 'https://picsum.photos/seed/mike-johnson/200/200'
   }
 ];
-
-export default WebDevelopment;

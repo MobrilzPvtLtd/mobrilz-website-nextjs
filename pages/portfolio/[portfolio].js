@@ -26,13 +26,13 @@ export async function getStaticPaths() {
 
         return {
             paths,
-            fallback: 'blocking'
+            fallback: false // Make it fully static
         };
     } catch (error) {
         console.error('Error fetching paths:', error);
         return {
             paths: [],
-            fallback: 'blocking'
+            fallback: false
         };
     }
 }
@@ -41,9 +41,7 @@ export async function getStaticProps({ params }) {
     try {
         const portfolios = await getStrapiAPI("/portfolios", {
             filters: {
-                slug: {
-                    $eq: params.portfolio
-                }
+                slug: params.portfolio
             },
             populate: {
                 ThumbnailImage: { populate: '*' },
@@ -55,7 +53,8 @@ export async function getStaticProps({ params }) {
 
         if (!portfolios.data?.[0]) {
             return {
-                notFound: true
+                notFound: true,
+                revalidate: false // Remove revalidation
             };
         }
 
@@ -64,7 +63,7 @@ export async function getStaticProps({ params }) {
                 portfolio: portfolios.data[0],
                 isError: false
             },
-            revalidate: 60
+            revalidate: false // Remove revalidation
         };
     } catch (error) {
         console.error('Error fetching portfolio:', error);
@@ -73,7 +72,7 @@ export async function getStaticProps({ params }) {
                 portfolio: null,
                 isError: true
             },
-            revalidate: 60
+            revalidate: false // Remove revalidation
         };
     }
 }
