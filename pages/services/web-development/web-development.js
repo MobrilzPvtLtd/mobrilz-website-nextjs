@@ -10,14 +10,18 @@ import {
     Grid,
     Icon,
     useColorModeValue,
+    List,
+    ListItem,
+    ListIcon,
+    Avatar
 } from '@chakra-ui/react';
 import { CheckIcon, ArrowForwardIcon, StarIcon } from '@chakra-ui/icons';
 import { FaCode, FaShoppingCart, FaLaptopCode, FaUser } from 'react-icons/fa';
+import NextLink from 'next/link';
 import SEO from '../../../components/SEO'; // Fixed path
 import Breadcrumb from '../../../components/common/Breadcrumb'; // Fixed path
 import TechnologiesSection from '../../../components/TechnologiesSection'; // Fixed path
 import PortfolioSection from '../../../components/PortfolioSection'; // Fixed path
-import NextLink from 'next/link';
 import { getStrapiAPI } from '../../../utils/api'; // Fixed path
 
 export async function getStaticProps() {

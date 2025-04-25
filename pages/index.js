@@ -34,62 +34,60 @@ import TechnologiesSection from '../components/TechnologiesSection';
 // Static Generation
 export async function getStaticProps() {
   try {
-    // Only fetch in production build
-    if (process.env.NODE_ENV === 'production') {
-      const [portfoliosRes, technologiesRes] = await Promise.all([
-        getStrapiAPI("/portfolios", {
-          sort: ['id:desc'],
-          populate: {
-            ThumbnailImage: { populate: '*' },
-            technologies: { populate: '*' },
-            portfolio_categories: { populate: '*' }
-          }
-        }),
-        getStrapiAPI("/technologies", {
-          populate: '*',
-          filters: {
-            Featured: true
-          },
-          sort: ['type:asc', 'name:asc']
-        })
-      ]);
-
-      return {
-        props: {
-          services: servicesData,
-          benefits: benefitsData,
-          testimonials: testimonials,
-          trustSignals: trustSignals,
-          portfolios: portfoliosRes?.data ? portfoliosRes : { data: [] },
-          technologies: technologiesRes?.data || [],
-          isError: false
+    const [portfoliosRes, technologiesRes] = await Promise.all([
+      getStrapiAPI("/portfolios", {
+        sort: ['id:desc'],
+        populate: {
+          ThumbnailImage: { populate: '*' },
+          technologies: { populate: '*' },
+          portfolio_categories: { populate: '*' }
+        }
+      }),
+      getStrapiAPI("/technologies", {
+        populate: '*',
+        filters: {
+          Featured: true
         },
-        revalidate: false // Disable ISR in development
-      };
-    }
+        sort: ['type:asc', 'name:asc']
+      })
+    ]);
 
-    // Return static data in development
     return {
       props: {
         services: servicesData,
         benefits: benefitsData,
         testimonials: testimonials,
         trustSignals: trustSignals,
-        portfolios: { data: [] },
-        technologies: [],
+        portfolios: portfoliosRes?.data ? portfoliosRes : { data: [] },
+        technologies: technologiesRes?.data || [],
         isError: false
-      }
+      },
+      revalidate: false
     };
   } catch (error) {
     console.error('Error in getStaticProps:', error);
+    // Fallback to mock data on error
+    const mockTechnologies = Object.entries(technologiesData).reduce((acc, [type, data]) => {
+      const tools = data.tools.map(tool => ({
+        id: tool.name.toLowerCase().replace(/\s+/g, '-'),
+        name: tool.name,
+        type: data.title,
+        icon: { url: tool.icon },
+        slug: tool.name.toLowerCase().replace(/\s+/g, '-')
+      }));
+      return [...acc, ...tools];
+    }, []);
+
     return {
       props: {
         services: servicesData,
         benefits: benefitsData,
         testimonials: testimonials,
         trustSignals: trustSignals,
-        portfolios: { data: [] },
-        technologies: [],
+        portfolios: { 
+          data: [] 
+        },
+        technologies: mockTechnologies,
         isError: true
       }
     };
