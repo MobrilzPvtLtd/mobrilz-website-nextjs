@@ -127,11 +127,22 @@ export default function ContactPage() {
   const wantsAppointment = watch('wantsAppointment');
   const toast = useToast();
 
-  // Update form submission handler
+  // Update the onSubmit function
   const onSubmit = async (data) => {
     try {
-      // Add your API call here
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const response = await fetch('/api/submit-form', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error('Form submission failed');
+      }
+
+      await response.json();
 
       toast({
         title: "Message Sent!",
@@ -145,6 +156,7 @@ export default function ContactPage() {
 
       reset();
     } catch (error) {
+      console.error('Submission error:', error);
       toast({
         title: "Error",
         description: "Something went wrong. Please try again.",

@@ -223,7 +223,7 @@ const Footer = () => {
                 Support
               </Text>
               <Stack spacing={2}>
-                <FooterLink href="/contact">Contact</FooterLink>
+                <FooterLink href="/contact-us">Contact</FooterLink>
                 <FooterLink href="/services/make-payment">Make Payment</FooterLink>
                 <NextLink href="/get-quote" passHref>
                   <Button
