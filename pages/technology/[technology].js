@@ -13,72 +13,78 @@ import NextLink from 'next/link';
 import { getStrapiAPI } from '../../utils/api';
 
 export async function getStaticPaths() {
-    try {
-        const technologies = await getStrapiAPI("/technologies", {
-            fields: ['slug']
-        });
+    // Only generate paths in production build
+    if (process.env.NODE_ENV === 'production') {
+        try {
+            const technologies = await getStrapiAPI("/technologies", {
+                fields: ['slug']
+            });
 
-        const paths = technologies.data.map((tech) => ({
-            params: { technology: tech.slug }
-        }));
-
-        return {
-            paths,
-            fallback: 'blocking'
-        };
-    } catch (error) {
-        console.error('Error fetching paths:', error);
-        return {
-            paths: [],
-            fallback: 'blocking'
-        };
+            return {
+                paths: technologies.data.map((tech) => ({
+                    params: { technology: tech.slug }
+                })),
+                fallback: false // Don't generate new paths after build
+            };
+        } catch (error) {
+            return { paths: [], fallback: false };
+        }
     }
+
+    // Return empty paths in development
+    return {
+        paths: [],
+        fallback: false
+    };
 }
 
 export async function getStaticProps({ params }) {
-    try {
-        const technologies = await getStrapiAPI("/technologies", {
-            filters: {
-                slug: params.technology
-            },
-            populate: {
-                icon: {
-                    fields: ['url', 'formats']
-                },
-                portfolios: {
-                    populate: {
-                        ThumbnailImage: {
-                            fields: ['url', 'formats']
-                        }
-                    },
-                    fields: ['ProjectName', 'ProjectDescription', 'slug']
+    // Only fetch in production build
+    if (process.env.NODE_ENV === 'production') {
+        try {
+            const technologies = await getStrapiAPI("/technologies", {
+                filters: { slug: params.technology },
+                populate: {
+                    icon: { fields: ['url', 'formats'] },
+                    portfolios: {
+                        populate: {
+                            ThumbnailImage: { fields: ['url', 'formats'] }
+                        },
+                        fields: ['ProjectName', 'ProjectDescription', 'slug']
+                    }
                 }
-            }
-        });
+            });
 
-        if (!technologies.data?.[0]) {
+            if (!technologies.data?.[0]) {
+                return { notFound: true };
+            }
+
             return {
-                notFound: true
+                props: {
+                    technology: technologies.data[0],
+                    isError: false
+                },
+                revalidate: false // Disable ISR in development
+            };
+        } catch (error) {
+            return {
+                props: { technology: null, isError: true }
             };
         }
-
-        return {
-            props: {
-                technology: technologies.data[0],
-                isError: false
-            },
-            revalidate: 60
-        };
-    } catch (error) {
-        console.error('Error fetching technology:', error);
-        return {
-            props: {
-                technology: null,
-                isError: true
-            },
-            revalidate: 60
-        };
     }
+
+    // Return mock data in development
+    return {
+        props: {
+            technology: {
+                name: 'Mock Technology',
+                type: 'Frontend',
+                icon: { url: '/mock/tech.png' },
+                portfolios: []
+            },
+            isError: false
+        }
+    };
 }
 
 export default function TechnologyDetail({ technology, isError }) {

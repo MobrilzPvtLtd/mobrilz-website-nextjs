@@ -34,8 +34,8 @@ import TechnologiesSection from '../components/TechnologiesSection';
 // Static Generation
 export async function getStaticProps() {
   try {
-    // Get data from Strapi API
-    try {
+    // Only fetch in production build
+    if (process.env.NODE_ENV === 'production') {
       const [portfoliosRes, technologiesRes] = await Promise.all([
         getStrapiAPI("/portfolios", {
           sort: ['id:desc'],
@@ -62,41 +62,36 @@ export async function getStaticProps() {
           trustSignals: trustSignals,
           portfolios: portfoliosRes?.data ? portfoliosRes : { data: [] },
           technologies: technologiesRes?.data || [],
-          isLoading: false,
-          error: false
+          isError: false
         },
-        revalidate: 60
-      };
-    } catch (apiError) {
-      console.error('API Error:', apiError);
-      return {
-        props: {
-          services: servicesData,
-          benefits: benefitsData,
-          testimonials: testimonials,
-          trustSignals: trustSignals,
-          portfolios: { data: [] },
-          technologies: [],
-          isLoading: false,
-          error: true
-        },
-        revalidate: 60
+        revalidate: false // Disable ISR in development
       };
     }
+
+    // Return static data in development
+    return {
+      props: {
+        services: servicesData,
+        benefits: benefitsData,
+        testimonials: testimonials,
+        trustSignals: trustSignals,
+        portfolios: { data: [] },
+        technologies: [],
+        isError: false
+      }
+    };
   } catch (error) {
     console.error('Error in getStaticProps:', error);
     return {
       props: {
-        services: [],
-        benefits: [],
-        testimonials: [],
-        trustSignals: [],
+        services: servicesData,
+        benefits: benefitsData,
+        testimonials: testimonials,
+        trustSignals: trustSignals,
         portfolios: { data: [] },
         technologies: [],
-        isLoading: false,
-        error: true
-      },
-      revalidate: 60
+        isError: true
+      }
     };
   }
 }
