@@ -20,6 +20,7 @@ import SEO from '../components/SEO';
 import { 
   benefitsData, 
   servicesData, 
+  testimonials, 
   trustSignals,
   technologiesData 
 } from '../data/content';
@@ -29,12 +30,11 @@ import NextLink from 'next/link';
 import { getStrapiAPI } from '../utils/api';
 import PortfolioSection from '../components/PortfolioSection';
 import TechnologiesSection from '../components/TechnologiesSection';
-import TestimonialsSection from '../components/TestimonialsSection';
 
 // Static Generation
 export async function getStaticProps() {
   try {
-    const [portfoliosRes, technologiesRes, testimonialsRes] = await Promise.all([
+    const [portfoliosRes, technologiesRes] = await Promise.all([
       getStrapiAPI("/portfolios", {
         sort: ['id:desc'],
         populate: {
@@ -49,9 +49,6 @@ export async function getStaticProps() {
           Featured: true
         },
         sort: ['type:asc', 'name:asc']
-      }),
-      getStrapiAPI("/testimonials", {
-        populate: '*'
       })
     ]);
 
@@ -59,7 +56,7 @@ export async function getStaticProps() {
       props: {
         services: servicesData,
         benefits: benefitsData,
-        testimonials: testimonialsRes?.data || [],
+        testimonials: testimonials,
         trustSignals: trustSignals,
         portfolios: portfoliosRes?.data ? portfoliosRes : { data: [] },
         technologies: technologiesRes?.data || [],
@@ -85,7 +82,7 @@ export async function getStaticProps() {
       props: {
         services: servicesData,
         benefits: benefitsData,
-        testimonials: [],
+        testimonials: testimonials,
         trustSignals: trustSignals,
         portfolios: { 
           data: [] 
@@ -319,8 +316,70 @@ const Home = ({
           </Container>
         </Box>
 
-        {/* Testimonials Section */}
-        <TestimonialsSection testimonials={testimonials} isError={isError} />
+        {/* Testimonials */}
+        <Box
+          bg={useColorModeValue("gray.50", "gray.800")}
+          py={20}
+        >
+          <Container maxW="container.xl">
+            <Stack spacing={12}>
+              <Stack textAlign="center" spacing={3}>
+                <Heading size="xl">What Our Clients Say</Heading>
+                <Text
+                  color={useColorModeValue("gray.600", "gray.300")}
+                  maxW="2xl"
+                  mx="auto"
+                >
+                  Don't just take our word for it - hear what our clients have to say
+                </Text>
+              </Stack>
+
+              <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
+                {testimonials.map((testimonial, index) => (
+                  <Box
+                    key={index}
+                    p={6}
+                    boxShadow="lg"
+                    borderRadius="lg"
+                    bg={useColorModeValue("white", "gray.700")}
+                    borderWidth="1px"
+                    borderColor={useColorModeValue("gray.100", "gray.600")}
+                  >
+                    <Text
+                      fontSize="lg"
+                      fontStyle="italic"
+                      mb={4}
+                      color={useColorModeValue("gray.800", "white")}
+                    >
+                      "{testimonial.quote}"
+                    </Text>
+                    <Flex align="center">
+                      <Avatar
+                        src={testimonial.image}
+                        mr={4}
+                        border="2px solid"
+                        borderColor={useColorModeValue("gray.200", "gray.600")}
+                      />
+                      <Box>
+                        <Text
+                          fontWeight="bold"
+                          color={useColorModeValue("gray.800", "white")}
+                        >
+                          {testimonial.name}
+                        </Text>
+                        <Text
+                          color={useColorModeValue("gray.600", "gray.300")}
+                        >
+                          {testimonial.position}
+                        </Text>
+                      </Box>
+                    </Flex>
+                  </Box>
+                ))}
+              </SimpleGrid>
+            </Stack>
+          </Container>
+        </Box>
 
         {/* Technologies Section */}
         <TechnologiesSection 
