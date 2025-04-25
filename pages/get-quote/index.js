@@ -69,6 +69,11 @@ export default function GetQuotePage() {
         '$50,000+'
     ];
 
+    const contactInfo = {
+        phone: "+91-8010355718",
+        email: "sales@mobrilz.com"
+    };
+
     return (
         <>
             <SEO 
@@ -288,11 +293,11 @@ export default function GetQuotePage() {
                                 <Stack spacing={4} w="full">
                                     <HStack spacing={4}>
                                         <Icon as={FaPhone} color="blue.500" boxSize={5} />
-                                        <Text color={textColor}>+1 (555) 000-0000</Text>
+                                        <Text color={textColor}>{contactInfo.phone}</Text>
                                     </HStack>
                                     <HStack spacing={4}>
                                         <Icon as={FaEnvelope} color="blue.500" boxSize={5} />
-                                        <Text color={textColor}>contact@mobrilz.com</Text>
+                                        <Text color={textColor}>{contactInfo.email}</Text>
                                     </HStack>
                                 </Stack>
                             </VStack>
