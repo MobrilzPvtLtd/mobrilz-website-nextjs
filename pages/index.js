@@ -24,6 +24,7 @@ import { getStrapiAPI } from '../utils/api';
 import PortfolioSection from '../components/PortfolioSection';
 import TechnologiesSection from '../components/TechnologiesSection';
 import TestimonialsSection from '../components/TestimonialsSection';
+import AgileSoftwareDevelopment from '@/components/AgileSoftwareDevelopment';
 
 // Update the static data to match Strapi API response format
 const staticServices = {
@@ -272,6 +273,7 @@ const Home = ({
         </Box>
 
         {/* Services Section */}
+        <AgileSoftwareDevelopment />
         <Box py={20} bg={useColorModeValue("white", "gray.900")}>
           <Container maxW="container.xl">
             <Stack spacing={12}>
