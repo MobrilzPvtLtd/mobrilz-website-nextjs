@@ -24,6 +24,7 @@ const HeaderBottom = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, [handleScroll]);
 
+    console.log("header is calling")
     return (
         <Box
             as="header"
