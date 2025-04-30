@@ -112,15 +112,29 @@ const MegaMenu = () => {
     }
   };
 
-  const MobileNavItem = ({ href, children, items }) => {
+  const MobileNavItem = ({ href, children, items, title, color, _hover }) => {
+    const textColor = useColorModeValue('gray.800', 'gray.100');
+    const hoverStyle = useColorModeValue({
+      bg: 'gray.50',
+      color: 'gray.900'
+    }, {
+      bg: 'whiteAlpha.100',
+      color: 'white'
+    });
+
     if (items) {
       return (
         <AccordionItem border="none">
           <AccordionButton py={4}>
-            <Box flex="1" textAlign="left" fontWeight="500">
-              {children}
+            <Box 
+              flex="1" 
+              textAlign="left" 
+              fontWeight="500"
+              color={textColor}
+            >
+              {title}
             </Box>
-            <AccordionIcon />
+            <AccordionIcon color={textColor} />
           </AccordionButton>
           <AccordionPanel pb={4}>
             <VStack align="stretch" spacing={3}>
@@ -130,7 +144,9 @@ const MegaMenu = () => {
                     py={2}
                     px={4}
                     borderRadius="md"
-                    _hover={{ bg: useColorModeValue('gray.100', 'whiteAlpha.100') }}
+                    color={textColor}
+                    _hover={hoverStyle}
+                    transition="all 0.2s"
                   >
                     {item.title}
                   </Text>
@@ -148,9 +164,11 @@ const MegaMenu = () => {
           py={4}
           px={4}
           fontWeight="500"
+          color={textColor}
           borderBottom="1px"
           borderColor={useColorModeValue('gray.100', 'whiteAlpha.100')}
-          _hover={{ bg: useColorModeValue('gray.50', 'whiteAlpha.100') }}
+          _hover={hoverStyle}
+          transition="all 0.2s"
         >
           {children}
         </Box>
@@ -353,6 +371,11 @@ const MegaMenu = () => {
                     title: item.title
                   }))}
                 title="Services"
+                color={useColorModeValue('gray.800', 'gray.100')}
+                _hover={{
+                  bg: useColorModeValue('gray.50', 'whiteAlpha.100'),
+                  color: useColorModeValue('gray.900', 'white')
+                }}
               />
 
               <MobileNavItem 
@@ -373,6 +396,11 @@ const MegaMenu = () => {
                     title: item.title
                   }))}
                 title="Our Work"
+                color={useColorModeValue('gray.800', 'gray.100')}
+                _hover={{
+                  bg: useColorModeValue('gray.50', 'whiteAlpha.100'),
+                  color: useColorModeValue('gray.900', 'white')
+                }}
               />
 
               <MobileNavItem href="/packages">Packages</MobileNavItem>

@@ -22,9 +22,7 @@ const HeaderBottom = () => {
     useEffect(() => {
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
-    }, [handleScroll]);
-
-    console.log("header is calling")
+    }, [handleScroll]); 
     return (
         <Box
             as="header"

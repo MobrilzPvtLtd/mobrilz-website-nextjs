@@ -30,8 +30,8 @@ export const TechStackSection = ({
                     <Center mr={2}>
                         <Box
                             transform="rotate(-90deg)"
-                            width="24px"
-                            height= "min-content"
+                            width={{ base: '20px', sm: '24px', md: '28px' }}
+                            height="min-content"
                             whiteSpace="nowrap"
                             display="flex"
                             alignItems="center"
@@ -39,7 +39,7 @@ export const TechStackSection = ({
                             zIndex={1}
                         >
                             <Text
-                                fontSize="sm"
+                                fontSize={{ base: 'xs', sm: 'sm', md: 'sm' }}
                                 fontWeight="semibold"
                                 color="blue.300"
                                 textAlign="center"

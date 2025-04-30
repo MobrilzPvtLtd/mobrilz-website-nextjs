@@ -70,7 +70,7 @@ const IconImage = ({ src, alt }) => {
 };
 
 export default function AgileSoftwareDevelopment() {
-    const bgColor = useColorModeValue('#dce6fa', 'blue.900');
+    const bgColor = useColorModeValue('#dce6fa', 'gray.800');
     const cardBg = useColorModeValue('white', 'gray.700');
     const borderColor = useColorModeValue('blue.100', 'blue.600');
     const pathColor = useColorModeValue('blue.300', 'blue.500');
@@ -769,13 +769,17 @@ export default function AgileSoftwareDevelopment() {
                             zIndex={2}
 
                         >
-                            <Heading as="h3" zIndex={2} size="md" fontWeight={800} position='absolute' textAlign="center" bg='#dce6fa' p={2.5} right="39%" mt={3}>Automation <br />Testing</Heading>
+                            <Heading as="h3" zIndex={2} size="md" fontWeight={800} position='absolute' textAlign="center" bg={bgColor} p={2.5} right="39%" mt={3}>Automation <br />Testing</Heading>
                             <Image
                                 src="https://webreinvent.com/images/we-build-automation-testing.png"
                                 alt="Mobile Development"
                                 borderRadius="md"
-                                maxW="4xl"
+                                width={{ base: "100%", sm: "90%", md: "80%", lg: "70%" }}
+                                maxW={{ base: "100%", md: "4xl" }}
+                                height="auto"
                                 mx="auto"
+                                objectFit="contain"
+                                loading="lazy"
                             />
                         </Box>
 
