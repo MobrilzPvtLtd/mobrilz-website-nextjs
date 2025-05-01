@@ -84,3 +84,20 @@ html {
     opacity: 0;
     transition: opacity 200ms ease-out;
 }
+/* Testimonials animation styles */
+.chakra-fade {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
