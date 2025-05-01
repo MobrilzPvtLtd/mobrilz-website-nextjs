@@ -10,95 +10,161 @@ import {
   useColorModeValue,
   IconButton,
   Flex,
+  HStack,
 } from "@chakra-ui/react";
-import { ChevronRightIcon, ChevronLeftIcon, HStack } from "@chakra-ui/icons";
+import { ChevronRightIcon, ChevronLeftIcon } from "@chakra-ui/icons";
 import NextLink from "next/link";
 import Slider from "react-slick";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 
 // Import Slick CSS (add these imports in your _app.js)
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const PortfolioCard = ({ project }) => {
+  const bgColor = useColorModeValue("white", "gray.700");
+  const textColor = useColorModeValue("gray.800", "white");
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Create array of images combining thumbnail and gallery images
+  const images = [
+    // Add thumbnail image if it exists
+    project.ThumbnailImage && {
+      url: project.ThumbnailImage.url || project.ThumbnailImage.formats?.large?.url,
+      alt: project.ProjectName
+    },
+    // Add gallery images if they exist
+    ...(project.GalleryImages || []).map(img => ({
+      url: img.url || img.formats?.large?.url,
+      alt: project.ProjectName
+    }))
+  ].filter(Boolean);
+
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  // Auto-advance timer
+  useEffect(() => {
+    if (images.length <= 1) return;
+
+    const timer = setInterval(nextImage, 2000);
+    return () => clearInterval(timer);
+  }, [images.length]);
+
   return (
     <Box
-      as="a"
-      cursor="pointer"
-      overflow="hidden"
       borderRadius="lg"
-      boxShadow="lg"
-      bg={useColorModeValue("white", "gray.700")}
+      overflow="hidden"
+      bg={bgColor}
+      width="full"
+      maxW="md"
+      boxShadow="xl"
       transition="all 0.3s"
-      height="100%"
       _hover={{
         transform: "translateY(-5px)",
-        shadow: "2xl",
+        boxShadow: "2xl",
       }}
     >
-      <Image
-        src={
-          project.ThumbnailImage?.url ||
-          project.ThumbnailImage?.formats?.large?.url
-        }
-        alt={project.ProjectName || "Project Image"}
-        h="250px"
-        w="full"
-        objectFit="cover"
-      />
-      <Box p={6}>
-        <Stack spacing={4}>
-          <HStack spacing={3} >
-            <Heading
-              size="md"
-              color={useColorModeValue("gray.800", "white")}
-              noOfLines={1}
-            >
-              {project.ProjectName}
-            </Heading>
-            {/* <Flex wrap="wrap" gap={2}> */}
-              {project.portfolio_categories?.length > 0 &&
-                project.portfolio_categories.map((category, index) => (
-                  <Tag 
-                    key={index} 
-                    colorScheme="blue" 
-                    size="sm"
-                    borderRadius="full"
-                  >
-                    {category.CategoryName}
-                  </Tag>
-                ))}
-            {/* </Flex> */}
-          </HStack>
+      <Box position="relative" p={4} >
+        <Box
+          position="relative"
+          overflow="hidden"
+          paddingBottom="56.25%" // This creates a 16:9 aspect ratio
+          w="full"
+          rounded="lg"
+        >
+          {images.map((image, index) => (
+            <Image
+              key={index}
+              src={image.url}
+              alt={image.alt}
+              position="absolute"
+              top="0"
+              left="0"
+              w="full"
+              h="full"
+              objectFit="cover"
+              opacity={index === currentImageIndex ? 1 : 0}
+              transition="opacity 0.5s ease-in-out"
+              loading="lazy"
+            />
+          ))}
 
-          <Box textAlign="center" pt={2}>
-            {project.ProjectURL && (
-              <NextLink
-                href={project.ProjectURL}
-                passHref
-                legacyBehavior
+          {/* Category Tags */}
+          <HStack
+            position="absolute"
+            bottom="4"
+            left="4"
+            spacing={2}
+          >
+            {project.portfolio_categories?.map((category, index) => (
+              <Tag
+                key={index}
+                bg="blue.500"
+                color="white"
+                borderRadius="full"
+                px="3"
+                py="1"
+                fontSize="sm"
               >
-                <Button
-                  as="a"
-                  variant="solid"
-                  colorScheme="blue"
-                  size="md"
-                  rightIcon={<ChevronRightIcon />}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  w="full"
-                  maxW="200px"
-                  _hover={{
-                    transform: 'translateY(-2px)',
-                    boxShadow: 'md'
-                  }}
-                >
-                  View Project
-                </Button>
-              </NextLink>
-            )}
-          </Box>
-        </Stack>
+                {category.CategoryName}
+              </Tag>
+            ))}
+          </HStack>
+        </Box>
+      </Box>
+
+      {/* Content */}
+      <Box p="4">
+        {/* Technologies Tags */}
+        <HStack spacing={2} mb="2" flexWrap="wrap">
+          {project.technologies?.map((tech) => (
+            <Tag
+              key={tech.id}
+              size="sm"
+              variant="outline"
+              colorScheme={tech.type === "Frontend" ? "blue" : 
+                          tech.type === "Database" ? "green" : "gray"}
+              borderRadius="full"
+            >
+              {tech.name} 
+            </Tag>
+          ))}
+        </HStack>
+        <Heading
+          as="h3"
+          fontSize="xl"
+          mb="3"
+          color={textColor}
+        >
+          {project.ProjectName}
+        </Heading>
+
+        
+
+        <Flex justify="flex-end">
+          {project.ProjectURL && (
+            <Button
+              as="a"
+              href={project.ProjectURL}
+              size="sm"
+              borderRadius="full"
+              bg="#F3B725"
+              color="black"
+              _hover={{ bg: "#d9a520" }}
+              rightIcon={<ChevronRightIcon />}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View Project
+            </Button>
+          )}
+        </Flex>
       </Box>
     </Box>
   );
@@ -106,6 +172,7 @@ const PortfolioCard = ({ project }) => {
 
 const PortfolioSection = ({ portfolios = [], isError = false }) => {
   const sliderRef = useRef(null);
+  console.log(portfolios, "portfolios")
 
   const settings = {
     dots: true,
@@ -115,7 +182,7 @@ const PortfolioSection = ({ portfolios = [], isError = false }) => {
     slidesToScroll: 1,
     arrows: false,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 8000,
     pauseOnHover: true,
     responsive: [
       {

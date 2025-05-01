@@ -145,11 +145,7 @@ export async function getStaticProps() {
     const [portfoliosRes, technologiesRes, testimonialsRes] = await Promise.all([
       getStrapiAPI("/portfolios", {
         sort: ['id:desc'],
-        populate: {
-          ThumbnailImage: { populate: '*' },
-          technologies: { populate: '*' },
-          portfolio_categories: { populate: '*' }
-        }
+        populate: '*'
       }),
       getStrapiAPI("/technologies", {
         populate: '*',
@@ -191,14 +187,14 @@ export async function getStaticProps() {
   }
 }
 
-const Home = ({ 
-  services, 
-  testimonials, 
-  trustSignals, 
-  technologies, 
+const Home = ({
+  services,
+  testimonials,
+  trustSignals,
+  technologies,
   portfolios,
   benefits,
-  isError = false 
+  isError = false
 }) => {
   const getIcon = useMemo(() => (iconName) => {
     return Icons[iconName];
@@ -272,91 +268,12 @@ const Home = ({
           </Container>
         </Box>
 
-        {/* Services Section */}
         <AgileSoftwareDevelopment />
-        <Box py={20} bg={useColorModeValue("white", "gray.900")}>
-          <Container maxW="container.xl">
-            <Stack spacing={12}>
-              <Stack textAlign="center" spacing={3}>
-                <Heading size="xl" color={useColorModeValue("gray.800", "white")}>
-                  Our Services
-                </Heading>
-                <Text
-                  color={useColorModeValue("gray.600", "gray.300")}
-                  maxW="2xl"
-                  mx="auto"
-                >
-                  We offer comprehensive software development services to help your business thrive in the digital age
-                </Text>
-              </Stack>
 
-              <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
-                {services.data.map((service, index) => (
-                  <Box
-                    key={service.id || index}
-                    p={6}
-                    boxShadow="lg"
-                    borderRadius="lg"
-                    bg={useColorModeValue("white", "gray.800")}
-                    borderWidth="1px"
-                    borderColor={useColorModeValue("gray.100", "gray.700")}
-                    transition="all 0.3s ease"
-                    _hover={{
-                      transform: 'translateY(-5px)',
-                      shadow: '2xl',
-                      borderColor: useColorModeValue("gray.200", "gray.600")
-                    }}
-                  >
-                    <Image
-                      src={service.attributes.image.data.attributes.url}
-                      alt={service.attributes.title}
-                      borderRadius="md"
-                      mb={4}
-                      h="200px"
-                      w="full"
-                      objectFit="cover"
-                    />
-                    <Heading
-                      size="md"
-                      mb={3}
-                      color={useColorModeValue("gray.800", "white")}
-                    >
-                      {service.attributes.title}
-                    </Heading>
-                    <Text
-                      color={useColorModeValue("gray.600", "gray.300")}
-                      mb={4}
-                    >
-                      {service.attributes.description}
-                    </Text>
-                    <NextLink 
-                      href={`/services/${service.attributes.slug}`} 
-                      passHref 
-                      legacyBehavior
-                    >
-                      <Button
-                        as="a"
-                        variant="link"
-                        colorScheme="blue"
-                        color={useColorModeValue("blue.600", "blue.200")}
-                        rightIcon={<ChevronRightIcon />}
-                        _hover={{
-                          color: useColorModeValue("blue.700", "blue.100")
-                        }}
-                      >
-                        Learn More
-                      </Button>
-                    </NextLink>
-                  </Box>
-                ))}
-              </SimpleGrid>
-            </Stack>
-          </Container>
-        </Box>
 
         {/* Portfolio Section */}
-        <PortfolioSection 
-          portfolios={portfolios?.data || []} 
+        <PortfolioSection
+          portfolios={portfolios?.data || []}
           isError={isError}
         />
 
@@ -425,10 +342,91 @@ const Home = ({
         <TestimonialsSection testimonials={testimonials} />
 
         {/* Technologies Section */}
-        <TechnologiesSection 
+        {/* <TechnologiesSection 
           technologies={technologies} 
           isError={isError}
-        />
+        /> */}
+
+        {/* Services Section */}
+        <Box py={20} bg={useColorModeValue("white", "gray.900")}>
+          <Container maxW="container.xl">
+            <Stack spacing={12}>
+              <Stack textAlign="center" spacing={3}>
+                <Heading size="xl" color={useColorModeValue("gray.800", "white")}>
+                  News Updates
+                </Heading>
+                <Text
+                  color={useColorModeValue("gray.600", "gray.300")}
+                  maxW="2xl"
+                  mx="auto"
+                >
+                  We offer comprehensive software development services to help your business thrive in the digital age
+                </Text>
+              </Stack>
+
+              <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
+                {services.data.map((service, index) => (
+                  <Box
+                    key={service.id || index}
+                    p={6}
+                    boxShadow="lg"
+                    borderRadius="lg"
+                    bg={useColorModeValue("white", "gray.800")}
+                    borderWidth="1px"
+                    borderColor={useColorModeValue("gray.100", "gray.700")}
+                    transition="all 0.3s ease"
+                    _hover={{
+                      transform: 'translateY(-5px)',
+                      shadow: '2xl',
+                      borderColor: useColorModeValue("gray.200", "gray.600")
+                    }}
+                  >
+                    <Image
+                      src={service.attributes.image.data.attributes.url}
+                      alt={service.attributes.title}
+                      borderRadius="md"
+                      mb={4}
+                      h="200px"
+                      w="full"
+                      objectFit="cover"
+                    />
+                    <Heading
+                      size="md"
+                      mb={3}
+                      color={useColorModeValue("gray.800", "white")}
+                    >
+                      {service.attributes.title}
+                    </Heading>
+                    <Text
+                      color={useColorModeValue("gray.600", "gray.300")}
+                      mb={4}
+                    >
+                      {service.attributes.description}
+                    </Text>
+                    <NextLink
+                      href={`/services/${service.attributes.slug}`}
+                      passHref
+                      legacyBehavior
+                    >
+                      <Button
+                        as="a"
+                        variant="link"
+                        colorScheme="blue"
+                        color={useColorModeValue("blue.600", "blue.200")}
+                        rightIcon={<ChevronRightIcon />}
+                        _hover={{
+                          color: useColorModeValue("blue.700", "blue.100")
+                        }}
+                      >
+                        Learn More
+                      </Button>
+                    </NextLink>
+                  </Box>
+                ))}
+              </SimpleGrid>
+            </Stack>
+          </Container>
+        </Box>
 
         {/* CTA Section */}
         <Box

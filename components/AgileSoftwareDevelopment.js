@@ -70,7 +70,7 @@ const IconImage = ({ src, alt }) => {
 };
 
 export default function AgileSoftwareDevelopment() {
-    const bgColor = useColorModeValue('#dce6fa', 'gray.800');
+    const bgColor = useColorModeValue('#dce6fa', 'gray.900');
     const cardBg = useColorModeValue('white', 'gray.700');
     const borderColor = useColorModeValue('blue.100', 'blue.600');
     const pathColor = useColorModeValue('blue.300', 'blue.500');
@@ -80,22 +80,22 @@ export default function AgileSoftwareDevelopment() {
     const techStacks = {
         backend: [
             {
-                name: "Laravel",
+                name: "Nodejs",
                 color: "#FF2D20",
-                description: "PHP framework for web artisans with elegant syntax.",
+                description: "Server-side JavaScript runtime for building scalable network applications.",
+                icon: () => <IconImage src="/icons/nodejs.png" alt="Nodejs" />
+            },
+            {
+                name: "Python",
+                color: "#000000",
+                description: "Versatile programming language with extensive libraries for web development.",
+                icon: () => <IconImage src="/icons/python.png" alt="Python" />
+            },
+            {
+                name: "Laravel",
+                color: "#000000",
+                description: "PHP framework for web artisans with elegant syntax and robust features.",
                 icon: () => <IconImage src="/icons/laravel.png" alt="Laravel" />
-            },
-            {
-                name: "Express JS",
-                color: "#000000",
-                description: "Fast, unopinionated web framework for Node.js applications.",
-                icon: () => <IconImage src="/icons/laravel.png" alt="Express JS" />
-            },
-            {
-                name: "Express JS",
-                color: "#000000",
-                description: "Fast, unopinionated web framework for Node.js applications.",
-                icon: () => <IconImage src="/icons/laravel.png" alt="Express JS" />
             }
         ],
         frontend: [
@@ -112,10 +112,10 @@ export default function AgileSoftwareDevelopment() {
                 icon: () => <IconImage src="/icons/reactjs.png" alt="React JS" />
             },
             {
-                name: "Next JS",
+                name: "Nuxt JS",
                 color: "#00DC82",
-                description: "React framework for production-grade static and dynamic websites.",
-                icon: () => <IconImage src="/icons/nextjs.png" alt="Next JS" />
+                description: "Vue framework for building modern web applications with server-side rendering.",
+                icon: () => <IconImage src="/icons/nuxt.png" alt="Nuxt JS" />
             },
         ],
         database: [
@@ -138,10 +138,10 @@ export default function AgileSoftwareDevelopment() {
                 icon: () => <IconImage src="/icons/mongodb.png" alt="Mongo DB" />
             },
             {
-                name: "MySQL",
+                name: "MSSQL",
                 color: "#4479A1",
-                description: "Popular open-source relational database management system.",
-                icon: () => <IconImage src="/icons/mysql.png" alt="MySQL" />
+                description: "Microsoft's enterprise-grade relational database management system.",
+                icon: () => <IconImage src="/icons/mssql.png" alt="MSSQL" />
             },
         ],
         api: [
@@ -394,7 +394,7 @@ export default function AgileSoftwareDevelopment() {
                                     h={7}
                                     p={0.5}
                                     borderRadius="full"
-                                    bg="white"
+                                    bg={bgColor}
                                     border="2px"
                                     _hover={{
                                         color: "blue.500",
@@ -452,7 +452,7 @@ export default function AgileSoftwareDevelopment() {
                                     h={7}
                                     p={0.5}
                                     borderRadius="full"
-                                    bg="white"
+                                    bg={bgColor}
                                     border="2px"
                                     _hover={{
                                         color: "blue.500",
@@ -574,7 +574,7 @@ export default function AgileSoftwareDevelopment() {
                                     h={7}
                                     p={0.5}
                                     borderRadius="full"
-                                    bg="white"
+                                    bg={bgColor}
                                     border="2px"
                                     _hover={{
                                         color: "blue.500",
@@ -633,7 +633,7 @@ export default function AgileSoftwareDevelopment() {
                                     h={7}
                                     p={0.5}
                                     borderRadius="full"
-                                    bg="white"
+                                    bg={bgColor}
                                     border="2px"
                                     _hover={{
                                         color: "blue.500",
@@ -677,7 +677,7 @@ export default function AgileSoftwareDevelopment() {
                                     h={7}
                                     p={0.5}
                                     borderRadius="full"
-                                    bg="white"
+                                    bg={bgColor}
                                     border="2px"
                                     _hover={{
                                         color: "blue.500",
@@ -827,7 +827,7 @@ export default function AgileSoftwareDevelopment() {
                                 h={7}
                                 p={0.5}
                                 borderRadius="full"
-                                bg="white"
+                                bg={bgColor}
                                 border="2px"
                                 _hover={{
                                     color: "blue.500",
