@@ -260,22 +260,78 @@ export default function AgileSoftwareDevelopment() {
 
     const solutions = {
         web: [
-            'Single Page Applications',
-            'PWA (Progressive Web Apps)',
-            'CMS Development',
-            'API Development',
-            'Custom CMS',
-            'Web Apps',
-            'eCommerce Cloud'
+            {
+                name: 'Single Page Applications',
+                description: 'Modern web apps with seamless user experience',
+                icon: FaReact
+            },
+            {
+                name: 'PWA (Progressive Web Apps)',
+                description: 'Web apps that work like native applications',
+                icon: FaMobile
+            },
+            {
+                name: 'CMS Development',
+                description: 'Custom content management solutions',
+                icon: FaCode
+            },
+            {
+                name: 'API Development',
+                description: 'Robust and scalable API architectures',
+                icon: FaServer
+            },
+            {
+                name: 'Custom CMS',
+                description: 'Tailored content management systems',
+                icon: FaCode
+            },
+            {
+                name: 'Web Apps',
+                description: 'Full-featured web applications',
+                icon: FaCode
+            },
+            {
+                name: 'eCommerce Cloud',
+                description: 'Cloud-based online store solutions',
+                icon: FaCloud
+            }
         ],
         mobile: [
-            'eCommerce Apps',
-            'Real-Time Apps',
-            'Android Apps',
-            'iOS/iPadOS Apps',
-            'Chat & Video Apps',
-            'Unity Apps',
-            'WebView Apps'
+            {
+                name: 'eCommerce Apps',
+                description: 'Mobile shopping experiences',
+                icon: FaMobile
+            },
+            {
+                name: 'Real-Time Apps',
+                description: 'Live data and instant updates',
+                icon: FaMobile
+            },
+            {
+                name: 'Android Apps',
+                description: 'Native Android applications',
+                icon: FaAndroid
+            },
+            {
+                name: 'iOS/iPadOS Apps',
+                description: 'Native Apple platform apps',
+                icon: FaSwift
+            },
+            {
+                name: 'Chat & Video Apps',
+                description: 'Communication and streaming solutions',
+                icon: FaMobile
+            },
+            {
+                name: 'Unity Apps',
+                description: '3D and gaming applications',
+                icon: FaMobile
+            },
+            {
+                name: 'WebView Apps',
+                description: 'Hybrid web-based mobile apps',
+                icon: FaMobile
+            }
         ]
     };
 
@@ -791,7 +847,7 @@ export default function AgileSoftwareDevelopment() {
                         >
                             <Heading as="h3" zIndex={2} size="md" fontWeight={800} position='absolute' textAlign="center" bg={bgColor} p={2.5} right="39%" mt={3}>Automation <br />Testing</Heading>
 
-                            <Box spacing={1}  ml={20} mt={24} width="52" position='absolute' >
+                            <Box spacing={1} ml={20} mt={24} width="52" position='absolute' >
                                 <TechStackSection
                                     title="API"
                                     items={techStacks.testing}
@@ -811,9 +867,9 @@ export default function AgileSoftwareDevelopment() {
                                 loading="lazy"
                             />
 
-                        </Box> 
+                        </Box>
                     </Box>
- 
+
                     {/* DevOps Section */}
                     <Box
                         borderStyle="dashed"
@@ -878,17 +934,46 @@ export default function AgileSoftwareDevelopment() {
                             onMouseLeave={() => setActiveSection(null)}
                         >
                             <Heading as="h3" size="md" textAlign="center" mb={4}>Web Solutions</Heading>
-                            <VStack spacing={2} align="stretch">
+                            <VStack spacing={3} align="stretch">
                                 {solutions.web.map((solution, index) => (
                                     <HStack
                                         key={index}
-                                        bg={cardBg}
-                                        p={3}
+                                        as="a"
+                                        p={4}
+                                        spacing={4}
+                                        role="menuitem"
+                                        tabIndex={0}
+                                        aria-label={solution.name}
                                         borderRadius="md"
-                                        boxShadow="sm"
+                                        transition="all 0.2s"
+                                        cursor="pointer"
+                                        bg={useColorModeValue('white', 'gray.700')}
+                                        _hover={{
+                                            bg: useColorModeValue('gray.50', 'gray.600'),
+                                            transform: 'translateX(4px)',
+                                            boxShadow: 'md'
+                                        }}
                                     >
-                                        <Icon as={FaCode} color="blue.500" />
-                                        <Text fontSize="sm">{solution}</Text>
+                                        <Icon
+                                            as={solution.icon}
+                                            boxSize={5}
+                                            color="blue.500"
+                                            _dark={{ color: 'blue.200' }}
+                                        />
+                                        <VStack align="start" spacing={0}>
+                                            <Text
+                                                fontWeight="500"
+                                                color={useColorModeValue('gray.800', 'white')}
+                                            >
+                                                {solution.name}
+                                            </Text>
+                                            <Text
+                                                fontSize="sm"
+                                                color={useColorModeValue('gray.600', 'gray.400')}
+                                            >
+                                                {solution.description}
+                                            </Text>
+                                        </VStack>
                                     </HStack>
                                 ))}
                             </VStack>
@@ -904,17 +989,46 @@ export default function AgileSoftwareDevelopment() {
                             onMouseLeave={() => setActiveSection(null)}
                         >
                             <Heading as="h3" size="md" textAlign="center" mb={4}>Mobile Solutions</Heading>
-                            <VStack spacing={2} align="stretch">
+                            <VStack spacing={3} align="stretch">
                                 {solutions.mobile.map((solution, index) => (
                                     <HStack
                                         key={index}
-                                        bg={cardBg}
-                                        p={3}
+                                        as="a"
+                                        p={4}
+                                        spacing={4}
+                                        role="menuitem"
+                                        tabIndex={0}
+                                        aria-label={solution.name}
                                         borderRadius="md"
-                                        boxShadow="sm"
+                                        transition="all 0.2s"
+                                        cursor="pointer"
+                                        bg={useColorModeValue('white', 'gray.700')}
+                                        _hover={{
+                                            bg: useColorModeValue('gray.50', 'gray.600'),
+                                            transform: 'translateX(4px)',
+                                            boxShadow: 'md'
+                                        }}
                                     >
-                                        <Icon as={FaMobile} color="purple.500" />
-                                        <Text fontSize="sm">{solution}</Text>
+                                        <Icon
+                                            as={solution.icon}
+                                            boxSize={5}
+                                            color="purple.500"
+                                            _dark={{ color: 'purple.200' }}
+                                        />
+                                        <VStack align="start" spacing={0}>
+                                            <Text
+                                                fontWeight="500"
+                                                color={useColorModeValue('gray.800', 'white')}
+                                            >
+                                                {solution.name}
+                                            </Text>
+                                            <Text
+                                                fontSize="sm"
+                                                color={useColorModeValue('gray.600', 'gray.400')}
+                                            >
+                                                {solution.description}
+                                            </Text>
+                                        </VStack>
                                     </HStack>
                                 ))}
                             </VStack>
