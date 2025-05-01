@@ -223,7 +223,27 @@ export default function AgileSoftwareDevelopment() {
                 description: "Framework for building cross-platform apps with web technologies.",
                 icon: () => <IconImage src="/icons/dart.png" alt="Ionic" />
             }
-        ]
+        ],
+        testing: [
+            {
+                name: "WebDriverIO",
+                color: "#C21325",
+                description: "Delightful JavaScript testing framework with a focus on simplicity.",
+                icon: () => <IconImage src="/icons/nextjs.png" alt="Jest" />
+            },
+            {
+                name: "NightWatch.js",
+                color: "#17202C",
+                description: "Modern end-to-end testing framework for web applications.",
+                icon: () => <IconImage src="/icons/nextjs.png" alt="Cypress" />
+            },
+            {
+                name: "Laravel Dusk",
+                color: "#43B02A",
+                description: "Automated browser testing for web applications.",
+                icon: () => <IconImage src="/icons/nextjs.png" alt="Selenium" />
+            }
+        ],
     };
 
     const devOpsSteps = [
@@ -770,6 +790,15 @@ export default function AgileSoftwareDevelopment() {
 
                         >
                             <Heading as="h3" zIndex={2} size="md" fontWeight={800} position='absolute' textAlign="center" bg={bgColor} p={2.5} right="39%" mt={3}>Automation <br />Testing</Heading>
+
+                            <Box spacing={1}  ml={20} mt={24} width="52" position='absolute' >
+                                <TechStackSection
+                                    title="API"
+                                    items={techStacks.testing}
+                                    showLabel={false}
+                                    width="100%"
+                                />
+                            </Box>
                             <Image
                                 src="https://webreinvent.com/images/we-build-automation-testing.png"
                                 alt="Mobile Development"
@@ -781,26 +810,10 @@ export default function AgileSoftwareDevelopment() {
                                 objectFit="contain"
                                 loading="lazy"
                             />
-                        </Box>
 
-
-                        <Flex justify="center">
-                            <SimpleGrid columns={{ base: 1, md: 3 }} spacing={6}>
-                                {techStacks?.testing?.map((tech, index) => (
-                                    <Card key={index} bg={cardBg} maxW="sm">
-                                        <CardBody>
-                                            <Flex direction="column" align="center">
-                                                <Icon as={tech.icon} w={10} h={10} color={tech.color} mb={4} />
-                                                <Heading size="sm">{tech.name}</Heading>
-                                            </Flex>
-                                        </CardBody>
-                                    </Card>
-                                ))}
-                            </SimpleGrid>
-                        </Flex>
+                        </Box> 
                     </Box>
-
-
+ 
                     {/* DevOps Section */}
                     <Box
                         borderStyle="dashed"
