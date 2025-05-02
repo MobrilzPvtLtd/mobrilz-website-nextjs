@@ -143,8 +143,7 @@ const staticBenefits = [
 export async function getStaticProps() {
   try {
     const [portfoliosRes, technologiesRes, testimonialsRes,  blogs] = await Promise.all([
-      getStrapiAPI("/portfolios", {
-        sort: ['id:desc'],
+      getStrapiAPI("/portfolios", { 
         populate: '*'
       }),
       getStrapiAPI("/technologies", {
