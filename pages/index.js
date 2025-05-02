@@ -142,7 +142,7 @@ const staticBenefits = [
 // Update the getStaticProps function
 export async function getStaticProps() {
   try {
-    const [portfoliosRes, technologiesRes, testimonialsRes] = await Promise.all([
+    const [portfoliosRes, technologiesRes, testimonialsRes,  blogs] = await Promise.all([
       getStrapiAPI("/portfolios", {
         sort: ['id:desc'],
         populate: '*'
@@ -156,8 +156,11 @@ export async function getStaticProps() {
       }),
       getStrapiAPI("/testimonials", {
         populate: '*'
+      }), 
+      getStrapiAPI("/blogs", {
+        populate: '*'
       })
-    ]);
+    ]); 
 
     return {
       props: {
@@ -167,6 +170,7 @@ export async function getStaticProps() {
         portfolios: portfoliosRes?.data ? portfoliosRes : { data: [] },
         technologies: technologiesRes?.data || [],
         benefits: staticBenefits,
+        blogs: blogs,
         isError: false
       },
       revalidate: false
@@ -181,6 +185,7 @@ export async function getStaticProps() {
         portfolios: { data: [] },
         technologies: [],
         benefits: staticBenefits,
+        blogs: [],
         isError: true
       }
     };
@@ -194,6 +199,7 @@ const Home = ({
   technologies,
   portfolios,
   benefits,
+  blogs,
   isError = false
 }) => {
   const getIcon = useMemo(() => (iconName) => {
@@ -349,7 +355,7 @@ const Home = ({
 
         {/* Services Section */}
         <Box py={20} bg={useColorModeValue("white", "gray.900")}>
-          <Container maxW="container.xl">
+          <Container maxW="container.2xl">
             <Stack spacing={12}>
               <Stack textAlign="center" spacing={3}>
                 <Heading size="xl" color={useColorModeValue("gray.800", "white")}>
