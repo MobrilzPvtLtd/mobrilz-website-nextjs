@@ -231,6 +231,7 @@ export default function WebDevelopment({
                       borderColor: 'brand.500'
                     }}
                     transition="all 0.3s"
+                    height={'340px'}
                   >
                     <Icon as={service.icon} boxSize={10} color={accentColor} />
                     <Stack spacing={2}>
@@ -315,10 +316,10 @@ export default function WebDevelopment({
       </Box>
 
       {/* Technologies Section */}
-      <TechnologiesSection 
+      {/* <TechnologiesSection 
         technologies={apiTechnologies} 
         isError={isError}
-      />
+      /> */}
 
       {/* Portfolio Section */}
       <PortfolioSection 
