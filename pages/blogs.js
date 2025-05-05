@@ -197,7 +197,7 @@ export default function Blogs({ blogs = [], isError = false }) {
                             )}
                           </Stack>
                         )}
-                        <NextLink href={`/blogs/${slug}`} passHref legacyBehavior>
+                        <NextLink href={`/blogs/${slug}`} passHref key={blog.id} legacyBehavior>
                           <Button
                             as="a"
                             variant="link"
