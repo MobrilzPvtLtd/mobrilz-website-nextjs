@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 
-const TechnologiesSection = ({ technologies = [], isError = false }) => {
+const TechnologiesSection = ({ technologies = [], isError = false, filterType = null }) => {
     if (isError) {
         return (
             <Box py={20} bg={useColorModeValue("gray.50", "gray.800")}>
@@ -30,15 +30,36 @@ const TechnologiesSection = ({ technologies = [], isError = false }) => {
         );
     }
 
-    // Group technologies by type
+    // Group technologies by type with filtering
     const groupedTechnologies = technologies.reduce((acc, tech) => {
         const type = tech.type || 'Other';
+        
+        // If filterType is provided, only include matching technologies
+        if (filterType && type.toLowerCase() !== filterType.toLowerCase()) {
+            return acc;
+        }
+        
         if (!acc[type]) {
             acc[type] = [];
         }
         acc[type].push(tech);
         return acc;
     }, {});
+
+    // If no technologies match the filter
+    if (filterType && Object.keys(groupedTechnologies).length === 0) {
+        return (
+            <Box py={20} bg={useColorModeValue("gray.50", "gray.800")}>
+                <Container maxW="container.xl">
+                    <Stack spacing={4} align="center">
+                        <Heading size="md" color={useColorModeValue("gray.700", "gray.300")}>
+                            No technologies found for {filterType}
+                        </Heading>
+                    </Stack>
+                </Container>
+            </Box>
+        );
+    }
 
     return (
         <Box
@@ -58,7 +79,7 @@ const TechnologiesSection = ({ technologies = [], isError = false }) => {
                             )}
                             bgClip="text"
                         >
-                            Technologies We Master
+                           Technologies 
                         </Heading>
                         <Text
                             fontSize="lg"
@@ -90,17 +111,12 @@ const TechnologiesSection = ({ technologies = [], isError = false }) => {
                                             as="a"
                                             cursor="pointer"
                                             p={4}
-                                            bg={useColorModeValue("white", "gray.700")}
-                                            borderRadius="xl"
-                                            boxShadow="lg"
+                                           
+                                           
+                                           
                                             transition="all 0.3s"
-                                            _hover={{
-                                                transform: 'translateY(-5px)',
-                                                shadow: '2xl',
-                                                borderColor: 'blue.400'
-                                            }}
-                                            borderWidth="1px"
-                                            borderColor={useColorModeValue("gray.200", "gray.700")}
+                                          
+                                            
                                         >
                                             <Stack align="center" spacing={3}>
                                                 <Image

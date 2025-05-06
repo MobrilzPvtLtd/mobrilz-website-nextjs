@@ -215,6 +215,7 @@ const Home = ({
   );
 
   console.log("data", blogs.data);
+  console.log("data", technologies);
   const bgColor = useColorModeValue("white", "gray.900");
   const heroTextColor = useColorModeValue("blue.800", "white");
   const heroBgColor = useColorModeValue("blue.50", "gray.800");
@@ -375,7 +376,7 @@ const Home = ({
                   size="xl"
                   color={useColorModeValue("gray.800", "white")}
                 >
-                  News Updates
+                  Blog Updates
                 </Heading>
                 <Text
                   color={useColorModeValue("gray.600", "gray.300")}
@@ -387,8 +388,8 @@ const Home = ({
                 </Text>
               </Stack>
 
-              <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
-                {blogs.data.map((service, index) => {
+              <SimpleGrid columns={{ base: 1, md: 4 }} spacing={10}>
+                {blogs.data.slice(0,4).map((service, index) => {
                   const featuredImage = service.FeaturedImage?.url;
                   const title = service.Title;
                   const slug = service.slug;

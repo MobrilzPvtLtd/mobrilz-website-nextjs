@@ -1,22 +1,13 @@
-import { 
-    FaCode, 
-    FaServer, 
-    FaLayerGroup, 
-    FaPencilRuler, 
-    FaDatabase, 
-    FaShoppingCart, 
-    FaWordpress, 
-    FaTools, 
-    FaSearch, 
-    FaShieldAlt 
-} from 'react-icons/fa';
+
+
 
 // Web Development Services categorized by type
+
 export const webDevelopmentServices = [
     // Core Web Development Services
     {
         title: 'Front-End Development',
-        icon: FaCode,
+        icon: 'FaCode',
         description: 'Creating engaging user interfaces and experiences.',
         features: [
             'HTML5 & CSS3 Development',
@@ -29,7 +20,7 @@ export const webDevelopmentServices = [
     },
     {
         title: 'Back-End Development',
-        icon: FaServer,
+        icon: 'FaServer',
         description: 'Building robust server-side applications.',
         features: [
             'Server-Side Programming',
@@ -42,7 +33,7 @@ export const webDevelopmentServices = [
     },
     {
         title: 'Full-Stack Development',
-        icon: FaLayerGroup,
+        icon: 'FaLayerGroup',
         description: 'End-to-end web application development.',
         features: [
             'Full Application Architecture',
@@ -56,7 +47,7 @@ export const webDevelopmentServices = [
     // Specific Website & Application Development
     {
         title: 'Custom Web Applications',
-        icon: FaPencilRuler,
+        icon: 'FaPencilRuler',
         description: 'Tailored web solutions for your business needs.',
         features: [
             'Bespoke Web Applications',
@@ -69,7 +60,7 @@ export const webDevelopmentServices = [
     },
     {
         title: 'CMS Development',
-        icon: FaWordpress,
+        icon: 'FaWordpress',
         description: 'Content management system development.',
         features: [
             'WordPress Development',
@@ -82,7 +73,7 @@ export const webDevelopmentServices = [
     },
     {
         title: 'E-Commerce Solutions',
-        icon: FaShoppingCart,
+        icon: 'FaShoppingCart',
         description: 'Building powerful online stores.',
         features: [
             'Custom Shopping Platforms',
@@ -96,7 +87,7 @@ export const webDevelopmentServices = [
     // Related & Supplementary Services
     {
         title: 'Web Maintenance',
-        icon: FaTools,
+        icon: 'FaTools',
         description: 'Keeping your web applications up-to-date.',
         features: [
             'Regular Updates',
@@ -109,7 +100,7 @@ export const webDevelopmentServices = [
     },
     {
         title: 'SEO Implementation',
-        icon: FaSearch,
+        icon: 'FaSearch',
         description: 'Optimize your website for search engines.',
         features: [
             'Technical SEO',
@@ -122,7 +113,7 @@ export const webDevelopmentServices = [
     },
     {
         title: 'Web Security',
-        icon: FaShieldAlt,
+        icon: 'FaShieldAlt',
         description: 'Protect your web applications.',
         features: [
             'Security Audits',
@@ -175,5 +166,251 @@ export const clientTestimonials = [
         quote: 'Professional team that delivers quality web solutions on time.',
         rating: 5,
         image: 'https://picsum.photos/seed/mike-johnson/200/200'
+    }
+];
+
+export const mobileAppDevelopmentServices = [
+    // Core Mobile App Development Services
+    {
+        title: 'iOS App Development',
+        icon: 'FaApple',
+        description: 'Creating native applications for Apple devices.',
+        features: [
+            'Swift & Objective-C Development',
+            'iOS UI/UX Implementation',
+            'Apple Store Submission',
+            'iOS Framework Integration'
+        ],
+        url: '/services/mobile-development/ios-development',
+        category: 'core'
+    },
+    {
+        title: 'Android App Development',
+        icon: 'FaAndroid',
+        description: 'Building robust applications for Android devices.',
+        features: [
+            'Kotlin & Java Development',
+            'Material Design Implementation',
+            'Google Play Store Publishing',
+            'Android SDK Integration'
+        ],
+        url: '/services/mobile-development/android-development',
+        category: 'core'
+    },
+    {
+        title: 'Cross-Platform Development',
+        icon: 'FaMobile',
+        description: 'Develop once, deploy everywhere solutions.',
+        features: [
+            'React Native Development',
+            'Flutter Development',
+            'Shared Codebase Architecture',
+            'Multi-Platform UI/UX Design'
+        ],
+        url: '/services/mobile-development/cross-platform',
+        category: 'core'
+    },
+    // Specific Mobile App Categories
+    {
+        title: 'Enterprise Mobile Solutions',
+        icon: 'FaBriefcase',
+        description: 'Secure and scalable apps for business needs.',
+        features: [
+            'Workflow Automation Apps',
+            'Enterprise Resource Planning',
+            'Internal Communication Tools',
+            'Data Management Systems'
+        ],
+        url: '/services/mobile-development/enterprise-solutions',
+        category: 'specific'
+    },
+    {
+        title: 'E-Commerce Mobile Apps',
+        icon: 'FaShoppingBag',
+        description: 'Creating powerful mobile shopping experiences.',
+        features: [
+            'Mobile Shopping Platforms',
+            'Payment Gateway Integration',
+            'Product Catalog Management',
+            'Push Notification Systems'
+        ],
+        url: '/services/mobile-development/ecommerce-apps',
+        category: 'specific'
+    },
+    {
+        title: 'Social & Communication Apps',
+        icon: 'FaComments',
+        description: 'Building engaging social and messaging platforms.',
+        features: [
+            'Real-time Chat Integration',
+            'Social Networking Features',
+            'Media Sharing Capabilities',
+            'User Engagement Tools'
+        ],
+        url: '/services/mobile-development/social-apps',
+        category: 'specific'
+    },
+    // Related & Supplementary Services
+    {
+        title: 'App Maintenance & Support',
+        icon: 'FaWrench',
+        description: 'Keeping your mobile applications running smoothly.',
+        features: [
+            'Regular Updates & Patches',
+            'Performance Optimization',
+            'Bug Fixes & Improvements',
+            'OS Compatibility Updates'
+        ],
+        url: '/services/mobile-development/maintenance',
+        category: 'supplementary'
+    },
+    {
+        title: 'App Store Optimization',
+        icon: 'FaChartLine',
+        description: 'Improve visibility and downloads for your app.',
+        features: [
+            'Keyword Optimization',
+            'Conversion Rate Improvement',
+            'App Rating Management',
+            'Competitive Analysis'
+        ],
+        url: '/services/mobile-development/app-store-optimization',
+        category: 'supplementary'
+    },
+    {
+        title: 'Mobile App Security',
+        icon: 'FaLock',
+        description: 'Protect user data and ensure app security.',
+        features: [
+            'Secure Authentication',
+            'Data Encryption',
+            'Vulnerability Testing',
+            'Compliance Implementation'
+        ],
+        url: '/services/mobile-development/security',
+        category: 'supplementary'
+    }
+];
+
+export const cloudServices = [
+    // Core Cloud Services
+    {
+        title: 'Cloud Migration',
+        icon: 'FaCloudUploadAlt',
+        description: 'Seamlessly transition your systems to the cloud.',
+        features: [
+            'Infrastructure Assessment',
+            'Migration Strategy Development',
+            'Data Transfer & Validation',
+            'Post-Migration Support'
+        ],
+        url: '/services/cloud/migration',
+        category: 'core'
+    },
+    {
+        title: 'Cloud Infrastructure',
+        icon: 'FaServer',
+        description: 'Build and manage reliable cloud infrastructure.',
+        features: [
+            'IaaS Implementation',
+            'Virtual Machine Configuration',
+            'Network Architecture Design',
+            'Storage Solutions'
+        ],
+        url: '/services/cloud/infrastructure',
+        category: 'core'
+    },
+    {
+        title: 'Cloud Application Development',
+        icon: 'FaCode',
+        description: 'Develop cloud-native applications for your business.',
+        features: [
+            'Containerized Applications',
+            'Microservices Architecture',
+            'Serverless Computing',
+            'API Development'
+        ],
+        url: '/services/cloud/application-development',
+        category: 'core'
+    },
+    // Specific Cloud Services
+    {
+        title: 'Multi-Cloud Management',
+        icon: 'FaCubes',
+        description: 'Manage resources across multiple cloud platforms.',
+        features: [
+            'Multi-Platform Integration',
+            'Unified Management Console',
+            'Cost Optimization',
+            'Resource Allocation'
+        ],
+        url: '/services/cloud/multi-cloud-management',
+        category: 'specific'
+    },
+    {
+        title: 'DevOps & CI/CD',
+        icon: 'FaSync',
+        description: 'Streamline development and deployment processes.',
+        features: [
+            'CI/CD Pipeline Implementation',
+            'Infrastructure as Code',
+            'Automated Testing',
+            'Continuous Monitoring'
+        ],
+        url: '/services/cloud/devops',
+        category: 'specific'
+    },
+    {
+        title: 'Data Analytics & Big Data',
+        icon: 'FaChartBar',
+        description: 'Leverage cloud capabilities for data processing.',
+        features: [
+            'Big Data Processing',
+            'Real-time Analytics',
+            'Data Warehouse Implementation',
+            'Business Intelligence Solutions'
+        ],
+        url: '/services/cloud/data-analytics',
+        category: 'specific'
+    },
+    // Related & Supplementary Services
+    {
+        title: 'Cloud Security',
+        icon: 'FaShieldAlt',
+        description: 'Protect your cloud environments and data.',
+        features: [
+            'Security Assessment',
+            'Identity & Access Management',
+            'Encryption Implementation',
+            'Compliance Solutions'
+        ],
+        url: '/services/cloud/security',
+        category: 'supplementary'
+    },
+    {
+        title: 'Cloud Optimization',
+        icon: 'FaTachometerAlt',
+        description: 'Enhance performance and reduce cloud costs.',
+        features: [
+            'Resource Utilization Analysis',
+            'Cost Management',
+            'Performance Tuning',
+            'Scalability Planning'
+        ],
+        url: '/services/cloud/optimization',
+        category: 'supplementary'
+    },
+    {
+        title: 'Disaster Recovery',
+        icon: 'FaLifeRing',
+        description: 'Ensure business continuity with robust backup solutions.',
+        features: [
+            'Backup Strategy Development',
+            'Disaster Recovery Planning',
+            'Automated Backup Systems',
+            'Recovery Testing'
+        ],
+        url: '/services/cloud/disaster-recovery',
+        category: 'supplementary'
     }
 ];
