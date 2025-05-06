@@ -37,7 +37,8 @@ export default function ServicesPage() {
       isCurrentPage: true
     }
   ];
-  
+   
+        console.log('object',services)
   return (
     <>
       <SEO 

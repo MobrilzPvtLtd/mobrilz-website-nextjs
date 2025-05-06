@@ -130,7 +130,7 @@ export default function WebDevelopment({
     }
     return '';
   };
-
+     console.log('ds',services)
   return (
     <>
       <SEO 
