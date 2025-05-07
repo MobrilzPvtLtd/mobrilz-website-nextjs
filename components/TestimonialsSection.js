@@ -9,8 +9,9 @@ import {
   Flex,
   Icon,
   useColorModeValue,
+  IconButton,
 } from "@chakra-ui/react";
-import { StarIcon } from "@chakra-ui/icons";
+import { StarIcon, ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 
 const truncateText = (text, maxLength = 200) =>
   text.length <= maxLength ? text : text.slice(0, maxLength) + "...";
@@ -97,6 +98,55 @@ const TestimonialCard = ({
   );
 };
 
+// Custom arrow components
+const NextArrow = ({ onClick }) => {
+  const arrowColor = useColorModeValue("gray.600", "gray.100");
+  const arrowBgColor = useColorModeValue("white", "gray.500");
+  
+  return (
+    <IconButton
+      aria-label="next slide"
+      icon={<ChevronRightIcon w={6} h={6} />}
+      onClick={onClick}
+      position="absolute"
+      right={["-10px", "-15px", "-25px"]}
+      top="50%"
+      transform="translateY(-50%)"
+      zIndex={2}
+      shadow="xl"
+      bg={arrowBgColor}
+      color={arrowColor}
+      _hover={{ bg: "gray.100" }}
+      rounded="full" 
+      size="lg"
+    />
+  );
+};
+
+const PrevArrow = ({ onClick }) => {
+  const arrowColor = useColorModeValue("gray.600", "gray.100");
+  const arrowBgColor = useColorModeValue("white", "gray.500");
+  
+  return (
+    <IconButton
+      aria-label="previous slide"
+      icon={<ChevronLeftIcon w={6} h={6} />}
+      onClick={onClick}
+      position="absolute"
+      left={["-10px", "-15px", "-25px"]}
+      top="50%"
+      transform="translateY(-50%)"
+      zIndex={2}
+      shadow="xl"
+      bg={arrowBgColor}
+      color={arrowColor}
+      _hover={{ bg: "gray.100" }}
+      rounded="full" 
+      size="lg"
+    />
+  );
+};
+
 const TestimonialsSection = ({ testimonials = [], isError = false }) => {
   const bgColor = useColorModeValue("gray.50", "gray.800");
   const cardBgColor = useColorModeValue("white", "gray.700");
@@ -115,6 +165,8 @@ const TestimonialsSection = ({ testimonials = [], isError = false }) => {
     autoplay: true,
     autoplaySpeed: 5000,
     arrows: true,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
     responsive: [
       { breakpoint: 1024, settings: { slidesToShow: 2 } },
       { breakpoint: 600, settings: { slidesToShow: 1 } },
@@ -122,8 +174,7 @@ const TestimonialsSection = ({ testimonials = [], isError = false }) => {
   };
 
   return (
-    <Box bg={bgColor} py={16}>
-      <Container maxW="container.xl">
+    <Box bg={bgColor} py={16}> 
         <Stack spacing={12}>
           <Stack textAlign="center" spacing={3}>
             <Heading size="xl">What Our Clients Say</Heading>
@@ -133,21 +184,22 @@ const TestimonialsSection = ({ testimonials = [], isError = false }) => {
             </Text>
           </Stack>
 
-          <Slider {...sliderSettings}>
-            {testimonials.map((testimonial) => (
-              <Box key={testimonial.id} height="100%" p={2}>
-                <TestimonialCard
-                  testimonial={testimonial}
-                  cardBgColor={cardBgColor}
-                  borderColor={borderColor}
-                  textColor={textColor}
-                  headingColor={headingColor}
-                />
-              </Box>
-            ))}
-          </Slider>
-        </Stack>
-      </Container>
+          <Box position="relative" px={[6, 8, 10]}>
+            <Slider {...sliderSettings}>
+              {testimonials.map((testimonial) => (
+                <Box key={testimonial.id} height="100%" p={2}>
+                  <TestimonialCard
+                    testimonial={testimonial}
+                    cardBgColor={cardBgColor}
+                    borderColor={borderColor}
+                    textColor={textColor}
+                    headingColor={headingColor}
+                  />
+                </Box>
+              ))}
+            </Slider>
+          </Box>
+        </Stack> 
     </Box>
   );
 };
