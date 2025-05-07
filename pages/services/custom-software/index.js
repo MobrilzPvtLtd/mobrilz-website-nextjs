@@ -40,7 +40,7 @@ import PortfolioSection from '../../../components/PortfolioSection'; // Fixed pa
 import TestimonialsSection from '../../../components/TestimonialsSection';
 import { getStrapiAPI } from '../../../utils/api'; // Fixed path
 import { 
-  mobileAppDevelopmentServices as services,
+    customSoftwareServices as services,
     developmentProcess as process,
     clientTestimonials as testimonials 
 } from '../../../contexts/services/web-development';
@@ -115,8 +115,8 @@ export default function AppDevelopment({
       title: 'Our Services',
     },
     {
-      name: 'Mobile Apps',
-      path: '/services/mobile-apps',
+      name: 'Custom Software',
+      path: '/services/custom-software',
       title: 'Mobile Apps Services',
       isCurrentPage: true,
     }
@@ -152,7 +152,7 @@ export default function AppDevelopment({
                   color={headingColor}
                   lineHeight="shorter"
                 >
-                  Crafting High-Performance Apps Solutions
+                  Crafting High-Performance Custom Software Solutions
                 </Heading>
                 <Text fontSize="xl" color={textColor}>
                   Transform your digital presence with our expert web development services. 

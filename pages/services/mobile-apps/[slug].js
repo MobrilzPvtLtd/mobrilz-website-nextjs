@@ -25,12 +25,10 @@ import {
   FaCalendarCheck,
   FaUserLock,
 } from "react-icons/fa";
-import { webDevelopmentServices as services } from "../../../contexts/services/web-development";
+import { mobileAppDevelopmentServices as services } from "../../../contexts/services/web-development";
 import Image from "next/image";
 import { getStrapiAPI } from "@/utils/api";
 
-// Add getStaticPaths function
-// console.log('check ', services)
 // Add getStaticPaths function
 export async function getStaticPaths() {
   // Generate paths from services array
@@ -148,19 +146,10 @@ export default function ServiceDetail({ service, technologies = [], isError = fa
       icon: "Settings",
     },
   ];
-  const serviceToTechType = {
-    'Front-End Development': 'Frontend',
-    'Back-End Development': 'Backend',
-    'Full-Stack Development': 'Database',
-    'Custom Web Applications': 'Framework',
-    'CMS Development': 'CMS',
-    'E-Commerce Solutions': 'E-Commerce',
-    // Add other mappings as needed
-  };
 
-  // Get the corresponding technology type for the current service
-  const techType = serviceToTechType[service?.title] || null;
-  console.log('sd',service)
+
+
+  
   return (
     <Box minH="100vh" bg={"gray.50"}>
       {/* Update breadcrumb to use service prop */}
@@ -182,7 +171,7 @@ export default function ServiceDetail({ service, technologies = [], isError = fa
             </BreadcrumbItem>
             <BreadcrumbItem>
               <NextLink href="/services/web-development" passHref>
-                <BreadcrumbLink>Web-Development</BreadcrumbLink>
+                <BreadcrumbLink>App-Development</BreadcrumbLink>
               </NextLink>
             </BreadcrumbItem>
             <BreadcrumbItem isCurrentPage>
@@ -296,7 +285,7 @@ export default function ServiceDetail({ service, technologies = [], isError = fa
         </Container>
       </Box>
 
-      <TechnologiesSection technologies={technologies} isError={isError} filterType={techType} />
+      {/* <TechnologiesSection technologies={technologies} isError={isError} filterType={techType} /> */}
 
       <Box py={12}>
         <Heading size="xl" color={"gray.800"} textAlign="center" mb={8}>

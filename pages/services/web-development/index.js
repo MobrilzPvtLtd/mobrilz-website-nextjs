@@ -222,18 +222,19 @@ export default function WebDevelopment({
                     bg={cardBgColor}
                     borderRadius="lg"
                     borderWidth="1px"
-                    borderColor={borderColor}
+                    // borderColor={borderColor}
                     spacing={4}
                     cursor="pointer"
                     _hover={{
                       transform: 'translateY(-5px)',
                       boxShadow: 'xl',
-                      borderColor: 'brand.500'
+                      // borderColor: 'brand.500'
                     }}
                     transition="all 0.3s"
                     height={'340px'}
                   >
                     <Icon as={service.icon} boxSize={10} color={accentColor} />
+                   
                     <Stack spacing={2}>
                       <Heading size="md" color={headingColor}>
                         {service.title}

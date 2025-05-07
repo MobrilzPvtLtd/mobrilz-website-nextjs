@@ -1,59 +1,35 @@
-import { 
-    FaCode, 
-    FaServer, 
-    FaLayerGroup,
-    FaPencilRuler,
-    FaDatabase,
-    FaShoppingCart,
-    FaWordpress,
-    FaTools,
-    FaSearch,
-    FaShieldAlt,
-    FaApple,
-    FaAndroid,
-    FaMobile,
-    FaBriefcase,
-    FaShoppingBag,
-    FaComments,
-    FaWrench,
-    FaChartLine,
-    FaLock,
-    FaCloudUploadAlt,
-    FaCubes,
-    FaSync,
-    FaChartBar,
-    FaTachometerAlt,
-    FaLifeRing
-} from 'react-icons/fa';
-
-export const iconMap = {
-    FaCode,
-    FaServer,
-    FaLayerGroup,
-    FaPencilRuler,
-    FaDatabase,
-    FaShoppingCart,
-    FaWordpress,
-    FaTools,
-    FaSearch,
-    FaShieldAlt,
-    FaApple,
-    FaAndroid,
-    FaMobile,
-    FaBriefcase,
-    FaShoppingBag,
-    FaComments,
-    FaWrench,
-    FaChartLine,
-    FaLock,
-    FaCloudUploadAlt,
-    FaCubes,
-    FaSync,
-    FaChartBar,
-    FaTachometerAlt,
-    FaLifeRing
-};
-
-export const getIcon = (iconName) => {
-    return iconMap[iconName] || FaCode; // Returns FaCode as fallback
-};
+// import {
+//     FaProjectDiagram,
+//     FaShoppingCart,
+//     FaUsersCog,
+//     FaCalendarCheck,
+//     FaUserLock,
+//     FaCode,
+//     FaServer,
+//     FaLayerGroup,
+//     FaPencilRuler,
+//     FaWordpress,
+//     FaTools,a
+//     FaSearch,
+//     FaShieldAlt,
+//   } from "react-icons/fa";
+  
+//   export const iconMap = {
+//     ProjectDiagram: FaProjectDiagram,
+//     ShoppingCart: FaShoppingCart,
+//     UsersCog: FaUsersCog,
+//     CalendarCheck: FaCalendarCheck,
+//     UserLock: FaUserLock,
+//     Code: FaCode,
+//     Server: FaServer,
+//     LayerGroup: FaLayerGroup,
+//     PencilRuler: FaPencilRuler,
+//     Wordpress: FaWordpress,
+//     Tools: FaTools,
+//     Search: FaSearch,
+//     ShieldAlt: FaShieldAlt,
+//   };
+  
+//   export const getIcon = (iconName) => {
+//     return iconMap[iconName] || FaCode; // Default to FaCode if icon not found
+//   };
