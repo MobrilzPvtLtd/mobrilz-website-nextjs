@@ -45,6 +45,9 @@ const AboutPage = () => {
   const borderColor = useColorModeValue("gray.100", "gray.700");
   const textColor = useColorModeValue("gray.600", "gray.300");
   const headingColor = useColorModeValue("gray.800", "white");
+  const bgColor1 = useColorModeValue("blue.100", "gray.800");
+  const waveColor1 = useColorModeValue("#3182ce", "#1a367d");
+  const waveColor2 = useColorModeValue("#4299e1", "#2c5282");
 
   const breadcrumbItems = [
     {
@@ -268,27 +271,77 @@ const AboutPage = () => {
       </Box>
 
       {/* CTA Section */}
-      <Box py={20} bg={useColorModeValue("blue.600", "blue.900")} color="white">
-        <Container maxW="container.xl">
-          <Stack spacing={8} align="center" textAlign="center">
-            <Heading size="xl">Ready to Start Your Project?</Heading>
-            <Text fontSize="xl" maxW="2xl" color="whiteAlpha.900">
-              Let's discuss how we can help transform your business through innovative software solutions.
-            </Text>
-            <Button
-              size="lg"
-              bg={useColorModeValue("white", "whiteAlpha.200")}
-              color={useColorModeValue("blue.600", "white")}
-              _hover={{
-                bg: useColorModeValue("gray.100", "whiteAlpha.300")
-              }}
-              rightIcon={<ArrowForwardIcon />}
-            >
-              Schedule a Free Consultation
-            </Button>
-          </Stack>
-        </Container>
+      <Box position="relative" overflow="hidden" bg={bgColor1} color="white">
+      {/* Wave SVG Background */}
+      <Box
+        position="absolute"
+        left={0}
+        right={0}
+        bottom={0}
+        width="100%"
+        height="100%"
+        zIndex={0}
+      >
+        {/* First wave */}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1440 320"
+          preserveAspectRatio="none"
+          style={{
+            position: "absolute",
+            width: "100%",
+            height: "60%",
+            bottom: 0,
+          }}
+        >
+          <path
+            fill={waveColor1}
+            fillOpacity="0.4"
+            d="M0,128L48,122.7C96,117,192,107,288,112C384,117,480,139,576,165.3C672,192,768,224,864,213.3C960,203,1056,149,1152,138.7C1248,128,1344,160,1392,176L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+          ></path>
+        </svg>
+        
+        {/* Second wave */}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1440 320"
+          preserveAspectRatio="none"
+          style={{
+            position: "absolute",
+            width: "100%",
+            height: "40%",
+            bottom: 0,
+          }}
+        >
+          <path
+            fill={waveColor2}
+            fillOpacity="0.3"
+            d="M0,256L48,256C96,256,192,256,288,240C384,224,480,192,576,181.3C672,171,768,181,864,192C960,203,1056,213,1152,208C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+          ></path>
+        </svg>
       </Box>
+
+      {/* CTA Content */}
+      <Container maxW="container.xl" position="relative" zIndex={1} py={20}>
+        <Stack spacing={8} align="center" textAlign="center">
+          <Heading size="xl">Ready to Start Your Project?</Heading>
+          <Text fontSize="xl" maxW="2xl" color="whiteAlpha.900">
+            Let's discuss how we can help transform your business through innovative software solutions.
+          </Text>
+          <Button
+            size="lg"
+            bg={useColorModeValue("white", "whiteAlpha.200")}
+            color={useColorModeValue("blue.600", "white")}
+            _hover={{
+              bg: useColorModeValue("gray.100", "whiteAlpha.300")
+            }}
+            rightIcon={<ArrowForwardIcon />}
+          >
+            Schedule a Free Consultation
+          </Button>
+        </Stack>
+      </Container>
+    </Box>
     </>
   );
 };

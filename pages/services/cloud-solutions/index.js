@@ -102,6 +102,9 @@ export default function CloudSolutions({
   const textColor = useColorModeValue('gray.600', 'gray.300');
   const headingColor = useColorModeValue('gray.800', 'white');
   const accentColor = useColorModeValue('brand.500', 'brand.300');
+  const bgColor1 = useColorModeValue("blue.100", "gray.800");
+  const waveColor1 = useColorModeValue("#3182ce", "#1a367d");
+  const waveColor2 = useColorModeValue("#4299e1", "#2c5282");
 
   const breadcrumbItems = [
     {
@@ -333,42 +336,90 @@ export default function CloudSolutions({
       />
 
       {/* CTA Section */}
-      <Box py={20} bg={useColorModeValue("brand.600", "brand.900")}>
-        <Container maxW="container.xl">
-          <Stack spacing={8} align="center" textAlign="center" color="white">
-            <Heading size="xl">Ready to Start Your Web Project?</Heading>
-            <Text fontSize="xl" maxW="2xl">
-              Let's discuss how we can help transform your business through innovative web solutions.
-            </Text>
-            <Stack 
-              direction={{ base: 'column', sm: 'row' }} 
-              spacing={4}
-            >
-              <Button
-                size="lg"
-                bg="white"
-                color="brand.600"
-                _hover={{
-                  bg: 'gray.100',
-                }}
-                rightIcon={<ArrowForwardIcon />}
-              >
-                Schedule a Consultation
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                color="white"
-                _hover={{
-                  bg: 'whiteAlpha.200',
-                }}
-              >
-                View Our Portfolio
-              </Button>
-            </Stack>
-          </Stack>
-        </Container>
+      <Box position="relative" overflow="hidden" bg={bgColor1}>
+      {/* Wave SVG Background */}
+      <Box
+        position="absolute"
+        left={0}
+        right={0}
+        bottom={0}
+        width="100%"
+        height="100%"
+        zIndex={0}
+      >
+        {/* First wave */}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1440 320"
+          preserveAspectRatio="none"
+          style={{
+            position: "absolute",
+            width: "100%",
+            height: "60%",
+            bottom: 0,
+          }}
+        >
+          <path
+            fill={waveColor1}
+            d="M0,224L48,213.3C96,203,192,181,288,160C384,139,480,117,576,112C672,107,768,117,864,149.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+          ></path>
+        </svg>
+        
+        {/* Second wave with different pattern */}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1440 320"
+          preserveAspectRatio="none"
+          style={{
+            position: "absolute",
+            width: "100%",
+            height: "40%",
+            bottom: 0,
+          }}
+        >
+          <path
+            fill={waveColor2}
+            d="M0,128L48,144C96,160,192,192,288,186.7C384,181,480,139,576,149.3C672,160,768,224,864,250.7C960,277,1056,267,1152,229.3C1248,192,1344,128,1392,96L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+          ></path>
+        </svg>
       </Box>
+
+      {/* CTA Content */}
+      <Container maxW="container.xl" position="relative" zIndex={1} py={20}>
+        <Stack spacing={8} align="center" textAlign="center" color="white">
+          <Heading size="xl">Ready to Start Your Web Project?</Heading>
+          <Text fontSize="xl" maxW="2xl">
+            Let's discuss how we can help transform your business through innovative web solutions.
+          </Text>
+          <Stack 
+            direction={{ base: 'column', sm: 'row' }} 
+            spacing={4}
+          >
+            <Button
+              size="lg"
+              bg="white"
+              color="brand.600"
+              _hover={{
+                bg: 'gray.100',
+              }}
+              rightIcon={<ArrowForwardIcon />}
+            >
+              Schedule a Consultation
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              color="white"
+              _hover={{
+                bg: 'whiteAlpha.200',
+              }}
+            >
+              View Our Portfolio
+            </Button>
+          </Stack>
+        </Stack>
+      </Container>
+    </Box>
     </>
   );
 }
