@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 
-const TechnologiesSection = ({ technologies = [], isError = false, filterType = null }) => {
+const TechnologiesSection = ({ technologies = [], isError = false, filterType = null, hideHeading }) => {
     if (isError) {
         return (
             <Box py={20} bg={useColorModeValue("gray.50", "gray.800")}>
@@ -33,12 +33,12 @@ const TechnologiesSection = ({ technologies = [], isError = false, filterType = 
     // Group technologies by type with filtering
     const groupedTechnologies = technologies.reduce((acc, tech) => {
         const type = tech.type || 'Other';
-        
+
         // If filterType is provided, only include matching technologies
         if (filterType && type.toLowerCase() !== filterType.toLowerCase()) {
             return acc;
         }
-        
+
         if (!acc[type]) {
             acc[type] = [];
         }
@@ -63,14 +63,14 @@ const TechnologiesSection = ({ technologies = [], isError = false, filterType = 
 
     return (
         <Box
-            py={20}
+            pt={20}
             position="relative"
             overflow="hidden"
             bg={useColorModeValue("gray.50", "gray.800")}
         >
             <Container maxW="container.xl" position="relative" zIndex={1}>
                 <Stack spacing={12}>
-                    <Stack textAlign="center" spacing={3}>
+                    {!hideHeading && <Stack textAlign="center" spacing={3}>
                         <Heading
                             size="xl"
                             bgGradient={useColorModeValue(
@@ -79,7 +79,7 @@ const TechnologiesSection = ({ technologies = [], isError = false, filterType = 
                             )}
                             bgClip="text"
                         >
-                           Technologies 
+                            Technologies
                         </Heading>
                         <Text
                             fontSize="lg"
@@ -90,6 +90,7 @@ const TechnologiesSection = ({ technologies = [], isError = false, filterType = 
                             We use cutting-edge technologies to build robust and scalable solutions
                         </Text>
                     </Stack>
+                    }
 
                     {Object.entries(groupedTechnologies).map(([type, techs]) => (
                         <Box key={type}>
@@ -102,21 +103,21 @@ const TechnologiesSection = ({ technologies = [], isError = false, filterType = 
                             </Heading>
                             <SimpleGrid columns={{ base: 2, sm: 3, md: 4, lg: 6 }} spacing={6}>
                                 {techs.map((tech) => (
-                                    <NextLink 
-                                        href={`/technology/${tech.slug}`} 
-                                        passHref 
+                                    <NextLink
+                                        href={`/technology/${tech.slug}`}
+                                        passHref
                                         key={tech.id}
                                     >
                                         <Box
                                             as="a"
                                             cursor="pointer"
                                             p={4}
-                                           
-                                           
-                                           
+
+
+
                                             transition="all 0.3s"
-                                          
-                                            
+
+
                                         >
                                             <Stack align="center" spacing={3}>
                                                 <Image

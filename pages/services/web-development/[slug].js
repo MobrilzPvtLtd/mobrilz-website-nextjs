@@ -44,8 +44,8 @@ const iconMap = {
 export async function getStaticPaths() {
   // Generate paths from services array
   const paths = services.map((service) => ({
-    params: { 
-      slug: service.url.split("/").pop() 
+    params: {
+      slug: service.url.split("/").pop()
     },
   }));
 
@@ -79,7 +79,7 @@ export async function getStaticProps({ params }) {
       // Store only the icon name as a string, not the actual component
       iconName: service.iconName || ''
     };
-    
+
     // Remove the non-serializable icon property
     delete serializableService.icon;
 
@@ -134,7 +134,7 @@ export default function ServiceDetail({ service, technologies = [], isError = fa
   const textColor = useColorModeValue("gray.600", "gray.300");
   const headingColor = useColorModeValue("gray.800", "white");
   const activeColor = useColorModeValue("blue.600", "blue.200");
-  
+
   const projectWork = [
     {
       title: "Event Management",
@@ -146,7 +146,7 @@ export default function ServiceDetail({ service, technologies = [], isError = fa
       title: "Product Store",
       description: "Sell event-related clothing and accessories online.",
       href: "/projects/product-store",
-      icon: FaShoppingCart, 
+      icon: FaShoppingCart,
     },
     {
       title: "User Dashboard",
@@ -161,11 +161,13 @@ export default function ServiceDetail({ service, technologies = [], isError = fa
       icon: FaUserLock,
     },
   ];
-  
+
+  // Updated by MobrilzCom on 2025-05-08 10:24:40
+  // Modified serviceToTechType mapping to support multiple technology types for Full-Stack Development
   const serviceToTechType = {
     'Front-End Development': 'Frontend',
     'Back-End Development': 'Backend',
-    'Full-Stack Development': 'Database',
+    'Full-Stack Development': ['Frontend', 'Backend', 'Database'], // Now returns an array of technology types
     'Custom Web Applications': 'Framework',
     'CMS Development': 'CMS',
     'E-Commerce Solutions': 'E-Commerce',
@@ -174,7 +176,40 @@ export default function ServiceDetail({ service, technologies = [], isError = fa
 
   // Get the corresponding technology type for the current service
   const techType = serviceToTechType[service?.title] || null;
-  
+
+  // Render the TechnologiesSection based on whether techType is an array or a single value
+  const renderTechnologiesSection = () => {
+    if (Array.isArray(techType)) {
+      // For Full-Stack Development, render a single main technologies heading
+      // followed by multiple technology sections with subheadings
+      return (
+        <Container maxW="container.xl">
+
+          {techType.map((type, index) => (
+            <Box key={type} >
+              <TechnologiesSection
+                technologies={technologies}
+                isError={isError}
+                filterType={type}
+                hideHeading={index !== 0} // Only hide heading for first technology type
+              />
+            </Box>
+          ))}
+        </Container>
+      );
+    } else {
+      // For other services, render a single technology section with its default heading
+      return (
+        <TechnologiesSection
+          technologies={technologies}
+          isError={isError}
+          filterType={techType}
+          hideHeading={false} // Let the component show its default heading
+        />
+      );
+    }
+  };
+
   // If service has an iconName, get the component from the map, or use a default
   const ServiceIcon = service.iconName ? iconMap[service.iconName] : FaProjectDiagram;
 
@@ -313,7 +348,8 @@ export default function ServiceDetail({ service, technologies = [], isError = fa
         </Container>
       </Box>
 
-      <TechnologiesSection technologies={technologies} isError={isError} filterType={techType} />
+      {/* Updated Technologies Section with fixed heading */}
+      {renderTechnologiesSection()}
 
       <Box py={12}>
         <Heading size="xl" color={"gray.800"} textAlign="center" mb={8}>
