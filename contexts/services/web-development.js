@@ -9,7 +9,7 @@ export const webDevelopmentServices = [
     // Core Web Development Services
     {
         title: 'Front-End Development',
-        icon: "FaCode",
+        icon: FaCode,
         description: 'Creating engaging user interfaces and experiences.',
         features: [
             'HTML5 & CSS3 Development',
@@ -22,7 +22,7 @@ export const webDevelopmentServices = [
     },
     {
         title: 'Back-End Development',
-        icon: "FaServer",
+        icon: FaServer,
         description: 'Building robust server-side applications.',
         features: [
             'Server-Side Programming',
@@ -35,7 +35,7 @@ export const webDevelopmentServices = [
     },
     {
         title: 'Full-Stack Development',
-        icon: "FaLayerGroup",
+        icon: FaLayerGroup,
         description: 'End-to-end web application development.',
         features: [
             'Full Application Architecture',
@@ -49,7 +49,7 @@ export const webDevelopmentServices = [
     // Specific Website & Application Development
     {
         title: 'Custom Web Applications',
-        icon: "FaPencilRuler",
+        icon: FaPencilRuler,
         description: 'Tailored web solutions for your business needs.',
         features: [
             'Bespoke Web Applications',
@@ -62,7 +62,7 @@ export const webDevelopmentServices = [
     },
     {
         title: 'CMS Development',
-        icon: "FaWordpress",
+        icon: FaWordpress,
         description: 'Content management system development.',
         features: [
             'WordPress Development',
@@ -75,7 +75,7 @@ export const webDevelopmentServices = [
     },
     {
         title: 'E-Commerce Solutions',
-        icon: "FaShoppingCart",
+        icon: FaShoppingCart,
         description: 'Building powerful online stores.',
         features: [
             'Custom Shopping Platforms',
@@ -89,7 +89,7 @@ export const webDevelopmentServices = [
     // Related & Supplementary Services
     {
         title: 'Web Maintenance',
-        icon: "FaTools",
+        icon: FaTools,
         description: 'Keeping your web applications up-to-date.',
         features: [
             'Regular Updates',
@@ -102,7 +102,7 @@ export const webDevelopmentServices = [
     },
     {
         title: 'SEO Implementation',
-        icon: "FaSearch",
+        icon: FaSearch,
         description: 'Optimize your website for search engines.',
         features: [
             'Technical SEO',
@@ -115,7 +115,7 @@ export const webDevelopmentServices = [
     },
     {
         title: 'Web Security',
-        icon: "FaShieldAlt",
+        icon: FaShieldAlt,
         description: 'Protect your web applications.',
         features: [
             'Security Audits',

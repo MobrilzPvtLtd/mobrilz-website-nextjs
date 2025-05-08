@@ -24,13 +24,22 @@ import {
   FaUsersCog,
   FaCalendarCheck,
   FaUserLock,
+  // Import any other icons you need
 } from "react-icons/fa";
 import { webDevelopmentServices as services } from "../../../contexts/services/web-development";
 import Image from "next/image";
 import { getStrapiAPI } from "@/utils/api";
 
-// Add getStaticPaths function
-// console.log('check ', services)
+// Map of icon names to components for use in the component
+const iconMap = {
+  FaProjectDiagram: FaProjectDiagram,
+  FaShoppingCart: FaShoppingCart,
+  FaUsersCog: FaUsersCog,
+  FaCalendarCheck: FaCalendarCheck,
+  FaUserLock: FaUserLock,
+  // Add any other icons you need
+};
+
 // Add getStaticPaths function
 export async function getStaticPaths() {
   // Generate paths from services array
@@ -67,9 +76,12 @@ export async function getStaticProps({ params }) {
     // Create a serializable version of service
     const serializableService = {
       ...service,
-      // Convert icon to string name to avoid serialization error
-      iconName: service.icon
+      // Store only the icon name as a string, not the actual component
+      iconName: service.iconName || ''
     };
+    
+    // Remove the non-serializable icon property
+    delete serializableService.icon;
 
     return {
       props: {
@@ -122,32 +134,34 @@ export default function ServiceDetail({ service, technologies = [], isError = fa
   const textColor = useColorModeValue("gray.600", "gray.300");
   const headingColor = useColorModeValue("gray.800", "white");
   const activeColor = useColorModeValue("blue.600", "blue.200");
+  
   const projectWork = [
     {
       title: "Event Management",
       description: "Manage and organize sports events with real-time updates.",
       href: "/projects/event-management",
-      icon: "CalendarCheck", // example Lucide icon
+      icon: FaCalendarCheck,
     },
     {
       title: "Product Store",
       description: "Sell event-related clothing and accessories online.",
       href: "/projects/product-store",
-      icon: "ShoppingCart", 
+      icon: FaShoppingCart, 
     },
     {
       title: "User Dashboard",
       description: "Allow users to track their event registrations and purchases.",
       href: "/projects/user-dashboard",
-      icon: "UserCircle",
+      icon: FaUsersCog,
     },
     {
       title: "Admin Panel",
       description: "Control products, events, and user management securely.",
       href: "/projects/admin-panel",
-      icon: "Settings",
+      icon: FaUserLock,
     },
   ];
+  
   const serviceToTechType = {
     'Front-End Development': 'Frontend',
     'Back-End Development': 'Backend',
@@ -160,10 +174,13 @@ export default function ServiceDetail({ service, technologies = [], isError = fa
 
   // Get the corresponding technology type for the current service
   const techType = serviceToTechType[service?.title] || null;
-  console.log('sd',service)
+  
+  // If service has an iconName, get the component from the map, or use a default
+  const ServiceIcon = service.iconName ? iconMap[service.iconName] : FaProjectDiagram;
+
   return (
     <Box minH="100vh" bg={"gray.50"}>
-      {/* Update breadcrumb to use service prop */}
+      {/* Breadcrumb section */}
       <Box bg={heroBgColor} py={20}>
         <Container maxW="container.xl">
           <Breadcrumb
@@ -332,7 +349,7 @@ export default function ServiceDetail({ service, technologies = [], isError = fa
                     transition="all 0.3s"
                     color="gray.600"
                   >
-                    <Icon as={project?.icon} boxSize={8} />
+                    <Icon as={project.icon} boxSize={8} />
                   </Box>
 
                   <Stack spacing={2}>
