@@ -89,7 +89,7 @@ export async function getStaticProps() {
     }
 }
 
-export default function AppDevelopment({ 
+export default function CustomSoftware({ 
     technologies: apiTechnologies = [], 
     portfolios = [], 
     testimonials = [],
@@ -232,7 +232,7 @@ export default function AppDevelopment({
                     transition="all 0.3s"
                     height={'340px'}
                   >
-                    {/* <Icon as={service.icon} boxSize={10} color={accentColor} /> */}
+                    <Icon as={service.icon} boxSize={10} color={accentColor} />
                     <Stack spacing={2}>
                       <Heading size="md" color={headingColor}>
                         {service.title}

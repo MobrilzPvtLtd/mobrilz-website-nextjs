@@ -3,7 +3,7 @@
 
 // Web Development Services categorized by type
 
-import { FaCode, FaLayerGroup, FaPencilRuler, FaSearch, FaServer, FaShieldAlt, FaShoppingCart, FaTools, FaWordpress } from "react-icons/fa";
+import { FaAndroid, FaApple, FaBriefcase, FaBug, FaBuilding, FaChartBar, FaChartLine, FaCloudUploadAlt, FaCode, FaComments, FaCubes, FaGlobe, FaLaptopCode, FaLayerGroup, FaLifeRing, FaLock, FaMobile, FaMobileAlt, FaPalette, FaPalfed, FaPencilRuler, FaProjectDiagram, FaRedo, FaSearch, FaServer, FaShieldAlt, FaShoppingBag, FaShoppingCart, FaSync, FaTachometerAlt, FaTools, FaWordpress, FaWrench } from "react-icons/fa";
 
 export const webDevelopmentServices = [
     // Core Web Development Services
@@ -175,7 +175,7 @@ export const mobileAppDevelopmentServices = [
     // Core Mobile App Development Services
     {
         title: 'iOS App Development',
-        icon: 'FaApple',
+        icon: FaApple,
         description: 'Creating native applications for Apple devices.',
         features: [
             'Swift & Objective-C Development',
@@ -188,7 +188,7 @@ export const mobileAppDevelopmentServices = [
     },
     {
         title: 'Android App Development',
-        icon: 'FaAndroid',
+        icon: FaAndroid,
         description: 'Building robust applications for Android devices.',
         features: [
             'Kotlin & Java Development',
@@ -201,7 +201,7 @@ export const mobileAppDevelopmentServices = [
     },
     {
         title: 'Cross-Platform Development',
-        icon: 'FaMobile',
+        icon: FaMobile,
         description: 'Develop once, deploy everywhere solutions.',
         features: [
             'React Native Development',
@@ -215,7 +215,7 @@ export const mobileAppDevelopmentServices = [
     // Specific Mobile App Categories
     {
         title: 'Enterprise Mobile Solutions',
-        icon: 'FaBriefcase',
+        icon: FaBriefcase,
         description: 'Secure and scalable apps for business needs.',
         features: [
             'Workflow Automation Apps',
@@ -228,7 +228,7 @@ export const mobileAppDevelopmentServices = [
     },
     {
         title: 'E-Commerce Mobile Apps',
-        icon: 'FaShoppingBag',
+        icon: FaShoppingBag,
         description: 'Creating powerful mobile shopping experiences.',
         features: [
             'Mobile Shopping Platforms',
@@ -241,7 +241,7 @@ export const mobileAppDevelopmentServices = [
     },
     {
         title: 'Social & Communication Apps',
-        icon: 'FaComments',
+        icon: FaComments,
         description: 'Building engaging social and messaging platforms.',
         features: [
             'Real-time Chat Integration',
@@ -255,7 +255,7 @@ export const mobileAppDevelopmentServices = [
     // Related & Supplementary Services
     {
         title: 'App Maintenance & Support',
-        icon: 'FaWrench',
+        icon: FaWrench,
         description: 'Keeping your mobile applications running smoothly.',
         features: [
             'Regular Updates & Patches',
@@ -268,7 +268,7 @@ export const mobileAppDevelopmentServices = [
     },
     {
         title: 'App Store Optimization',
-        icon: 'FaChartLine',
+        icon: FaChartLine,
         description: 'Improve visibility and downloads for your app.',
         features: [
             'Keyword Optimization',
@@ -281,7 +281,7 @@ export const mobileAppDevelopmentServices = [
     },
     {
         title: 'Mobile App Security',
-        icon: 'FaLock',
+        icon: FaLock,
         description: 'Protect user data and ensure app security.',
         features: [
             'Secure Authentication',
@@ -298,7 +298,7 @@ export const cloudServices = [
     // Core Cloud Services
     {
         title: 'Cloud Migration',
-        icon: 'FaCloudUploadAlt',
+        icon: FaCloudUploadAlt,
         description: 'Seamlessly transition your systems to the cloud.',
         features: [
             'Infrastructure Assessment',
@@ -311,7 +311,7 @@ export const cloudServices = [
     },
     {
         title: 'Cloud Infrastructure',
-        icon: 'FaServer',
+        icon: FaServer,
         description: 'Build and manage reliable cloud infrastructure.',
         features: [
             'IaaS Implementation',
@@ -324,7 +324,7 @@ export const cloudServices = [
     },
     {
         title: 'Cloud Application Development',
-        icon: 'FaCode',
+        icon: FaCode,
         description: 'Develop cloud-native applications for your business.',
         features: [
             'Containerized Applications',
@@ -338,7 +338,7 @@ export const cloudServices = [
     // Specific Cloud Services
     {
         title: 'Multi-Cloud Management',
-        icon: 'FaCubes',
+        icon: FaCubes,
         description: 'Manage resources across multiple cloud platforms.',
         features: [
             'Multi-Platform Integration',
@@ -351,7 +351,7 @@ export const cloudServices = [
     },
     {
         title: 'DevOps & CI/CD',
-        icon: 'FaSync',
+        icon: FaSync,
         description: 'Streamline development and deployment processes.',
         features: [
             'CI/CD Pipeline Implementation',
@@ -364,7 +364,7 @@ export const cloudServices = [
     },
     {
         title: 'Data Analytics & Big Data',
-        icon: 'FaChartBar',
+        icon: FaChartBar,
         description: 'Leverage cloud capabilities for data processing.',
         features: [
             'Big Data Processing',
@@ -378,7 +378,7 @@ export const cloudServices = [
     // Related & Supplementary Services
     {
         title: 'Cloud Security',
-        icon: 'FaShieldAlt',
+        icon: FaShieldAlt,
         description: 'Protect your cloud environments and data.',
         features: [
             'Security Assessment',
@@ -391,7 +391,7 @@ export const cloudServices = [
     },
     {
         title: 'Cloud Optimization',
-        icon: 'FaTachometerAlt',
+        icon: FaTachometerAlt,
         description: 'Enhance performance and reduce cloud costs.',
         features: [
             'Resource Utilization Analysis',
@@ -404,7 +404,7 @@ export const cloudServices = [
     },
     {
         title: 'Disaster Recovery',
-        icon: 'FaLifeRing',
+        icon: FaLifeRing,
         description: 'Ensure business continuity with robust backup solutions.',
         features: [
             'Backup Strategy Development',
@@ -421,7 +421,7 @@ export const customSoftwareServices = [
     // Core Software Services
     {
         title: 'Custom Software Development',
-        icon: 'FaLaptopCode',
+        icon: FaLaptopCode,
         description: 'Tailored software solutions designed for your business needs.',
         features: [
             'Requirements Analysis',
@@ -429,12 +429,12 @@ export const customSoftwareServices = [
             'Custom Application Development',
             'Deployment & Support'
         ],
-        url: '/services/custom-software/Custom-Software-Development',
+        url: '/services/custom-software/custom-software-development',
         category: 'core'
     },
     {
         title: 'Mobile App Development',
-        icon: 'FaMobileAlt',
+        icon: FaMobileAlt,
         description: 'Build powerful mobile apps for iOS and Android platforms.',
         features: [
             'Native & Cross-Platform Apps',
@@ -442,12 +442,12 @@ export const customSoftwareServices = [
             'API Integration',
             'App Store Deployment'
         ],
-        url: '/services/custom-software/Mobile App Development',
+        url: '/services/custom-software/mobile-app-development',
         category: 'core'
     },
     {
         title: 'Web Application Development',
-        icon: 'FaGlobe',
+        icon: FaGlobe,
         description: 'Develop scalable web applications for various industries.',
         features: [
             'Responsive Web Design',
@@ -455,13 +455,13 @@ export const customSoftwareServices = [
             'Progressive Web Apps',
             'Cloud Integration'
         ],
-        url: '/services/custom-software/Web Application Development',
+        url: '/services/custom-software/web-application-development',
         category: 'core'
     },
     // Specific Software Services
     {
         title: 'Enterprise Software Solutions',
-        icon: 'FaBuilding',
+        icon: FaBuilding,
         description: 'Empower enterprises with robust, scalable solutions.',
         features: [
             'ERP & CRM Systems',
@@ -469,12 +469,12 @@ export const customSoftwareServices = [
             'Data Management Solutions',
             'Integration with Legacy Systems'
         ],
-        url: '/services/custom-software/Enterprise Software Solutions',
+        url: '/services/custom-software/enterprise-software-solutions',
         category: 'specific'
     },
     {
         title: 'Software Integration Services',
-        icon: 'FaProjectDiagram',
+        icon: FaProjectDiagram,
         description: 'Seamlessly integrate new software with your existing systems.',
         features: [
             'Third-Party API Integration',
@@ -487,7 +487,7 @@ export const customSoftwareServices = [
     },
     {
         title: 'Software Testing & QA',
-        icon: 'FaBug',
+        icon: FaBug,
         description: 'Ensure software reliability through rigorous testing.',
         features: [
             'Manual & Automated Testing',
@@ -495,13 +495,13 @@ export const customSoftwareServices = [
             'Bug Tracking & Reporting',
             'Security Testing'
         ],
-        url: '/services/custom-software/Software Testing & QA',
+        url: '/services/custom-software/software-testing ',
         category: 'specific'
     },
     // Supplementary Services
     {
         title: 'UI/UX Design Services',
-        icon: 'FaPalette',
+        icon: FaPalfed,
         description: 'Design intuitive, engaging user experiences.',
         features: [
             'User Research & Personas',
@@ -509,12 +509,12 @@ export const customSoftwareServices = [
             'Visual Design',
             'Usability Testing'
         ],
-        url: '/services/custom-software/UI/UX Design Services',
+        url: '/services/custom-software/design-services',
         category: 'supplementary'
     },
     {
         title: 'Software Maintenance & Support',
-        icon: 'FaTools',
+        icon: FaTools,
         description: 'Keep your software running smoothly with ongoing support.',
         features: [
             'Bug Fixing & Updates',
@@ -527,7 +527,7 @@ export const customSoftwareServices = [
     },
     {
         title: 'Legacy System Modernization',
-        icon: 'FaRedo',
+        icon: FaRedo,
         description: 'Revitalize outdated systems with modern technologies.',
         features: [
             'Legacy Code Refactoring',
